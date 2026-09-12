@@ -11,14 +11,18 @@ mit höchstens 30 Minuten und nur bei ausreichend Codex-Kontingent.
 
 ## Entwicklung
 
-Python wird ohne neue Systeminstallation verwendet. Die Erstprüfung verwendet die
-bereits vorhandene Codex-Laufzeit (Python 3.12.14). Eine eigene portable Laufzeit
-unter dem freigegebenen Softwareordner ist noch nicht eingerichtet.
-Die folgenden Befehle werden im Projektordner ausgeführt; auf anderen Rechnern
-ist der Pfad durch einen bereits vorhandenen Python-Interpreter ab Version 3.12 zu ersetzen:
+Die offizielle portable Python-Laufzeit 3.14.7 (Windows x64) ist auf Andys Rechner
+direkt im globalen Softwareordner eingerichtet, ohne Projekt-Unterordner. Alle
+Projekte können dieselbe Laufzeit verwenden. Ihr Start und die acht Tests wurden
+mit leerem PATH geprüft: Ein installiertes Python oder die Codex-Laufzeit werden
+dabei nicht verwendet. Der SHA-256-Wert des Originalarchivs wurde geprüft.
+
+Die folgenden Befehle werden im Projektordner ausgeführt. Auf anderen Rechnern
+muss der Pfad auf die dort bereitgestellte portable Laufzeit zeigen. Ein automatisch
+bereitstellender App-Launcher ist noch nicht implementiert.
 
 ```powershell
-$pythonExe = 'C:/Users/andyk/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
+$pythonExe = 'C:/Users/andyk/HiDrive/OpenAI Codex/Software/python-3.14.7/python.exe'
 & $pythonExe tests/test_versioning.py -v
 & $pythonExe tools/bump_version.py
 & $pythonExe tools/bump_version.py --dry-run improvement

@@ -23,6 +23,8 @@ Dieser Auftrag wurde am 12.09.2026 ausdrücklich zur Umsetzung freigegeben.
 - Keine lokalen Server, keine systemweiten Softwareinstallationen. Der Nutzer erlaubt
   fehlende Werkzeuge ausschließlich portabel unter
   `C:/Users/andyk/HiDrive/OpenAI Codex/Software`, aus Originalquellen mit Hashprüfung.
+- Dieser Softwareordner ist global für alle Projekte. Keine Projekt-Unterordner
+  verwenden; Laufzeiten nach Produkt/Version ablegen und gemeinsam wiederverwenden.
 - Nur kostenlose, nichtkommerziell zulässige Datenquellen. Fehlende Rechte nicht umgehen.
 - Benachrichtigungen nur zu veröffentlichtem Fortschritt, neuen Fehlern oder neuen
   Blockaden. Bei unverändertem oder übersprungenem Zustand still bleiben.
@@ -137,31 +139,47 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   fachliche Versionslogik 0.1.0.0 mit atomischer Dateipflege und Vorschau.
 - Acht fachliche Tests bestanden mit vorhandenem Python 3.12.14; CLI-Lesen und
   Änderungsvorschau ebenfalls geprüft. Keine GUI, Wetterdaten oder Updates implementiert.
-- Testinterpreter: `C:/Users/andyk/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe`.
-- Eigene portable Python-/Qt-Laufzeit noch nicht eingerichtet. Die frühere automatische
-  Ablehnung von Download/Entpacken/Start von Python wurde dem Nutzer gemeldet.
+- Frühere Erstprüfung: vorhandene Codex-Laufzeit Python 3.12.14. Aktueller Testinterpreter:
+  `C:/Users/andyk/HiDrive/OpenAI Codex/Software/python-3.14.7/python.exe`.
+- Eigene portable Python-Laufzeit ist eingerichtet; PySide6/Qt noch nicht.
+  Die frühere automatische Ablehnung wurde nach der erneuten ausdrücklichen
+  Nutzerfreigabe bei dieser Bereitstellung erfolgreich geklärt.
 - Neue ausdrückliche Nutzerfreigabe vom 12.09.2026: „ignoriere für diese bereitstellung
   einmalig die vorgabe, dass keine software abgelegt werden darf.“ Dies gilt für die
   einmalige portable Python-Bereitstellung im zuvor genannten Softwareordner.
   Die vorherige Freigabeblockade ist mit dieser neuen Autorisierung erneut prüfbar.
   Keine erneute routinemäßige Bestätigung verlangen und die Ausnahme nicht auf andere
   Software ausweiten. Systemweite Installationen und lokale Server bleiben verboten.
-- Status der einmaligen Python-Bereitstellung: OFFEN. Nach geprüftem erfolgreichem
-  Entpacken und Start hier ABGESCHLOSSEN mit Pfad, Version, Quelle und SHA-256 vermerken.
-  Erst der Erfolg verbraucht den Auftrag; danach die vorhandene Laufzeit wiederverwenden.
-- PySide6 fehlt in dieser vorhandenen Laufzeit; cryptography ist vorhanden. Signaturschlüssel
+- Status der einmaligen Python-Bereitstellung: **ABGESCHLOSSEN am 12.09.2026**.
+  Die einmalige Ausnahme ist verbraucht. Die geprüfte Laufzeit wiederverwenden;
+  die frühere Bereitstellung nicht erneut ausführen.
+  - Version: Python 3.14.7, offizielles Windows-x64-Embeddable-Paket.
+  - Globaler Ordner: `C:/Users/andyk/HiDrive/OpenAI Codex/Software/python-3.14.7`.
+    Auf Nutzerwunsch direkt unter Software abgelegt, gemeinsam für alle Projekte nutzbar.
+  - Quelle: https://www.python.org/ftp/python/3.14.7/python-3.14.7-embeddable-amd64.zip
+  - Hashquelle: https://www.python.org/ftp/python/3.14.7/windows-3.14.7.json
+  - SHA-256: `76c3c0384ab3f822486f32450f3a4d20f5d65ad0ec32ee34290971aa0eb817e6`.
+  - Lokaler Nachweis: `C:/Users/andyk/HiDrive/OpenAI Codex/Software/python-3.14.7-provisioning.json`.
+  - Starttest am 12.09.2026, nach Verlagerung um 18:55:55 UTC erneut bestanden:
+    Kindprozess mit leerem PATH, ohne
+    PYTHONHOME/PYTHONPATH, isoliert (`-I -S`), 64 Bit; Interpreter, Prefix und sämtliche
+    Python-Suchpfade innerhalb des portablen Ordners. SSL, ctypes und SQLite geprüft.
+  - Acht vorhandene Versionstests, Versionslesen und Änderungsvorschau ebenfalls mit
+    dieser Laufzeit und leerem PATH bestanden. Kein System-Python verwendet.
+  - Keine dauerhaften Registry-/PATH-Änderungen; kein Paketmanager oder weiteres Paket
+    installiert. Dies ersetzt keinen künftigen Test des fertigen GUI-Launchers auf
+    einer sauberen Windows-Testmaschine.
+- PySide6 und cryptography sind in der neuen unveränderten Embeddable-Laufzeit nicht
+  enthalten. Nur die frühere Codex-Laufzeit enthält cryptography. Signaturschlüssel
   fehlen noch und sind vor der ersten Update-Veröffentlichung einzurichten.
-- Nächster sehr kleiner Schritt: ausschließlich die portable Python-Laufzeit im
-  Softwareordner bereitstellen und testen. Zuerst eine vorhandene geeignete Laufzeit
-  prüfen; falls keine vorhanden ist, das offizielle Windows-x64-Paket mit geprüftem
-  SHA-256 herunterladen und dort entpacken. Keine dauerhaften PATH-/Registry-Änderungen.
-  Interpreter über seinen eigenen Pfad starten und einen Start ohne installiertes
-  System-Python sowie ohne Python-Einträge in PATH nachweisen. In diesem Lauf keine
-  zusätzliche GUI-/Wetterfunktion entwickeln. Reine Werkzeugbereitstellung ohne
-  Programmänderung erzeugt keine neue Programmversion.
-- Diese Auftragsaktualisierung wurde ohne Programmentwicklung vorgenommen. VERSION
-  und Changelog bleiben unverändert. Ein portabler App-Launcher folgt separat und
-  muss die eigene Laufzeit auch auf Benutzerrechnern ohne Codex verwenden können.
+- Nächster sehr kleiner Schritt: den Changelog-Leser implementieren, der aus
+  `changelog.json` alle Einträge neuer als die zuletzt angezeigte Version numerisch
+  auswählt. Keine GUI oder Speicherung des Lesestands in demselben Lauf. Dies ist
+  ein unabhängiger Bestandteil der geplanten Versionshistorie ohne neue Abhängigkeiten.
+- Dieser Lauf hat ausschließlich die portable Python-Laufzeit bereitgestellt und
+  geprüft. Keine neue Programmfunktion: VERSION und Changelog bleiben bei 0.1.0.0.
+  Ein portabler App-Launcher folgt separat und muss die eigene Laufzeit auch auf
+  Benutzerrechnern ohne installiertes Python und ohne Codex verwenden können.
 - Veröffentlichung vor neuem Schritt anhand von `git status`, lokalem HEAD und
   `origin/live` prüfen; ausstehenden Push derselben Version zuerst abschließen.
 
