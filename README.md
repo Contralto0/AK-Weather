@@ -4,7 +4,9 @@ Eine geplante portable Wetteranwendung von **Andy Klemann**, entwickelt mit KI-U
 
 ## Aktueller Stand
 
-Version **0.1.0.0** enthält die getestete fachliche Versionslogik.
+Version **0.2.0.0** enthält die fachliche Versionslogik und einen Changelog-Leser,
+der alle Neuerungen seit einer zuletzt angezeigten Version numerisch auswählt.
+Die Anzeige und Speicherung des Lesestands folgen separat.
 Eine grafische Wetteranwendung und automatische Updates sind noch nicht vorhanden.
 Die Umsetzung erfolgt alle drei Stunden in genau einem sehr kleinen Teilschritt,
 mit höchstens 30 Minuten und nur bei ausreichend Codex-Kontingent.
@@ -13,7 +15,7 @@ mit höchstens 30 Minuten und nur bei ausreichend Codex-Kontingent.
 
 Die offizielle portable Python-Laufzeit 3.14.7 (Windows x64) ist auf Andys Rechner
 direkt im globalen Softwareordner eingerichtet, ohne Projekt-Unterordner. Alle
-Projekte können dieselbe Laufzeit verwenden. Ihr Start und die acht Tests wurden
+Projekte können dieselbe Laufzeit verwenden. Ihr Start und die Tests wurden
 mit leerem PATH geprüft: Ein installiertes Python oder die Codex-Laufzeit werden
 dabei nicht verwendet. Der SHA-256-Wert des Originalarchivs wurde geprüft.
 
@@ -23,7 +25,7 @@ bereitstellender App-Launcher ist noch nicht implementiert.
 
 ```powershell
 $pythonExe = 'C:/Users/andyk/HiDrive/OpenAI Codex/Software/python-3.14.7/python.exe'
-& $pythonExe tests/test_versioning.py -v
+& $pythonExe -I -m unittest discover -s tests -v
 & $pythonExe tools/bump_version.py
 & $pythonExe tools/bump_version.py --dry-run improvement
 ```
@@ -32,6 +34,11 @@ Die Kategorien `major`, `feature`, `improvement`, `fix` entsprechen Hauptversion
 Funktion, Verbesserung und Fehlerbehebung. Ohne `--dry-run` wird VERSION geändert;
 dies darf nur für einen abgeschlossenen, geprüften Teilschritt geschehen.
 Bei erneutem Push derselben Änderung die Version **nicht** nochmals erhöhen.
+
+`ak_weather.changelog.read_changelog()` liefert die Historie mit der neuesten Version
+zuerst. `entries_since("0.1.0.0")` wählt alle neueren Einträge; `entries_since(None)`
+liefert beim Erststart alle Einträge. Beide Funktionen lesen nur. Beschädigte Inhalte
+melden `ChangelogError`; Dateizugriffsfehler bleiben `OSError`.
 
 Der vollständige Auftrag und nächste Schritt stehen in [DEVELOPMENT.md](DEVELOPMENT.md).
 Veröffentlichungen erfolgen ausschließlich als Commits im Branch `live`.

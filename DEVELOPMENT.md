@@ -172,13 +172,20 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
 - PySide6 und cryptography sind in der neuen unveränderten Embeddable-Laufzeit nicht
   enthalten. Nur die frühere Codex-Laufzeit enthält cryptography. Signaturschlüssel
   fehlen noch und sind vor der ersten Update-Veröffentlichung einzurichten.
-- Nächster sehr kleiner Schritt: den Changelog-Leser implementieren, der aus
-  `changelog.json` alle Einträge neuer als die zuletzt angezeigte Version numerisch
-  auswählt. Keine GUI oder Speicherung des Lesestands in demselben Lauf. Dies ist
-  ein unabhängiger Bestandteil der geplanten Versionshistorie ohne neue Abhängigkeiten.
-- Dieser Lauf hat ausschließlich die portable Python-Laufzeit bereitgestellt und
-  geprüft. Keine neue Programmfunktion: VERSION und Changelog bleiben bei 0.1.0.0.
-  Ein portabler App-Launcher folgt separat und muss die eigene Laufzeit auch auf
+- Die Python-Bereitstellung war reine Werkzeugpflege ohne Programmänderung; dabei
+  blieb die Programmversion 0.1.0.0 unverändert.
+- 2026-09-12, weiterer Lauf: **Changelog-Leser 0.2.0.0 abgeschlossen**. Genau ein
+  Teilschritt: `ak_weather/changelog.py` liest die bestehende Historie, validiert sie
+  und wählt numerisch alle Einträge nach der zuletzt angezeigten Version aus.
+  Erststart (None) liefert alle Einträge, neueste zuerst. Keine GUI, Speicherung oder
+  neue Abhängigkeiten. Beschädigte Daten und doppelte Versionen melden einen Fehler.
+  Zehn neue Changelog-Prüfungen und acht bestehende Versionstests bestanden mit der
+  globalen portablen Python-Laufzeit und leerem PATH.
+- Nächster sehr kleiner Schritt: den zuletzt erfolgreich angezeigten Versionsstand
+  lokal außerhalb des austauschbaren Programmcodes laden und atomisch speichern.
+  Erst erfolgreiche Anzeige darf ihn ändern; fehlende Datei bedeutet Erststart.
+  In diesem nächsten Lauf noch keine GUI implementieren.
+- Ein portabler App-Launcher folgt separat und muss die eigene Laufzeit auch auf
   Benutzerrechnern ohne installiertes Python und ohne Codex verwenden können.
 - Veröffentlichung vor neuem Schritt anhand von `git status`, lokalem HEAD und
   `origin/live` prüfen; ausstehenden Push derselben Version zuerst abschließen.

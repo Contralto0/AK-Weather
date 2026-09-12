@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.2.0.0",
+    "date": "2026-09-12",
+    "category": "feature",
+    "title": "Neuerungen seit einer Version ermitteln",
+    "changes": [
+      "Versionshistorie strukturiert einlesen und neueste Versionen zuerst liefern.",
+      "Alle Neuerungen seit einer zuletzt angezeigten Version numerisch auswählen, auch bei übersprungenen Versionen.",
+      "Ungültige oder doppelte Historieneinträge ausdrücklich als Fehler melden."
+    ]
+  },
+  {
     "version": "0.1.0.0",
     "date": "2026-09-12",
     "category": "feature",
