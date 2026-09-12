@@ -56,6 +56,10 @@ Nach geprüftem Schritt `changelog.json` und Fortschritt pflegen, committen und 
 - Deutsche Oberfläche, metrische Einheiten, Deutschland als erster Kartenausschnitt.
 - Kleine Module für Oberfläche, Karte, Standort, Wetter, Prognose, Updates und Historie.
 - Netzwerkzugriffe außerhalb des Oberflächenthreads; keine lokalen Server.
+- Die App muss auf Windows-Rechnern ohne installiertes Python funktionieren. Eine
+  eigene portable Laufzeit direkt per Pfad verwenden; weder Python/py aus PATH noch
+  eine Codex-Laufzeit auf Benutzerrechnern voraussetzen. Auf Andys Rechner liegt die
+  portable Python-Laufzeit unter `C:/Users/andyk/HiDrive/OpenAI Codex/Software`.
 - Doppelklick-Bootstrap für portable Laufzeit und geprüfte Abhängigkeiten. Keine
   Registry-/PATH-Änderungen oder Admininstallation. Bibliotheken wiederverwenden.
 - Ed25519-signiertes Update-Manifest mit Version, Laufzeitanforderungen und Dateien
@@ -124,6 +128,7 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
 - Standort verweigert, schnelle Kartenklicks, Netzwerkausfall, veraltete Daten.
 - Fehlende Modelle, Zeitauflösungen, Sommerzeitwechsel, Gewichtung und Wahrscheinlichkeiten.
 - Windows-Start, Skalierung, Tastaturbedienung, Lizenzen.
+- Windows-Start ohne installiertes Python und ohne Python-Einträge in PATH; die eigene portable Laufzeit verwenden.
 - Beispieldaten und simulierte Netzantworten verwenden; keine lokalen Testserver.
 
 ## Fortschritt und nächster Schritt
@@ -133,16 +138,30 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
 - Acht fachliche Tests bestanden mit vorhandenem Python 3.12.14; CLI-Lesen und
   Änderungsvorschau ebenfalls geprüft. Keine GUI, Wetterdaten oder Updates implementiert.
 - Testinterpreter: `C:/Users/andyk/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe`.
-- Eigene portable Python-/Qt-Laufzeit noch nicht eingerichtet. Automatische Freigabe
-  lehnte Download/Entpacken/Start von Python trotz portabler Nutzerfreigabe unter Berufung
-  auf das ältere Installationsverbot ab. Nicht durch Umwege umgehen. Für Tests die
-  vorhandene Laufzeit nutzen; neue Installation erst nach geklärter Freigabe.
+- Eigene portable Python-/Qt-Laufzeit noch nicht eingerichtet. Die frühere automatische
+  Ablehnung von Download/Entpacken/Start von Python wurde dem Nutzer gemeldet.
+- Neue ausdrückliche Nutzerfreigabe vom 12.09.2026: „ignoriere für diese bereitstellung
+  einmalig die vorgabe, dass keine software abgelegt werden darf.“ Dies gilt für die
+  einmalige portable Python-Bereitstellung im zuvor genannten Softwareordner.
+  Die vorherige Freigabeblockade ist mit dieser neuen Autorisierung erneut prüfbar.
+  Keine erneute routinemäßige Bestätigung verlangen und die Ausnahme nicht auf andere
+  Software ausweiten. Systemweite Installationen und lokale Server bleiben verboten.
+- Status der einmaligen Python-Bereitstellung: OFFEN. Nach geprüftem erfolgreichem
+  Entpacken und Start hier ABGESCHLOSSEN mit Pfad, Version, Quelle und SHA-256 vermerken.
+  Erst der Erfolg verbraucht den Auftrag; danach die vorhandene Laufzeit wiederverwenden.
 - PySide6 fehlt in dieser vorhandenen Laufzeit; cryptography ist vorhanden. Signaturschlüssel
   fehlen noch und sind vor der ersten Update-Veröffentlichung einzurichten.
-- Nächster sehr kleiner Schritt: sofern PySide6 ohne neue Installation bereits zulässig
-  verfügbar ist, ein minimales Fenster mit zentraler Versionsanzeige erstellen.
-  Andernfalls als unabhängigen Bestandteil zuerst den Changelog-Leser mit Auswahl der
-  Einträge neuer als die zuletzt angezeigte Version implementieren (noch keine GUI).
+- Nächster sehr kleiner Schritt: ausschließlich die portable Python-Laufzeit im
+  Softwareordner bereitstellen und testen. Zuerst eine vorhandene geeignete Laufzeit
+  prüfen; falls keine vorhanden ist, das offizielle Windows-x64-Paket mit geprüftem
+  SHA-256 herunterladen und dort entpacken. Keine dauerhaften PATH-/Registry-Änderungen.
+  Interpreter über seinen eigenen Pfad starten und einen Start ohne installiertes
+  System-Python sowie ohne Python-Einträge in PATH nachweisen. In diesem Lauf keine
+  zusätzliche GUI-/Wetterfunktion entwickeln. Reine Werkzeugbereitstellung ohne
+  Programmänderung erzeugt keine neue Programmversion.
+- Diese Auftragsaktualisierung wurde ohne Programmentwicklung vorgenommen. VERSION
+  und Changelog bleiben unverändert. Ein portabler App-Launcher folgt separat und
+  muss die eigene Laufzeit auch auf Benutzerrechnern ohne Codex verwenden können.
 - Veröffentlichung vor neuem Schritt anhand von `git status`, lokalem HEAD und
   `origin/live` prüfen; ausstehenden Push derselben Version zuerst abschließen.
 

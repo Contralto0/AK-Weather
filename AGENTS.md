@@ -7,6 +7,16 @@ ausdrücklich freigegeben. Die Planungsrückfragen wurden abgeschlossen.
 - Keine lokalen Server starten. Keine Software systemweit installieren.
 - Ausdrücklich genehmigte Ausnahme: benötigte Werkzeuge nur portabel unter
   `C:/Users/andyk/HiDrive/OpenAI Codex/Software` ablegen, Originalquelle und Hash prüfen.
+- Nutzerergänzung vom 12.09.2026: AK-Weather muss auf Windows-Rechnern ohne
+  installiertes Python laufen. Die anwendungseigene portable Python-Laufzeit liegt
+  unter `C:/Users/andyk/HiDrive/OpenAI Codex/Software` und wird direkt per Pfad gestartet.
+- Für genau diese einmalige Python-Bereitstellung hat der Nutzer ausdrücklich das
+  ältere Verbot, Software abzulegen, aufgehoben. Im nächsten zulässigen Lauf vorhandene
+  geeignete portable Laufzeit prüfen oder offizielles Windows-x64-Paket herunterladen,
+  SHA-256 prüfen, dort entpacken und ohne System-Python/Python-PATH-Einträge testen.
+  Keine Systeminstallation oder dauerhaften Registry-/PATH-Änderungen. Diese Ausnahme
+  nicht auf weitere Software ausweiten; nach Erfolg den Auftrag als verbraucht markieren.
+  Danach vorhandene Laufzeit wiederverwenden. Keine erneute routinemäßige Rückfrage.
 - Jeder geplante Lauf: zuerst frische Kontingentwerte mit dem Codex-Werkzeug abfragen.
   Fünfstunden- UND Wochenrest sowie weitere anwendbare Modelllimits müssen jeweils
   mindestens 10 % betragen. Unbekannte Werte/Fehler: ohne Entwicklung überspringen.
