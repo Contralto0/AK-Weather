@@ -1,0 +1,13 @@
+[
+  {
+    "version": "0.1.0.0",
+    "date": "2026-09-12",
+    "category": "feature",
+    "title": "Fachliche Versionsgrundlage",
+    "changes": [
+      "Vier Versionsstellen für Hauptversion, Funktion, Verbesserung und Fehlerbehebung.",
+      "Automatische Erhöhung nach Änderungsart ohne Lauf- oder Buildnummer.",
+      "Zentrale Versionsdatei und Vorschau vor einer Versionsänderung."
+    ]
+  }
+]

@@ -1,1 +1,7 @@
-
+__pycache__/
+*.py[cod]
+.venv/
+.runtime/
+.ak-weather/
+.pytest_cache/
+*.log

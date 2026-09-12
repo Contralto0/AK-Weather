@@ -1,0 +1,21 @@
+AK-Weather
+Copyright (c) 2026 Andy Klemann. Alle Rechte vorbehalten.
+
+Andy Klemann gestattet das kostenlose Herunterladen und die private,
+nichtkommerzielle Nutzung der von ihm offiziell veröffentlichten Anwendung.
+Dafür notwendige lokale Kopien und Sicherungskopien sind gestattet.
+
+Weitergehende Rechte am eigenen Programmcode, insbesondere zur Änderung,
+Weiterveröffentlichung, Weiterverbreitung oder kommerziellen Nutzung, werden
+ohne gesonderte Erlaubnis nicht eingeräumt. Die öffentliche Einsehbarkeit
+des Repositorys begründet keine darüber hinausgehende Nutzungserlaubnis.
+
+Zwingende gesetzliche Rechte bleiben unberührt. Fremdbibliotheken, Daten und
+sonstige Drittbestandteile unterliegen ausschließlich ihren jeweiligen Lizenzen;
+die vorstehenden Einschränkungen gelten nicht für Rechte aus diesen Lizenzen.
+
+Die Anwendung wird ohne Zusicherung einer bestimmten Verfügbarkeit oder
+meteorologischen Genauigkeit bereitgestellt. Gesetzlich zwingende Ansprüche
+bleiben unberührt.
+
+Entwickelt mit KI-Unterstützung.
