@@ -1,0 +1,90 @@
+{
+  "format_version": 1,
+  "purpose": "Abhaengigkeiten fuer das erste Qt-Widgets-Fenster; noch keine automatische Bereitstellung.",
+  "metadata_checked_on": "2026-09-13",
+  "target": {
+    "os": "Windows 11",
+    "architecture": "x86_64",
+    "python_implementation": "CPython",
+    "python_version": "3.14.7",
+    "free_threaded": false
+  },
+  "required_imports": [
+    "PySide6.QtCore",
+    "PySide6.QtGui",
+    "PySide6.QtWidgets"
+  ],
+  "packages": [
+    {
+      "name": "shiboken6",
+      "version": "6.11.2",
+      "metadata_url": "https://pypi.org/pypi/shiboken6/6.11.2/json",
+      "requires_python": "<3.15,>=3.10",
+      "requires_dist": [],
+      "filename": "shiboken6-6.11.2-cp310-abi3-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/ce/6b/fee1b4814317e4664e318644c9c007676c65a71e5b2b9d3ac4121a94dc0a/shiboken6-6.11.2-cp310-abi3-win_amd64.whl",
+      "size_bytes": 1226578,
+      "sha256": "6ab0eba1c904455df621f9a6df3ca2bb896bab8670572d2bc4e37804ae91f19a",
+      "wheel_tags": [
+        "cp310",
+        "abi3",
+        "win_amd64"
+      ],
+      "license_expression_from_pypi": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "planned_license": "LGPL-3.0-only"
+    },
+    {
+      "name": "PySide6-Essentials",
+      "version": "6.11.2",
+      "metadata_url": "https://pypi.org/pypi/PySide6-Essentials/6.11.2/json",
+      "requires_python": "<3.15,>=3.10",
+      "requires_dist": [
+        "shiboken6==6.11.2"
+      ],
+      "filename": "pyside6_essentials-6.11.2-cp310-abi3-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/dc/09/d2662684aee4d3f027ff9b1e965f22301bc28ffc5b7f167658508e4475dc/pyside6_essentials-6.11.2-cp310-abi3-win_amd64.whl",
+      "size_bytes": 76913043,
+      "sha256": "c8a29def77032773a30879f7f24415b5395ad08592d147c170824ef4c735dfc1",
+      "wheel_tags": [
+        "cp310",
+        "abi3",
+        "win_amd64"
+      ],
+      "license_expression_from_pypi": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "planned_license": "LGPL-3.0-only"
+    }
+  ],
+  "licensing": {
+    "required_license_texts": [
+      {
+        "id": "LGPL-3.0-only",
+        "url": "https://raw.githubusercontent.com/qtproject/pyside-pyside-setup/v6.11.2/LICENSES/LGPL-3.0-only.txt"
+      },
+      {
+        "id": "GPL-3.0-only",
+        "url": "https://raw.githubusercontent.com/qtproject/pyside-pyside-setup/v6.11.2/LICENSES/GPL-3.0-only.txt",
+        "reason": "Lizenztext als Bestandteil der LGPLv3 mitliefern; kein Wechsel der Anwendungslizenz."
+      }
+    ],
+    "upstream_sources": "https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.11.2-src/",
+    "qt_module_notices": [
+      "https://doc.qt.io/qt-6/qtcore-index.html",
+      "https://doc.qt.io/qt-6/qtgui-index.html",
+      "https://doc.qt.io/qt-6/qtwidgets-index.html"
+    ],
+    "terms": "https://doc.qt.io/qt-6/lgpl.html",
+    "preserve_all_package_licenses_and_copyrights": true,
+    "keep_qt_libraries_replaceable": true,
+    "third_party_inventory_status": "Aus den konkreten Windows-Wheels vor Auslieferung zu ermitteln; die beiden Hauptlizenztexte allein sind nicht vollstaendig."
+  },
+  "verification": {
+    "pypi_metadata_checked": true,
+    "artifacts_downloaded": false,
+    "artifact_sha256_verified": false,
+    "python_imports_tested": false,
+    "qt_runtime_version_verified": false,
+    "license_texts_bundled": false,
+    "clean_windows_tested": false,
+    "ready_for_distribution": false
+  }
+}

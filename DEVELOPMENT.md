@@ -222,12 +222,21 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   Der interaktive Start wartet auf eine Taste; `--no-pause` erlaubt automatisierte
   Aufrufe. Rückgabewerte bleiben erhalten. Ein vollständiger Test auf einer sauberen
   Windows-Maschine ohne Python/Codex bleibt zur Abnahme des fertigen Launchers nötig.
-- Nächster sehr kleiner Schritt: Abhängigkeiten für ein minimales Qt-Widgets-Fenster
-  festlegen. Mit Python 3.14.7 kompatible PySide6-/Qt-Pakete, Originalquellen,
-  SHA-256-Werte und erforderliche Lizenztexte in einer Abhängigkeitsdatei dokumentieren.
-  In diesem nächsten Schritt noch keine GUI oder Softwarebereitstellung; die
-  abgeschlossene Python-Bereitstellung nicht wiederholen. Reine Metadatenpflege
-  ohne Programmänderung erzeugt keine neue Programmversion.
+- 2026-09-13: **Metadaten der Windows-GUI-Abhängigkeiten festgelegt**.
+  Genau ein kleiner Vorbereitungsschritt: `dependencies/windows-gui.lock.json`
+  dokumentiert PySide6-Essentials und shiboken6 6.11.2 mit Originaladressen,
+  Dateigrößen, erwarteten SHA-256-Werten und Lizenztextquellen. Deklarierte
+  Python-Anforderung >=3.10,<3.15 umfasst CPython 3.14.7; Windows-x64/abi3 gewählt.
+  Keine Wheels heruntergeladen oder Software bereitgestellt. Tatsächliche Hash-,
+  Import-, native DLL- und Lizenzinventarprüfungen sind ausdrücklich noch offen.
+  JSON-Struktur, Dateinamen, Größen, erwartete Hashes, Lizenzangaben und exakte
+  Abhängigkeit gegen beide versionsgebundenen PyPI-APIs erfolgreich abgeglichen.
+  Die reine Metadatenpflege lässt VERSION und changelog.json bei 0.4.0.0 unverändert.
+- Nächster sehr kleiner Schritt: einen rein lokalen Prüfbaustein für eine bereits
+  vorhandene Paketdatei erstellen, der Größe und SHA-256 mit den festgelegten Werten
+  vergleicht. Fehlende, unvollständige oder manipulierte Dateien ablehnen.
+  Noch keine Downloads, Entpackung, Softwarebereitstellung oder GUI in diesem Schritt.
+  Dieser Baustein bereitet die geprüfte portable Bereitstellung vor.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Launcher muss auf Benutzerrechnern ohne installiertes Python oder Codex starten.
 - 2026-09-13, Nutzervermerk: Diese eigenständige Windows-Auslieferung ist verbindlich

@@ -41,6 +41,11 @@ Auslieferungsziel noch nicht; ein entsprechender Test auf sauberem Windows ist v
 
 ## Entwicklung
 
+Die festgelegten Pakete für das erste Qt-Fenster stehen in
+[dependencies/windows-gui.lock.json](dependencies/windows-gui.lock.json).
+[Prüfstand und Lizenzhinweise](dependencies/README.md) unterscheiden die geprüften
+Paketmetadaten von den noch ausstehenden Download-, Import- und Auslieferungsprüfungen.
+
 Die offizielle portable Python-Laufzeit 3.14.7 (Windows x64) ist auf Andys Rechner
 direkt im globalen Softwareordner eingerichtet, ohne Projekt-Unterordner. Alle
 Projekte können dieselbe Laufzeit verwenden. Ihr Start und die Tests wurden
