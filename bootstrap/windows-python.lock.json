@@ -1,0 +1,43 @@
+{
+  "format_version": 1,
+  "purpose": "Festgelegte Python-Laufzeit fuer den noch zu implementierenden Repository-Bootstrapper.",
+  "target": {
+    "os": "Windows",
+    "os_version": "11",
+    "architecture": "x86_64"
+  },
+  "runtime": {
+    "implementation": "CPython",
+    "version": "3.14.7",
+    "distribution": "embeddable",
+    "free_threaded": false,
+    "directory_name": "python-3.14.7",
+    "executable": "python.exe"
+  },
+  "archive": {
+    "filename": "python-3.14.7-embeddable-amd64.zip",
+    "format": "zip",
+    "url": "https://www.python.org/ftp/python/3.14.7/python-3.14.7-embeddable-amd64.zip",
+    "size_bytes": 12673909,
+    "sha256": "76c3c0384ab3f822486f32450f3a4d20f5d65ad0ec32ee34290971aa0eb817e6"
+  },
+  "provenance": {
+    "metadata_url": "https://www.python.org/ftp/python/3.14.7/windows-3.14.7.json",
+    "metadata_entry_id": "pythonembed-3.14-64",
+    "checked_on": "2026-09-13"
+  },
+  "verification": {
+    "existing_archive_size_and_sha256_verified": true,
+    "official_metadata_and_local_receipt_match": true,
+    "bootstrap_download_tested": false,
+    "bootstrap_extraction_tested": false,
+    "clean_windows_start_tested": false
+  },
+  "bootstrap_requirements": {
+    "starts_without_python": true,
+    "requires_codex": false,
+    "changes_system_path": false,
+    "changes_registry": false,
+    "shared_runtime_directory": true
+  }
+}

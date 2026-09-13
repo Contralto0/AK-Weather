@@ -247,11 +247,18 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   und Schutz vor nachträglichem Dateiaustausch bleiben Aufgabe des Aufrufers.
   Dieser Python-Baustein dient der späteren Paket-/Updateprüfung; die erste
   Python-Bereitstellung selbst muss ohne Python implementiert werden.
-- Nächster sehr kleiner Schritt: einen versionierten Windows-Python-Datensatz für
-  den Repository-Bootstrapper festlegen (Originalquelle, genaue Archivgröße, SHA-256,
-  Zielplattform und Laufzeitversion). Vorhandenes geprüftes Archiv und Nachweis aus
-  dem globalen Softwareordner wiederverwenden, ohne Kopie oder erneute Bereitstellung.
-  Noch keine Downloads oder Entpackung; reine Metadatenpflege erzeugt keine Version.
+- 2026-09-13: **Python-Datensatz für den Repository-Bootstrapper festgelegt**.
+  Genau ein kleiner Vorbereitungsschritt: `bootstrap/windows-python.lock.json`
+  dokumentiert CPython 3.14.7 Embeddable für Windows 11 x64, Originalquelle,
+  Archivgröße 12.673.909 Byte, SHA-256 sowie Anforderungen an den Bootstrapper.
+  Offiziellen Metadateneintrag `pythonembed-3.14-64` mit lokalem Nachweis verglichen;
+  vorhandenes Archiv mit dem veröffentlichten lokalen Prüfbaustein erfolgreich
+  auf Größe und SHA-256 geprüft. Keine Kopie, kein Archivdownload, keine Entpackung.
+  Es bleibt bei Programmversion 0.5.0.0; reine Metadatenpflege ohne Changelog-Eintrag.
+- Nächster sehr kleiner Schritt: eine ohne Python lauffähige PowerShell-Grundlage
+  für den Bootstrapper erstellen, die den lokalen Python-Datensatz liest und eine
+  bereits vorhandene Archivdatei auf Größe und SHA-256 prüft. Fehler eindeutig melden.
+  Noch keine Downloads, Entpackung oder Installation in diesem nächsten Schritt.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Bootstrapper wird aus dem Repository bereitgestellt und muss auf Benutzerrechnern
   ohne installiertes Python oder Codex starten.

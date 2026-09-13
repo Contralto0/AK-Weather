@@ -45,6 +45,11 @@ Ein entsprechender Test auf sauberem Windows ist vorgesehen.
 
 ## Entwicklung
 
+Der [Python-Datensatz für den Repository-Bootstrapper](bootstrap/windows-python.lock.json)
+legt Laufzeitversion, Windows-Zielplattform, Originalquelle, Archivgröße und SHA-256
+fest. [Prüfstand und Verwendung](bootstrap/README.md) sind dokumentiert; der
+ausführbare Bootstrapper steht noch aus.
+
 Die festgelegten Pakete für das erste Qt-Fenster stehen in
 [dependencies/windows-gui.lock.json](dependencies/windows-gui.lock.json).
 [Prüfstand und Lizenzhinweise](dependencies/README.md) unterscheiden die geprüften
