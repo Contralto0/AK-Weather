@@ -33,6 +33,12 @@ Die Laufzeit muss bereits vorhanden sein. Fehlende Laufzeit oder ungültige Vers
 werden mit einer Fehlermeldung und Rückgabewert 1 gemeldet. Automatische Einrichtung,
 Downloads und Updates sind noch nicht implementiert.
 
+Für die fertige Windows-Auslieferung wird Python mitgeliefert oder durch einen
+selbst ohne Python startfähigen Bootstrap automatisch portabel bereitgestellt.
+Der Doppelklick muss auf einem frischen Windows-Rechner ohne Python, Codex oder
+manuell eingerichtete Python-Pfade funktionieren. Version 0.4.0.0 erfüllt dieses
+Auslieferungsziel noch nicht; ein entsprechender Test auf sauberem Windows ist vorgesehen.
+
 ## Entwicklung
 
 Die offizielle portable Python-Laufzeit 3.14.7 (Windows x64) ist auf Andys Rechner

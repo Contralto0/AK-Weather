@@ -62,6 +62,12 @@ Nach geprüftem Schritt `changelog.json` und Fortschritt pflegen, committen und 
   eigene portable Laufzeit direkt per Pfad verwenden; weder Python/py aus PATH noch
   eine Codex-Laufzeit auf Benutzerrechnern voraussetzen. Auf Andys Rechner liegt die
   portable Python-Laufzeit unter `C:/Users/andyk/HiDrive/OpenAI Codex/Software`.
+- Verbindliche Auslieferungsanforderung, präzisiert am 13.09.2026: Die portable
+  Python-Laufzeit mitliefern oder beim ersten Start automatisch aus der festgelegten
+  Originalquelle mit Hashprüfung bereitstellen. Der dafür verwendete Bootstrap muss
+  selbst ohne Python starten. Endnutzer müssen weder Python installieren noch eine
+  vorhandene Laufzeit suchen oder Python-Pfade konfigurieren. Die Auslieferung darf
+  weder Andys Softwareordner noch eine Codex-Installation voraussetzen.
 - Doppelklick-Bootstrap für portable Laufzeit und geprüfte Abhängigkeiten. Keine
   Registry-/PATH-Änderungen oder Admininstallation. Bibliotheken wiederverwenden.
 - Ed25519-signiertes Update-Manifest mit Version, Laufzeitanforderungen und Dateien
@@ -131,6 +137,10 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
 - Fehlende Modelle, Zeitauflösungen, Sommerzeitwechsel, Gewichtung und Wahrscheinlichkeiten.
 - Windows-Start, Skalierung, Tastaturbedienung, Lizenzen.
 - Windows-Start ohne installiertes Python und ohne Python-Einträge in PATH; die eigene portable Laufzeit verwenden.
+- Ausgeliefertes Paket auf sauberem Windows ohne Python, Codex oder vorbereiteten
+  Softwareordner per Doppelklick starten. Die mitgelieferte Laufzeit bzw. automatische
+  Erstbereitstellung ohne manuelle Pfadkonfiguration nachweisen. Leerer PATH allein
+  auf dem Entwicklungsrechner genügt dieser Auslieferungsabnahme nicht.
 - Beispieldaten und simulierte Netzantworten verwenden; keine lokalen Testserver.
 
 ## Fortschritt und nächster Schritt
@@ -220,6 +230,10 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   ohne Programmänderung erzeugt keine neue Programmversion.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Launcher muss auf Benutzerrechnern ohne installiertes Python oder Codex starten.
+- 2026-09-13, Nutzervermerk: Diese eigenständige Windows-Auslieferung ist verbindlich
+  und weiterhin offen. Version 0.4.0.0 startet nur eine bereits vorhandene Laufzeit;
+  sie erfüllt die Auslieferungsanforderung noch nicht. Der Vermerk ändert keine
+  Programmfunktion und erzeugt deshalb keine neue Programmversion.
 - Veröffentlichung vor neuem Schritt anhand von `git status`, lokalem HEAD und
   `origin/live` prüfen; ausstehenden Push derselben Version zuerst abschließen.
 
