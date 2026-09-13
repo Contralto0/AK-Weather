@@ -236,11 +236,22 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   JSON-Struktur, Dateinamen, Größen, erwartete Hashes, Lizenzangaben und exakte
   Abhängigkeit gegen beide versionsgebundenen PyPI-APIs erfolgreich abgeglichen.
   Die reine Metadatenpflege lässt VERSION und changelog.json bei 0.4.0.0 unverändert.
-- Nächster sehr kleiner Schritt: einen rein lokalen Prüfbaustein für eine bereits
-  vorhandene Paketdatei erstellen, der Größe und SHA-256 mit den festgelegten Werten
-  vergleicht. Fehlende, unvollständige oder manipulierte Dateien ablehnen.
-  Noch keine Downloads, Entpackung, Softwarebereitstellung oder GUI in diesem Schritt.
-  Dieser Baustein bereitet die geprüfte portable Bereitstellung vor.
+- 2026-09-13: **Lokale Paketprüfung 0.5.0.0**. Genau ein Teilschritt:
+  `ak_weather/package_verification.py` vergleicht eine vorhandene Datei lesend mit
+  erwarteter Größe und SHA-256. Begrenzte Leseblöcke; Größenänderungen während des
+  Lesens und falsche Inhalte werden abgelehnt. Ungültige Sollwerte und Zugriffsfehler
+  bleiben sichtbar. Neun neue Prüfungen mit Beispieldateien bestanden.
+  Alle 41 Tests (neun neue und 32 bestehende) mit der globalen portablen Laufzeit
+  und leerem PATH bestanden; VERSION und Historie stimmen auf 0.5.0.0 überein.
+  Keine Downloads, Entpackung, Installation oder GUI. Vertrauenswürdige Sollwerte
+  und Schutz vor nachträglichem Dateiaustausch bleiben Aufgabe des Aufrufers.
+  Dieser Python-Baustein dient der späteren Paket-/Updateprüfung; die erste
+  Python-Bereitstellung selbst muss ohne Python implementiert werden.
+- Nächster sehr kleiner Schritt: einen versionierten Windows-Python-Datensatz für
+  den Repository-Bootstrapper festlegen (Originalquelle, genaue Archivgröße, SHA-256,
+  Zielplattform und Laufzeitversion). Vorhandenes geprüftes Archiv und Nachweis aus
+  dem globalen Softwareordner wiederverwenden, ohne Kopie oder erneute Bereitstellung.
+  Noch keine Downloads oder Entpackung; reine Metadatenpflege erzeugt keine Version.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Bootstrapper wird aus dem Repository bereitgestellt und muss auf Benutzerrechnern
   ohne installiertes Python oder Codex starten.

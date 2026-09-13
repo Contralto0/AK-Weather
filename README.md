@@ -4,7 +4,8 @@ Eine geplante portable Wetteranwendung von **Andy Klemann**, entwickelt mit KI-U
 
 ## Aktueller Stand
 
-Version **0.4.0.0** enthält eine Windows-Startdatei für die portable Python-Laufzeit,
+Version **0.5.0.0** ergänzt die lokale Prüfung von Paketdateien nach Größe und SHA-256.
+Außerdem enthält sie eine Windows-Startdatei für die portable Python-Laufzeit,
 die fachliche Versionslogik, einen Changelog-Leser und die Speicherung des zuletzt
 erfolgreich angezeigten Versionsstands.
 Damit lassen sich alle noch ungelesenen Neuerungen ermitteln. Die Anzeige folgt separat.
@@ -39,7 +40,8 @@ startet selbst ohne Python; Laufzeitversion, Bezugsquelle und Prüfsumme werden
 zusammen mit ihm im Repository gepflegt.
 Der Doppelklick muss auf einem frischen Windows-Rechner ohne Python, Codex oder
 manuell eingerichtete Python-Pfade funktionieren. Version 0.4.0.0 erfüllt dieses
-Auslieferungsziel noch nicht; ein entsprechender Test auf sauberem Windows ist vorgesehen.
+Auslieferungsziel noch nicht; auch 0.5.0.0 ergänzt noch keinen Bootstrapper.
+Ein entsprechender Test auf sauberem Windows ist vorgesehen.
 
 ## Entwicklung
 
@@ -83,6 +85,16 @@ Linux in `$XDG_STATE_HOME/AK-Weather/read-state.json` (sonst `~/.local/state`).
 Fehlt unter Windows LOCALAPPDATA, wird `~/AppData/Local` verwendet. Relative
 Umgebungswerte werden ignoriert. Beschädigte Inhalte melden `ReadStateError` und
 werden nicht überschrieben; Dateizugriffsfehler bleiben sichtbar.
+
+`ak_weather.package_verification.verify_package_file(path, size_bytes=..., sha256=...)`
+prüft eine lokale Datei anhand vertrauenswürdiger Sollwerte. Erfolg liefert `None`,
+Abweichungen melden `PackageVerificationError`, ungültige Sollwerte `ValueError` und
+Dateizugriffsfehler `OSError`. SHA-256 muss 64 kleine Hexadezimalzeichen enthalten.
+Die Funktion verändert keine Dateien und liest höchstens 1 MiB pro Block.
+Sie verhindert keine nachträgliche Änderung der geprüften Datei und ersetzt keine
+Manifest-Signaturprüfung. Der spätere Aufrufer muss die Datei bis zur Verwendung
+schützen. Dieser Python-Baustein setzt eine laufende Python-Laufzeit voraus;
+die erste Python-Bereitstellung benötigt weiterhin einen davon unabhängigen Bootstrapper.
 
 Der vollständige Auftrag und nächste Schritt stehen in [DEVELOPMENT.md](DEVELOPMENT.md).
 Veröffentlichungen erfolgen ausschließlich als Commits im Branch `live`.

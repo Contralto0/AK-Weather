@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.5.0.0",
+    "date": "2026-09-13",
+    "category": "feature",
+    "title": "Lokale Paketdateien prüfen",
+    "changes": [
+      "Vorhandene Paketdateien ausschließlich lesend mit erwarteter Dateigröße und SHA-256 vergleichen.",
+      "Unvollständige, zu große und inhaltlich veränderte Dateien ablehnen; Zugriffsfehler sichtbar melden.",
+      "Dateien in begrenzten Blöcken prüfen und Größenänderungen während des Lesens erkennen."
+    ]
+  },
+  {
     "version": "0.4.0.0",
     "date": "2026-09-13",
     "category": "feature",
