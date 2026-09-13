@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.4.0.0",
+    "date": "2026-09-13",
+    "category": "feature",
+    "title": "Windows-Startdatei für die portable Laufzeit",
+    "changes": [
+      "Start-AK-Weather.cmd startet die vorhandene gemeinsame Python-Laufzeit direkt und zeigt die zentrale Programmversion an.",
+      "Start ohne Python in PATH und aus anderen Arbeitsordnern; ein abweichender portabler Interpreter ist per AK_WEATHER_PYTHON wählbar.",
+      "Fehlende Laufzeit und unlesbare oder ungültige Versionsdatei werden verständlich gemeldet. Die grafische Wetteroberfläche folgt separat."
+    ]
+  },
+  {
     "version": "0.3.0.0",
     "date": "2026-09-13",
     "category": "feature",

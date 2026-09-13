@@ -198,12 +198,28 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   Alle 27 Tests mit der portablen Laufzeit und leerem PATH erneut bestanden.
   Veröffentlichung ausschließlich als Commit/Push nach origin/live; vor einem
   neuen Schritt die Übereinstimmung von lokalem und Remote-Commit sicherstellen.
-- Nächster sehr kleiner Schritt nach bestätigtem Push: Windows-Launcher-Grundlage, die die vorhandene
-  portable Python-Laufzeit direkt per Pfad startet und die zentrale Version ausgibt.
-  Fehlende Laufzeit verständlich melden. Ohne System-Python/PATH testen; noch keine
-  Downloads, GUI oder weitere Softwarebereitstellung in diesem nächsten Schritt.
-- Ein portabler App-Launcher folgt separat und muss die eigene Laufzeit auch auf
-  Benutzerrechnern ohne installiertes Python und ohne Codex verwenden können.
+- 2026-09-13: **Windows-Startgrundlage 0.4.0.0**. Genau ein Teilschritt:
+  `Start-AK-Weather.cmd` startet die gemeinsame portable Laufzeit direkt mit `-I`;
+  `launch.py` zeigt die zentrale Version. Der Standardpfad liegt relativ zum
+  Programmordner unter `../../Software/python-3.14.7/python.exe`. Ein vorhandener
+  abweichender Interpreter kann über `AK_WEATHER_PYTHON` gewählt werden.
+  Kein System-Python, keine neue Laufzeitkopie, keine Downloads oder GUI.
+  Fünf Windows-Integrationstests prüfen den Start mit leerem PATH, störenden
+  PYTHONHOME/PYTHONPATH-Werten, anderem Arbeitsordner, Leerzeichen und Sonderzeichen,
+  die vorhandene globale Laufzeit, fehlende Laufzeiten sowie beschädigte Versionen.
+  Alle 32 Tests (fünf neue und 27 bestehende) mit der portablen Laufzeit und leerem
+  PATH bestanden. Versionsdatei und Historie verwenden übereinstimmend 0.4.0.0.
+  Der interaktive Start wartet auf eine Taste; `--no-pause` erlaubt automatisierte
+  Aufrufe. Rückgabewerte bleiben erhalten. Ein vollständiger Test auf einer sauberen
+  Windows-Maschine ohne Python/Codex bleibt zur Abnahme des fertigen Launchers nötig.
+- Nächster sehr kleiner Schritt: Abhängigkeiten für ein minimales Qt-Widgets-Fenster
+  festlegen. Mit Python 3.14.7 kompatible PySide6-/Qt-Pakete, Originalquellen,
+  SHA-256-Werte und erforderliche Lizenztexte in einer Abhängigkeitsdatei dokumentieren.
+  In diesem nächsten Schritt noch keine GUI oder Softwarebereitstellung; die
+  abgeschlossene Python-Bereitstellung nicht wiederholen. Reine Metadatenpflege
+  ohne Programmänderung erzeugt keine neue Programmversion.
+- Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
+  Launcher muss auf Benutzerrechnern ohne installiertes Python oder Codex starten.
 - Veröffentlichung vor neuem Schritt anhand von `git status`, lokalem HEAD und
   `origin/live` prüfen; ausstehenden Push derselben Version zuerst abschließen.
 
