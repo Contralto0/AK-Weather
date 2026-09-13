@@ -36,5 +36,7 @@ Windows-Abhängigkeiten und die tatsächliche Qt-Version sind noch zu prüfen.
 `ready_for_distribution` ist deshalb ausdrücklich `false`.
 
 Die globale Python-Laufzeit auf dem Entwicklungsrechner bleibt unverändert.
-Die spätere Auslieferung muss Python mitbringen oder ohne vorinstalliertes Python
-automatisch bereitstellen. Dieses Metadatendokument allein erfüllt das Ziel nicht.
+Die spätere Auslieferung stellt Python über einen Bootstrapper aus dem Repository
+automatisch bereit. Dieser muss selbst ohne vorinstalliertes Python starten;
+Laufzeitversion, Bezugsquelle und Prüfsumme werden im Repository gepflegt.
+Dieses Metadatendokument allein erfüllt das Ziel nicht.

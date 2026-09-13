@@ -33,8 +33,10 @@ Die Laufzeit muss bereits vorhanden sein. Fehlende Laufzeit oder ungültige Vers
 werden mit einer Fehlermeldung und Rückgabewert 1 gemeldet. Automatische Einrichtung,
 Downloads und Updates sind noch nicht implementiert.
 
-Für die fertige Windows-Auslieferung wird Python mitgeliefert oder durch einen
-selbst ohne Python startfähigen Bootstrap automatisch portabel bereitgestellt.
+Für die fertige Windows-Auslieferung wird Python über einen Bootstrapper aus diesem
+Repository (Branch `live`) automatisch portabel bereitgestellt. Der Bootstrapper
+startet selbst ohne Python; Laufzeitversion, Bezugsquelle und Prüfsumme werden
+zusammen mit ihm im Repository gepflegt.
 Der Doppelklick muss auf einem frischen Windows-Rechner ohne Python, Codex oder
 manuell eingerichtete Python-Pfade funktionieren. Version 0.4.0.0 erfüllt dieses
 Auslieferungsziel noch nicht; ein entsprechender Test auf sauberem Windows ist vorgesehen.

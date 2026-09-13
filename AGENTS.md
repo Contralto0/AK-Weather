@@ -13,9 +13,11 @@ ausdrücklich freigegeben. Die Planungsrückfragen wurden abgeschlossen.
 - Nutzerergänzung vom 12.09.2026: AK-Weather muss auf Windows-Rechnern ohne
   installiertes Python laufen. Die anwendungseigene portable Python-Laufzeit liegt
   unter `C:/Users/andyk/HiDrive/OpenAI Codex/Software` und wird direkt per Pfad gestartet.
-- Nutzerpräzisierung vom 13.09.2026 zur Auslieferung: Python muss mitgeliefert oder
-  durch einen selbst ohne Python startfähigen Bootstrap automatisch portabel
-  bereitgestellt werden. Auf einem frischen Windows-Rechner muss der Doppelklick
+- Nutzerfestlegung vom 13.09.2026 zur Auslieferung: Python wird verbindlich über
+  einen Bootstrapper aus dem AK-Weather-Repository (Branch `live`) automatisch
+  portabel bereitgestellt. Bootstrapper und Bereitstellungsmetadaten (Version,
+  Bezugsquelle, SHA-256) werden im Repository gepflegt. Der Bootstrapper muss selbst
+  ohne Python starten. Auf einem frischen Windows-Rechner muss der Doppelklick
   ohne vorinstalliertes Python/Codex und ohne manuelle Python-Pfade funktionieren.
   Ein Verweis auf Andys vorhandenen Softwareordner erfüllt diese Anforderung nicht.
   Abnahme auf sauberem Windows ohne Python; die lokale Laufzeit weiterhin gemeinsam
