@@ -4,8 +4,8 @@ Eine geplante portable Wetteranwendung von **Andy Klemann**, entwickelt mit KI-U
 
 ## Aktueller Stand
 
-Version **0.6.0.0** ergänzt eine Archivprüfung unter Windows PowerShell 5.1,
-die selbst ohne Python startet. Die lokale Python-Paketprüfung bleibt ebenfalls verfügbar.
+Version **0.7.0.0** kann ein fehlendes Python-Archiv zunächst temporär herunterladen,
+prüfen und anschließend bereitstellen. Die PowerShell-Grundlage startet ohne Python.
 Außerdem enthält sie eine Windows-Startdatei für die portable Python-Laufzeit,
 die fachliche Versionslogik, einen Changelog-Leser und die Speicherung des zuletzt
 erfolgreich angezeigten Versionsstands.
@@ -33,23 +33,23 @@ $env:AK_WEATHER_PYTHON = 'D:/Software/python-3.14.7/python.exe'
 
 Die Laufzeit muss bereits vorhanden sein. Fehlende Laufzeit oder ungültige Versionsdatei
 werden mit einer Fehlermeldung und Rückgabewert 1 gemeldet. Automatische Einrichtung,
-Downloads und Updates sind noch nicht implementiert.
+Automatische Einrichtung und Programmupdates sind noch nicht vollständig implementiert.
 
 Für die fertige Windows-Auslieferung wird Python über einen Bootstrapper aus diesem
 Repository (Branch `live`) automatisch portabel bereitgestellt. Der Bootstrapper
 startet selbst ohne Python; Laufzeitversion, Bezugsquelle und Prüfsumme werden
 zusammen mit ihm im Repository gepflegt.
 Der Doppelklick muss auf einem frischen Windows-Rechner ohne Python, Codex oder
-manuell eingerichtete Python-Pfade funktionieren. Version 0.4.0.0 erfüllt dieses
-Auslieferungsziel noch nicht; auch 0.5.0.0 ergänzt noch keinen Bootstrapper.
+manuell eingerichtete Python-Pfade funktionieren. Version 0.7.0.0 kann das geprüfte
+Python-Archiv bereitstellen, entpackt und aktiviert die Laufzeit aber noch nicht.
 Ein entsprechender Test auf sauberem Windows ist vorgesehen.
 
 ## Entwicklung
 
 Der [Python-Datensatz für den Repository-Bootstrapper](bootstrap/windows-python.lock.json)
 legt Laufzeitversion, Windows-Zielplattform, Originalquelle, Archivgröße und SHA-256
-fest. [Prüfstand und Verwendung](bootstrap/README.md) beschreiben auch die neue
-PowerShell-Archivprüfung. Automatischer Download und Einrichtung stehen noch aus.
+fest. [Prüfstand und Verwendung](bootstrap/README.md) beschreiben Archivprüfung und
+Download. Entpackung und vollständige Einrichtung stehen noch aus.
 
 Die festgelegten Pakete für das erste Qt-Fenster stehen in
 [dependencies/windows-gui.lock.json](dependencies/windows-gui.lock.json).

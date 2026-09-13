@@ -20,6 +20,20 @@ weiterhin der Signaturprüfung. Siehe [Microsoft-Dokumentation](https://learn.mi
 Die Auslieferung muss diese Startbedingungen noch berücksichtigen. Das Skript lädt
 nichts herunter und entpackt nichts; es ist noch kein vollständiger Bootstrapper.
 
+Seit 0.7.0.0 lädt `Get-PythonArchive.ps1` ein fehlendes Archiv von der im Datensatz
+festgelegten absoluten HTTPS-Adresse. Der Download landet unter einem zufälligen
+`.partial`-Namen im Zielordner. Erst nach erfolgreicher Größen- und SHA-256-Prüfung
+wird er unter dem endgültigen Namen bereitgestellt. Fehlerhafte oder unvollständige
+Downloads werden entfernt. Ein vorhandenes gültiges Archiv wird wiederverwendet;
+ein vorhandenes ungültiges Archiv bleibt zur Diagnose erhalten und wird nicht
+überschrieben. Der Zielordner muss bereits bestehen.
+
+Die produktive Downloadaktion verwendet `Invoke-WebRequest`. Der optionale Parameter
+`DownloadAction` dient der isolierten Prüfung mit simulierten Antworten und darf in
+der normalen Auslieferung nicht aus nicht vertrauenswürdigen Eingaben befüllt werden.
+Die Tests starten ohne Python in PATH, verwenden keinen lokalen Server und führen
+keinen echten Download aus. Der Baustein entpackt oder installiert noch nichts.
+
 `windows-python.lock.json` legt die portable CPython-Laufzeit **3.14.7**, Windows
 11 x64, als Embeddable-ZIP ohne Free-Threading fest. Die Archivgröße beträgt
 **12.673.909 Byte**. URL und SHA-256 stammen aus dem Eintrag

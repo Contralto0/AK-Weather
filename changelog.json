@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.7.0.0",
+    "date": "2026-09-14",
+    "category": "feature",
+    "title": "Python-Archiv sicher herunterladen",
+    "changes": [
+      "Fehlende Python-Archive über die festgelegte HTTPS-Adresse zunächst in eine temporäre Datei laden.",
+      "Temporäre Downloads vor der Übernahme anhand von Dateigröße und SHA-256 prüfen.",
+      "Fehlgeschlagene oder manipulierte Downloads vollständig entfernen und vorhandene gültige Archive wiederverwenden."
+    ]
+  },
+  {
     "version": "0.6.0.0",
     "date": "2026-09-13",
     "category": "feature",

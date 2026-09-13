@@ -269,10 +269,20 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   Die erste Veröffentlichung wurde bei 9 % Fünfstundenrest verschoben. Im folgenden
   Lauf wurden alle 48 Tests erneut bestanden und derselbe Stand 0.6.0.0 ohne weitere
   Versionserhöhung zur Veröffentlichung vorbereitet.
-- Nächster sehr kleiner Schritt: einen PowerShell-Downloadbaustein für ein fehlendes
-  Python-Archiv in eine temporäre Datei ergänzen, anschließend Größe/SHA-256 prüfen.
-  Noch keine Entpackung. Netzwerkantworten simulieren; das vorhandene globale Archiv
-  wiederverwenden und Python auf dem Entwicklungsrechner nicht erneut bereitstellen.
+- 2026-09-14: **Geprüfter Python-Archivdownload 0.7.0.0**. Genau ein Teilschritt:
+  `bootstrap/Get-PythonArchive.ps1` lädt ein fehlendes Archiv über die festgelegte
+  HTTPS-Adresse in eine zufällige temporäre Datei, prüft Größe/SHA-256 und übernimmt
+  es erst danach. Fehler entfernen Teilstände. Vorhandene gültige Archive werden
+  ohne Download wiederverwendet; ungültige bleiben unverändert sichtbar.
+  Fünf neue Windows-PowerShell-Tests simulieren erfolgreiche, beschädigte, fehlende
+  und abgebrochene Antworten ohne lokalen Server oder Netzwerkzugriff. Keine
+  Entpackung, Installation oder erneute Bereitstellung der globalen Laufzeit.
+  Alle 53 Tests (fünf neue und 48 bestehende) mit der portablen Python-Laufzeit
+  und leerem PATH bestanden; VERSION und Historie stimmen auf 0.7.0.0 überein.
+- Nächster sehr kleiner Schritt: sicheres Entpacken eines bereits geprüften Python-ZIP
+  in ein separates temporäres Verzeichnis vorbereiten. Absolute Pfade, `..`,
+  Laufwerks-/UNC-Pfade und Einträge außerhalb des Zielordners ablehnen. Tests nur
+  mit kleinen Beispieldaten; noch keine Aktivierung oder globale Bereitstellung.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Bootstrapper wird aus dem Repository bereitgestellt und muss auf Benutzerrechnern
   ohne installiertes Python oder Codex starten.
