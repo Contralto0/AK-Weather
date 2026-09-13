@@ -4,9 +4,9 @@ Eine geplante portable Wetteranwendung von **Andy Klemann**, entwickelt mit KI-U
 
 ## Aktueller Stand
 
-Version **0.2.0.0** enthält die fachliche Versionslogik und einen Changelog-Leser,
-der alle Neuerungen seit einer zuletzt angezeigten Version numerisch auswählt.
-Die Anzeige und Speicherung des Lesestands folgen separat.
+Version **0.3.0.0** enthält die fachliche Versionslogik, einen Changelog-Leser
+und die Speicherung des zuletzt erfolgreich angezeigten Versionsstands.
+Damit lassen sich alle noch ungelesenen Neuerungen ermitteln. Die Anzeige folgt separat.
 Eine grafische Wetteranwendung und automatische Updates sind noch nicht vorhanden.
 Die Umsetzung erfolgt alle drei Stunden in genau einem sehr kleinen Teilschritt,
 mit höchstens 30 Minuten und nur bei ausreichend Codex-Kontingent.
@@ -39,6 +39,16 @@ Bei erneutem Push derselben Änderung die Version **nicht** nochmals erhöhen.
 zuerst. `entries_since("0.1.0.0")` wählt alle neueren Einträge; `entries_since(None)`
 liefert beim Erststart alle Einträge. Beide Funktionen lesen nur. Beschädigte Inhalte
 melden `ChangelogError`; Dateizugriffsfehler bleiben `OSError`.
+
+`ak_weather.read_state.load_last_seen()` liest den Lesestand, beim Erststart `None`.
+`save_after_display(version, displayed=True)` speichert ihn nach erfolgreicher Anzeige
+atomisch; `displayed=False` verändert nichts. Die Oberfläche muss diese Aufrufe
+serialisieren. Ältere Versionen setzen den Lesestand nicht zurück.
+Unter Windows liegt die Datei in `%LOCALAPPDATA%/AK-Weather/read-state.json`, unter
+Linux in `$XDG_STATE_HOME/AK-Weather/read-state.json` (sonst `~/.local/state`).
+Fehlt unter Windows LOCALAPPDATA, wird `~/AppData/Local` verwendet. Relative
+Umgebungswerte werden ignoriert. Beschädigte Inhalte melden `ReadStateError` und
+werden nicht überschrieben; Dateizugriffsfehler bleiben sichtbar.
 
 Der vollständige Auftrag und nächste Schritt stehen in [DEVELOPMENT.md](DEVELOPMENT.md).
 Veröffentlichungen erfolgen ausschließlich als Commits im Branch `live`.

@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.3.0.0",
+    "date": "2026-09-13",
+    "category": "feature",
+    "title": "Lesestand der Versionshinweise speichern",
+    "changes": [
+      "Zuletzt erfolgreich angezeigte Version getrennt von den Programmdateien laden und atomisch speichern.",
+      "Fehlende Lesestandsdatei als Erststart behandeln; fehlgeschlagene Anzeigen und ältere Versionen verändern den Stand nicht.",
+      "Beschädigte Lesestände ausdrücklich melden und den bisherigen Stand bei fehlgeschlagenem Dateiaustausch erhalten."
+    ]
+  },
+  {
     "version": "0.2.0.0",
     "date": "2026-09-12",
     "category": "feature",

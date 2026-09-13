@@ -181,10 +181,27 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   neue Abhängigkeiten. Beschädigte Daten und doppelte Versionen melden einen Fehler.
   Zehn neue Changelog-Prüfungen und acht bestehende Versionstests bestanden mit der
   globalen portablen Python-Laufzeit und leerem PATH.
-- Nächster sehr kleiner Schritt: den zuletzt erfolgreich angezeigten Versionsstand
-  lokal außerhalb des austauschbaren Programmcodes laden und atomisch speichern.
-  Erst erfolgreiche Anzeige darf ihn ändern; fehlende Datei bedeutet Erststart.
-  In diesem nächsten Lauf noch keine GUI implementieren.
+- 2026-09-12/13: **Lesestand-Speicherung 0.3.0.0 abgeschlossen**.
+  Genau ein Teilschritt: `ak_weather/read_state.py` lädt und speichert den zuletzt
+  erfolgreich angezeigten Versionsstand außerhalb des austauschbaren Programmcodes.
+  Fehlende Datei bedeutet Erststart. Fehlgeschlagene Anzeigen verändern nichts;
+  ältere Versionen setzen den Stand nicht zurück. Beschädigte Inhalte bleiben
+  erhalten und werden gemeldet. Atomischer Dateiaustausch schützt den bisherigen
+  Stand bei Schreibfehlern. Noch keine GUI oder neue Abhängigkeiten.
+  Neun neue Lesestandsprüfungen und 18 bestehende Tests bestanden mit der globalen
+  portablen Python-Laufzeit und leerem PATH (insgesamt 27). Dazu zählen Erststart,
+  Anzeigeabbruch, beschädigte Daten, Schreibfehler, Plattformpfade und Zusammenspiel
+  mit dem Changelog-Leser. Eine gültige Datenpfadvariable benötigt kein Home-Verzeichnis.
+  Die Veröffentlichung wurde am 12.09. wegen 7 % Fünfstundenrest verschoben.
+  Wiederaufnahme am 13.09.: ausschließlich Prüfung und Veröffentlichung desselben
+  Stands 0.3.0.0, ohne erneute Versionserhöhung oder zusätzlichen Entwicklungsschritt.
+  Alle 27 Tests mit der portablen Laufzeit und leerem PATH erneut bestanden.
+  Veröffentlichung ausschließlich als Commit/Push nach origin/live; vor einem
+  neuen Schritt die Übereinstimmung von lokalem und Remote-Commit sicherstellen.
+- Nächster sehr kleiner Schritt nach bestätigtem Push: Windows-Launcher-Grundlage, die die vorhandene
+  portable Python-Laufzeit direkt per Pfad startet und die zentrale Version ausgibt.
+  Fehlende Laufzeit verständlich melden. Ohne System-Python/PATH testen; noch keine
+  Downloads, GUI oder weitere Softwarebereitstellung in diesem nächsten Schritt.
 - Ein portabler App-Launcher folgt separat und muss die eigene Laufzeit auch auf
   Benutzerrechnern ohne installiertes Python und ohne Codex verwenden können.
 - Veröffentlichung vor neuem Schritt anhand von `git status`, lokalem HEAD und
