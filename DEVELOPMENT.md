@@ -255,10 +255,24 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   vorhandenes Archiv mit dem veröffentlichten lokalen Prüfbaustein erfolgreich
   auf Größe und SHA-256 geprüft. Keine Kopie, kein Archivdownload, keine Entpackung.
   Es bleibt bei Programmversion 0.5.0.0; reine Metadatenpflege ohne Changelog-Eintrag.
-- Nächster sehr kleiner Schritt: eine ohne Python lauffähige PowerShell-Grundlage
-  für den Bootstrapper erstellen, die den lokalen Python-Datensatz liest und eine
-  bereits vorhandene Archivdatei auf Größe und SHA-256 prüft. Fehler eindeutig melden.
-  Noch keine Downloads, Entpackung oder Installation in diesem nächsten Schritt.
+- 2026-09-13: **PowerShell-Archivprüfung 0.6.0.0 abgeschlossen**.
+  Genau ein Teilschritt:
+  `bootstrap/Test-PythonArchive.ps1` liest lokale Prüfmetadaten und prüft Größe/SHA-256
+  ohne Python. Archivhandle sperrt Schreiben/Löschen während der Prüfung. Fehler
+  führen zu Rückgabewert 1. Sieben neue Windows-PowerShell-5.1-Tests bestanden:
+  leerer PATH, Sonderzeichen, fehlende Dateien, beschädigte Archive/Metadaten und
+  ein gleichzeitig geöffneter Schreibzugriff. RemoteSigned nur pro Testprozess;
+  dauerhafte Richtlinien unverändert. Keine Downloads, Entpackung oder Installation.
+  Alle 48 Tests (sieben neue und 41 bestehende) bestanden. Zusätzlich das vorhandene
+  offizielle Python-Archiv mit dem echten Repository-Datensatz erfolgreich unter
+  Windows PowerShell 5.1 und leerem PATH geprüft; keine erneute Bereitstellung.
+  Die erste Veröffentlichung wurde bei 9 % Fünfstundenrest verschoben. Im folgenden
+  Lauf wurden alle 48 Tests erneut bestanden und derselbe Stand 0.6.0.0 ohne weitere
+  Versionserhöhung zur Veröffentlichung vorbereitet.
+- Nächster sehr kleiner Schritt: einen PowerShell-Downloadbaustein für ein fehlendes
+  Python-Archiv in eine temporäre Datei ergänzen, anschließend Größe/SHA-256 prüfen.
+  Noch keine Entpackung. Netzwerkantworten simulieren; das vorhandene globale Archiv
+  wiederverwenden und Python auf dem Entwicklungsrechner nicht erneut bereitstellen.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Bootstrapper wird aus dem Repository bereitgestellt und muss auf Benutzerrechnern
   ohne installiertes Python oder Codex starten.

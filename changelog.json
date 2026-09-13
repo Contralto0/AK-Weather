@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.6.0.0",
+    "date": "2026-09-13",
+    "category": "feature",
+    "title": "Python-Archiv ohne Python prüfen",
+    "changes": [
+      "Windows-PowerShell-Prüfung für vorhandene Archive anhand des Repository-Datensatzes ergänzt.",
+      "Dateigröße, SHA-256 und ungültige Prüfmetadaten werden ohne Python oder Codex geprüft.",
+      "Das Archiv bleibt unverändert; während der Prüfung werden Schreibzugriffe gesperrt."
+    ]
+  },
+  {
     "version": "0.5.0.0",
     "date": "2026-09-13",
     "category": "feature",

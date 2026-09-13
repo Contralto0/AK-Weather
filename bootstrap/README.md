@@ -1,4 +1,24 @@
-# Python-Datensatz für den Windows-Bootstrapper
+# Python-Datensatz und Archivprüfung
+
+Seit 0.6.0.0 prüft `Test-PythonArchive.ps1` ein vorhandenes Archiv mit Windows
+PowerShell 5.1, ohne Python oder Codex aufzurufen. Standardmäßig liest es
+`windows-python.lock.json` neben dem Skript; `-MetadataPath` erlaubt einen anderen
+vertrauenswürdigen Datensatz. Es validiert Formatversion, Größe und SHA-256.
+Erfolg liefert Rückgabewert 0; Fehler werden auf stderr mit Rückgabewert 1 gemeldet.
+Das Archiv bleibt unverändert. Windows sperrt Schreiben und Löschen während der
+Prüfung; nach Ende muss der spätere Verwender Änderungen selbst verhindern.
+
+Beispiel aus dem Projektordner für das bereits vorhandene Archiv:
+
+```powershell
+& "$env:SystemRoot/System32/WindowsPowerShell/v1.0/powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy RemoteSigned -File .\bootstrap\Test-PythonArchive.ps1 -ArchivePath 'C:/Users/andyk/HiDrive/OpenAI Codex/Software/python-3.14.7-embeddable-amd64.zip'
+```
+
+`RemoteSigned` gilt hier nur für diesen Prozess, ohne dauerhafte Richtlinienänderung.
+Gruppenrichtlinien bleiben maßgeblich; aus dem Internet geladene Skripte unterliegen
+weiterhin der Signaturprüfung. Siehe [Microsoft-Dokumentation](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies).
+Die Auslieferung muss diese Startbedingungen noch berücksichtigen. Das Skript lädt
+nichts herunter und entpackt nichts; es ist noch kein vollständiger Bootstrapper.
 
 `windows-python.lock.json` legt die portable CPython-Laufzeit **3.14.7**, Windows
 11 x64, als Embeddable-ZIP ohne Free-Threading fest. Die Archivgröße beträgt

@@ -4,7 +4,8 @@ Eine geplante portable Wetteranwendung von **Andy Klemann**, entwickelt mit KI-U
 
 ## Aktueller Stand
 
-Version **0.5.0.0** ergänzt die lokale Prüfung von Paketdateien nach Größe und SHA-256.
+Version **0.6.0.0** ergänzt eine Archivprüfung unter Windows PowerShell 5.1,
+die selbst ohne Python startet. Die lokale Python-Paketprüfung bleibt ebenfalls verfügbar.
 Außerdem enthält sie eine Windows-Startdatei für die portable Python-Laufzeit,
 die fachliche Versionslogik, einen Changelog-Leser und die Speicherung des zuletzt
 erfolgreich angezeigten Versionsstands.
@@ -47,8 +48,8 @@ Ein entsprechender Test auf sauberem Windows ist vorgesehen.
 
 Der [Python-Datensatz für den Repository-Bootstrapper](bootstrap/windows-python.lock.json)
 legt Laufzeitversion, Windows-Zielplattform, Originalquelle, Archivgröße und SHA-256
-fest. [Prüfstand und Verwendung](bootstrap/README.md) sind dokumentiert; der
-ausführbare Bootstrapper steht noch aus.
+fest. [Prüfstand und Verwendung](bootstrap/README.md) beschreiben auch die neue
+PowerShell-Archivprüfung. Automatischer Download und Einrichtung stehen noch aus.
 
 Die festgelegten Pakete für das erste Qt-Fenster stehen in
 [dependencies/windows-gui.lock.json](dependencies/windows-gui.lock.json).
