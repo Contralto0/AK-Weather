@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.9.0.0",
+    "date": "2026-09-14",
+    "category": "feature",
+    "title": "Python-Laufzeit atomar veröffentlichen",
+    "changes": [
+      "Einen sicher entpackten Laufzeitordner atomar unter dem versionsgebundenen Namen bereitstellen.",
+      "Bereitgestellte Laufzeiten mit Version, Ordnername und Python-Programmdatei markieren.",
+      "Vorhandene eindeutig passende Laufzeiten unverändert wiederverwenden und Konflikte ohne Überschreiben ablehnen."
+    ]
+  },
+  {
     "version": "0.8.0.0",
     "date": "2026-09-14",
     "category": "feature",

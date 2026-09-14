@@ -281,10 +281,18 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   sowie Pfade außerhalb des Zielordners werden abgelehnt. Fehler entfernen nur das neu angelegte
   Ziel. Fünf Tests verwenden kleine lokale ZIP-Dateien, leeren PATH und keinen Server.
   Keine Aktivierung, Installation oder globale Bereitstellung der Laufzeit.
-- Nächster sehr kleiner Schritt: den geprüften und sicher entpackten Laufzeitordner
-  atomar unter seinem versionsgebundenen Namen bereitstellen. Vorhandene passende
-  Laufzeiten unverändert wiederverwenden; Konflikte ablehnen. Tests nur mit kleinen
-  lokalen Beispieldaten; noch kein Start der Laufzeit oder vollständiger Bootstrapper.
+- 2026-09-14: **Atomare Python-Laufzeitveröffentlichung 0.9.0.0**. Genau ein Teilschritt:
+  `bootstrap/Publish-PythonRuntime.ps1` verschiebt einen sicher entpackten direkten
+  Unterordner atomar unter den versionsgebundenen Namen aus dem Repository-Datensatz.
+  Eine vorab geschriebene Markierung hält Version, Ordner und Programmdatei fest.
+  Vorhandene eindeutig passende Laufzeiten werden unverändert wiederverwendet;
+  unmarkierte, abweichende oder verknüpfte Ziele werden ohne Überschreiben abgelehnt.
+  Fünf neue Tests verwenden nur kleine lokale Ordner, leeren PATH und keinen Server.
+  Alle 63 Tests bestanden. Kein Python-Start, Download oder globale Bereitstellung.
+- Nächster sehr kleiner Schritt: Download, Prüfung, sichere Entpackung und atomare
+  Veröffentlichung in einem repositorybasierten PowerShell-Bootstrapablauf verbinden.
+  Bereits vorhandene passende Laufzeiten vor einem Download erkennen. Tests verwenden
+  ausschließlich simulierte Downloads und kleine lokale Archive; Python noch nicht starten.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Bootstrapper wird aus dem Repository bereitgestellt und muss auf Benutzerrechnern
   ohne installiertes Python oder Codex starten.

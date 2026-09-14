@@ -38,14 +38,27 @@ Seit 0.8.0.0 entpackt `Expand-PythonArchive.ps1` ein bereits geprüftes lokales 
 in einen neuen, separaten Zielordner. Es prüft vor dem ersten Schreibzugriff alle
 Einträge und lehnt absolute Pfade, Laufwerks- und UNC-Pfade, `..`, Verknüpfungen,
 Windows-Gerätenamen, mehrdeutige Ziele sowie außerhalb des Zielordners aufgelöste
-Pfade ab. Bei
-einem Fehler wird nur der vom Skript neu angelegte Zielordner entfernt. Vorhandene
+Pfade ab. Bei einem Fehler wird nur der vom Skript neu angelegte Zielordner entfernt. Vorhandene
 Ziele und fehlende Elternordner werden unverändert abgelehnt.
 
 Das Skript prüft die ZIP-Prüfsumme nicht erneut. Der Aufrufer muss ausschließlich
 ein zuvor erfolgreich geprüftes und bis zum Aufruf unverändertes Archiv übergeben.
 Es aktiviert oder installiert die entpackte Laufzeit noch nicht. Die Tests verwenden
 nur kleine lokale Beispieldateien, Windows PowerShell 5.1 und einen leeren PATH.
+
+Seit 0.9.0.0 veröffentlicht `Publish-PythonRuntime.ps1` einen bereits sicher
+entpackten Ordner atomar unter `runtime.directory_name`. Temporärer Ordner und Ziel
+müssen direkte Kinder desselben vorhandenen Stammordners sein; damit bleibt der
+abschließende Verzeichniswechsel auf demselben Datenträger. Vor der Verschiebung
+entsteht im temporären Ordner `.ak-weather-runtime.json` mit Laufzeitversion,
+Ordnername und Programmdatei aus dem Repository-Datensatz.
+
+Ein vorhandener Zielordner wird nur mit passender Markierung und regulärer
+Python-Programmdatei unverändert wiederverwendet. Fehlende oder abweichende
+Markierungen, Verknüpfungen, ungültige Windows-Namen und fehlende Programmdateien
+führen zu einem Fehler, ohne den vorhandenen Zielordner oder den temporären Ordner
+zu verändern. Bei erfolgreicher Wiederverwendung bleibt der temporäre Ordner zur
+späteren kontrollierten Bereinigung erhalten. Das Skript startet Python noch nicht.
 
 `windows-python.lock.json` legt die portable CPython-Laufzeit **3.14.7**, Windows
 11 x64, als Embeddable-ZIP ohne Free-Threading fest. Die Archivgröße beträgt
