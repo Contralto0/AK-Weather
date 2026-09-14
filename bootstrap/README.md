@@ -34,6 +34,19 @@ der normalen Auslieferung nicht aus nicht vertrauenswürdigen Eingaben befüllt 
 Die Tests starten ohne Python in PATH, verwenden keinen lokalen Server und führen
 keinen echten Download aus. Der Baustein entpackt oder installiert noch nichts.
 
+Seit 0.8.0.0 entpackt `Expand-PythonArchive.ps1` ein bereits geprüftes lokales ZIP
+in einen neuen, separaten Zielordner. Es prüft vor dem ersten Schreibzugriff alle
+Einträge und lehnt absolute Pfade, Laufwerks- und UNC-Pfade, `..`, Verknüpfungen,
+Windows-Gerätenamen, mehrdeutige Ziele sowie außerhalb des Zielordners aufgelöste
+Pfade ab. Bei
+einem Fehler wird nur der vom Skript neu angelegte Zielordner entfernt. Vorhandene
+Ziele und fehlende Elternordner werden unverändert abgelehnt.
+
+Das Skript prüft die ZIP-Prüfsumme nicht erneut. Der Aufrufer muss ausschließlich
+ein zuvor erfolgreich geprüftes und bis zum Aufruf unverändertes Archiv übergeben.
+Es aktiviert oder installiert die entpackte Laufzeit noch nicht. Die Tests verwenden
+nur kleine lokale Beispieldateien, Windows PowerShell 5.1 und einen leeren PATH.
+
 `windows-python.lock.json` legt die portable CPython-Laufzeit **3.14.7**, Windows
 11 x64, als Embeddable-ZIP ohne Free-Threading fest. Die Archivgröße beträgt
 **12.673.909 Byte**. URL und SHA-256 stammen aus dem Eintrag

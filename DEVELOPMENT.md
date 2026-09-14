@@ -279,10 +279,17 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   Entpackung, Installation oder erneute Bereitstellung der globalen Laufzeit.
   Alle 53 Tests (fünf neue und 48 bestehende) mit der portablen Python-Laufzeit
   und leerem PATH bestanden; VERSION und Historie stimmen auf 0.7.0.0 überein.
-- Nächster sehr kleiner Schritt: sicheres Entpacken eines bereits geprüften Python-ZIP
-  in ein separates temporäres Verzeichnis vorbereiten. Absolute Pfade, `..`,
-  Laufwerks-/UNC-Pfade und Einträge außerhalb des Zielordners ablehnen. Tests nur
-  mit kleinen Beispieldaten; noch keine Aktivierung oder globale Bereitstellung.
+- 2026-09-14: **Sicheres Python-ZIP-Entpacken 0.8.0.0**. Genau ein Teilschritt:
+  `bootstrap/Expand-PythonArchive.ps1` prüft alle ZIP-Einträge vor dem Schreiben und
+  entpackt ein bereits geprüftes Archiv in einen neuen separaten Zielordner. Absolute,
+  Laufwerks-, UNC- und `..`-Pfade, Verknüpfungen, Windows-Gerätenamen, mehrdeutige Ziele
+  sowie Pfade außerhalb des Zielordners werden abgelehnt. Fehler entfernen nur das neu angelegte
+  Ziel. Fünf Tests verwenden kleine lokale ZIP-Dateien, leeren PATH und keinen Server.
+  Keine Aktivierung, Installation oder globale Bereitstellung der Laufzeit.
+- Nächster sehr kleiner Schritt: den geprüften und sicher entpackten Laufzeitordner
+  atomar unter seinem versionsgebundenen Namen bereitstellen. Vorhandene passende
+  Laufzeiten unverändert wiederverwenden; Konflikte ablehnen. Tests nur mit kleinen
+  lokalen Beispieldaten; noch kein Start der Laufzeit oder vollständiger Bootstrapper.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Bootstrapper wird aus dem Repository bereitgestellt und muss auf Benutzerrechnern
   ohne installiertes Python oder Codex starten.

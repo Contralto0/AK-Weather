@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.8.0.0",
+    "date": "2026-09-14",
+    "category": "feature",
+    "title": "Python-Archiv sicher entpacken",
+    "changes": [
+      "Ein bereits geprüftes Python-ZIP in einen neuen separaten Zielordner entpacken.",
+      "Absolute, Laufwerks-, UNC- und Elternpfade, Windows-Gerätenamen sowie Verknüpfungen vor jedem Schreibzugriff ablehnen.",
+      "Mehrdeutige oder außerhalb des Zielordners aufgelöste Einträge ablehnen und unvollständige Zielordner entfernen."
+    ]
+  },
+  {
     "version": "0.7.0.0",
     "date": "2026-09-14",
     "category": "feature",
