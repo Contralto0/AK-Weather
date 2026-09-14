@@ -34,17 +34,14 @@ ausdrücklich freigegeben. Die Planungsrückfragen wurden abgeschlossen.
   `C:/Users/andyk/HiDrive/OpenAI Codex/Software/python-3.14.7/python.exe`.
   Offizieller SHA-256 geprüft, isolierter Start mit leerem PATH und acht Tests bestanden.
   Details und Nachweis stehen in DEVELOPMENT.md. Python nicht erneut bereitstellen.
-- Jeder geplante Lauf: zuerst frische Kontingentwerte mit dem Codex-Werkzeug abfragen.
-  Fünfstunden- UND Wochenrest sowie weitere anwendbare Modelllimits müssen jeweils
-  mindestens 10 % betragen. Unbekannte Werte/Fehler: ohne Entwicklung überspringen.
-  Keine Reset-Guthaben oder zusätzlichen Credits verwenden.
+- Nutzeränderung vom 14.09.2026: Kontingentlimits ab jetzt vollständig ignorieren.
+  Keine Kontingentwerte abfragen und keinen Lauf wegen Fünfstunden-, Wochen- oder
+  anderer Modelllimits überspringen oder verschieben.
 - Genau EIN sehr kleiner, in sich abgeschlossener Teilschritt pro Lauf, nie ein
   ganzes Arbeitspaket. Höchstens 30 Minuten einschließlich Tests und Veröffentlichung.
   Startzeit und Deadline feststellen; vor jedem Werkzeugaufruf Restzeit beachten.
   Nach 25 Minuten keine neuen Implementierungsarbeiten, nur prüfen/publizieren/sichern.
   Externe Befehle zeitlich begrenzen, damit die 30-Minuten-Grenze eingehalten wird.
-- Vor Umsetzung und Veröffentlichung Kontingent erneut prüfen. Unter 10 % sichern
-  und verschieben. Nicht um mehr Kontingent bitten.
 - Überlappende Läufe ausschließen: vor Schreibzugriff einen exklusiven lokalen
   Lauf-Lock unter `.ak-weather/` halten; bei belegtem Lock den Lauf überspringen.
   Locks nicht allein anhand ihres Alters entfernen; lebenden Besitzer prüfen.

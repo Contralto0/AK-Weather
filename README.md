@@ -13,7 +13,7 @@ erfolgreich angezeigten Versionsstands.
 Damit lassen sich alle noch ungelesenen Neuerungen ermitteln. Die Anzeige folgt separat.
 Eine grafische Wetteranwendung und automatische Updates sind noch nicht vorhanden.
 Die Umsetzung erfolgt alle drei Stunden in genau einem sehr kleinen Teilschritt,
-mit höchstens 30 Minuten und nur bei ausreichend Codex-Kontingent.
+mit höchstens 30 Minuten. Kontingentlimits werden dabei nicht geprüft.
 
 ## Start unter Windows
 

@@ -8,13 +8,9 @@ Dieser Auftrag wurde am 12.09.2026 ausdrücklich zur Umsetzung freigegeben.
 
 - Alle drei Stunden genau EIN sehr kleiner, abgeschlossener Entwicklungsschritt.
 - Höchstens 30 Minuten einschließlich Analyse, Implementierung, Tests, Commit und Push.
-- Zu Beginn frische Codex-Kontingentwerte abfragen. Fünfstunden- und Wochenrest müssen
-  jeweils mindestens 10 % betragen; weitere anwendbare Modelllimits ebenfalls beachten.
-  `rateLimitsByLimitId` bevorzugen. Rest = max(0, min(100, 100 - usedPercent)).
-  Fehlende Werte, Toolfehler, gesperrte gewöhnliche Nutzung oder unzureichender Rest:
-  ohne Entwicklung und ohne Versionsänderung überspringen. Keine Reset-Guthaben nutzen.
-- Vor Implementierung und Veröffentlichung erneut abfragen. Unter 10 % Arbeitsstand
-  sichern und verschieben. Die kurze anfängliche Prüfung darf selbst Kontingent nutzen.
+- Nutzeränderung vom 14.09.2026: Kontingentlimits vollständig ignorieren. Keine
+  Kontingentabfragen durchführen und Entwicklung oder Veröffentlichung nicht aufgrund
+  von Fünfstunden-, Wochen- oder anderen Modelllimits überspringen oder verschieben.
 - Startzeit/Deadline festhalten; ab Minute 25 nur abschließen oder sichern.
   Kein zweiter Entwicklungsschritt im selben Lauf. Laufenden Besitzer eines exklusiven
   lokalen Locks respektieren. Unterbrochene Arbeit und ausstehenden Push zuerst fortsetzen.
@@ -131,7 +127,6 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
 ## Prüfungen
 
 - Ein Teilschritt / höchstens 30 Minuten / Wiederaufnahme / Parallelität.
-- Kontingent unter 10 %, genau 10 %, unbekannte Werte und Toolfehler.
 - Fachliche Versionswahl, Zurücksetzen folgender Stellen, keine Erhöhung ohne Änderung.
 - Delta-Downloads, Signaturen, Pfade, Teilabbrüche, Offlinebetrieb und Rückkehr zur Vorversion.
 - Veröffentlichung derselben Version nach Fehler wiederholen, Remote-Stand prüfen.
