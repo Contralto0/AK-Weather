@@ -303,9 +303,16 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   Interpreter. Explizite Interpreterpfade werden nicht ersetzt; Bootstrap-Fehlercodes
   bleiben erhalten. Ein neuer Launcher-Test simuliert den Aufruf ohne Netzwerk.
   Sechs Launcher-Tests und alle 69 Projekttests bestanden. Keine erneute Bereitstellung.
-- Nächster sehr kleiner Schritt: den ersten festgelegten Windows-GUI-Paketdownload
-  anhand von `dependencies/windows-gui.lock.json` vorbereiten und Größe/SHA-256 vor
-  jeder Übernahme prüfen. Tests verwenden simulierte Antworten; noch keine Installation,
+- 2026-09-14: **Geprüfter shiboken6-Download 0.12.0.0**. Genau ein Teilschritt:
+  `dependencies/Get-GuiPackage.ps1` lädt ausschließlich das festgelegte shiboken6-Wheel
+  zunächst temporär und übernimmt es erst nach Größen- und SHA-256-Prüfung. Gültige
+  vorhandene Wheels werden unverändert wiederverwendet; beschädigte, fehlende oder
+  abgebrochene Antworten hinterlassen keinen Teilstand. Fünf neue Tests verwenden
+  kleine Beispieldateien, simulierte Downloads, leeren PATH und keinen Server.
+  Alle 74 Projekttests bestanden. Kein echter Download, Entpacken oder Installieren.
+- Nächster sehr kleiner Schritt: denselben geprüften Downloadpfad für das festgelegte
+  PySide6-Essentials-Wheel freigeben. Abhängigkeit und Reihenfolge zu shiboken6 prüfen;
+  Tests verwenden weiterhin kleine simulierte Antworten. Noch keine Installation,
   kein Import und kein grafisches Fenster.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Bootstrapper wird aus dem Repository bereitgestellt und muss auf Benutzerrechnern

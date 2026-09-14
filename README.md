@@ -4,9 +4,9 @@ Eine geplante portable Wetteranwendung von **Andy Klemann**, entwickelt mit KI-U
 
 ## Aktueller Stand
 
-Version **0.11.0.0** bindet den Repository-Bootstrapablauf in die Windows-Startdatei
-ein. Eine fehlende Standardlaufzeit wird beim Doppelklick automatisch bereitgestellt;
-die PowerShell-Grundlage startet ohne Python.
+Version **0.12.0.0** ergänzt den geprüften Download des ersten festgelegten
+Windows-GUI-Pakets. Eine fehlende Standardlaufzeit wird beim Doppelklick weiterhin
+automatisch bereitgestellt; die PowerShell-Grundlage startet ohne Python.
 Außerdem enthält sie eine Windows-Startdatei für die portable Python-Laufzeit,
 die fachliche Versionslogik, einen Changelog-Leser und die Speicherung des zuletzt
 erfolgreich angezeigten Versionsstands.
@@ -59,7 +59,8 @@ Bootstrapablauf und seine Einbindung in die Doppelklick-Startdatei.
 Die festgelegten Pakete für das erste Qt-Fenster stehen in
 [dependencies/windows-gui.lock.json](dependencies/windows-gui.lock.json).
 [Prüfstand und Lizenzhinweise](dependencies/README.md) unterscheiden die geprüften
-Paketmetadaten von den noch ausstehenden Download-, Import- und Auslieferungsprüfungen.
+Paketmetadaten und den geprüften shiboken6-Download von den noch ausstehenden
+PySide6-Essentials-, Import- und Auslieferungsprüfungen.
 
 Die offizielle portable Python-Laufzeit 3.14.7 (Windows x64) ist auf Andys Rechner
 direkt im globalen Softwareordner eingerichtet, ohne Projekt-Unterordner. Alle

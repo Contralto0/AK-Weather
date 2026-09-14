@@ -13,6 +13,19 @@ Dies ist die deklarierte Kompatibilität; ein Import- und Fenstertest mit der
 portablen Laufzeit steht noch aus. Es wurden nur Metadaten gelesen, keine Wheels
 heruntergeladen, entpackt oder installiert.
 
+Seit 0.12.0.0 lädt `Get-GuiPackage.ps1` ausschließlich das zuerst benötigte
+`shiboken6`-Wheel. Eine fehlende Datei wird unter einem zufälligen `.partial`-Namen
+geladen und erst nach erfolgreichem Vergleich von Größe und SHA-256 übernommen.
+Gültige vorhandene Dateien bleiben unverändert; fehlerhafte oder abgebrochene
+Teilstände werden entfernt. Der Zielordner muss als direkter vorhandener Ordner
+angegeben werden. Pfadbestandteile und Windows-Gerätenamen aus Metadaten werden
+abgelehnt.
+
+Der optionale Parameter `DownloadAction` ist nur für isolierte Tests mit simulierten
+Antworten bestimmt. Die produktive Ausführung verwendet die festgelegte HTTPS-Adresse.
+Dieser Schritt hat keine Wheels heruntergeladen, entpackt oder installiert und die
+globale Python-Laufzeit nicht verändert. PySide6-Essentials folgt separat.
+
 Die Datei enthält unveränderlich ausgewählte Dateinamen, HTTPS-Adressen, Größen
 und die von PyPI veröffentlichten SHA-256-Werte. Diese erwarteten Werte wurden
 gegen die versionsgebundene PyPI-API geprüft. Erst ein späterer Download erlaubt
