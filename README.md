@@ -4,9 +4,9 @@ Eine geplante portable Wetteranwendung von **Andy Klemann**, entwickelt mit KI-U
 
 ## Aktueller Stand
 
-Version **0.10.0.0** verbindet Download, Prüfung, sichere Entpackung und atomare
-Veröffentlichung der portablen Python-Laufzeit in einem Repository-Bootstrapablauf.
-Die PowerShell-Grundlage startet ohne Python.
+Version **0.11.0.0** bindet den Repository-Bootstrapablauf in die Windows-Startdatei
+ein. Eine fehlende Standardlaufzeit wird beim Doppelklick automatisch bereitgestellt;
+die PowerShell-Grundlage startet ohne Python.
 Außerdem enthält sie eine Windows-Startdatei für die portable Python-Laufzeit,
 die fachliche Versionslogik, einen Changelog-Leser und die Speicherung des zuletzt
 erfolgreich angezeigten Versionsstands.
@@ -32,18 +32,20 @@ $env:AK_WEATHER_PYTHON = 'D:/Software/python-3.14.7/python.exe'
 .\Start-AK-Weather.cmd
 ```
 
-Die Laufzeit muss bereits vorhanden sein. Fehlende Laufzeit oder ungültige Versionsdatei
-werden mit einer Fehlermeldung und Rückgabewert 1 gemeldet. Automatische Einrichtung,
-Automatische Einrichtung und Programmupdates sind noch nicht vollständig implementiert.
+Fehlt die Standardlaufzeit, legt die Startdatei den globalen Softwareordner an und
+ruft den Repository-Bootstrapper auf. Ein explizit mit `AK_WEATHER_PYTHON` gewählter
+Pfad wird nicht automatisch ersetzt. Bereitstellungsfehler und ungültige Versionsdateien
+werden mit einer Fehlermeldung und ihrem Rückgabewert gemeldet. GUI-Bibliotheken und
+Programmupdates sind noch nicht vollständig implementiert.
 
 Für die fertige Windows-Auslieferung wird Python über einen Bootstrapper aus diesem
 Repository (Branch `live`) automatisch portabel bereitgestellt. Der Bootstrapper
 startet selbst ohne Python; Laufzeitversion, Bezugsquelle und Prüfsumme werden
 zusammen mit ihm im Repository gepflegt.
 Der Doppelklick muss auf einem frischen Windows-Rechner ohne Python, Codex oder
-manuell eingerichtete Python-Pfade funktionieren. Version 0.10.0.0 kann die portable
-Python-Laufzeit vollständig bereitstellen und vorhandene passende Laufzeiten vor einem
-Download erkennen, startet die bereitgestellte Laufzeit aber noch nicht.
+manuell eingerichtete Python-Pfade funktionieren. Version 0.11.0.0 stößt die portable
+Python-Bereitstellung bei Bedarf direkt aus der Startdatei an und verwendet anschließend
+den versionsgebundenen Interpreter.
 Ein entsprechender Test auf sauberem Windows ist vorgesehen.
 
 ## Entwicklung
@@ -51,8 +53,8 @@ Ein entsprechender Test auf sauberem Windows ist vorgesehen.
 Der [Python-Datensatz für den Repository-Bootstrapper](bootstrap/windows-python.lock.json)
 legt Laufzeitversion, Windows-Zielplattform, Originalquelle, Archivgröße und SHA-256
 fest. [Prüfstand und Verwendung](bootstrap/README.md) beschreiben Archivprüfung und
-Download, sichere Entpackung, atomare Laufzeitveröffentlichung und den verbindenden
-Bootstrapablauf. Start und Einbindung in die Doppelklick-Startdatei stehen noch aus.
+Download, sichere Entpackung, atomare Laufzeitveröffentlichung, den verbindenden
+Bootstrapablauf und seine Einbindung in die Doppelklick-Startdatei.
 
 Die festgelegten Pakete für das erste Qt-Fenster stehen in
 [dependencies/windows-gui.lock.json](dependencies/windows-gui.lock.json).

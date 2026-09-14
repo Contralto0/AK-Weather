@@ -297,10 +297,16 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   Ablauf, Wiederverwendung, Konflikte, beschädigte Downloads und unsichere ZIP-Pfade
   mit simulierten Downloads, kleinen lokalen Archiven, leerem PATH und ohne Server.
   Kein Python-Start und keine erneute globale Bereitstellung.
-- Nächster sehr kleiner Schritt: `Start-AK-Weather.cmd` bei fehlender Laufzeit den
-  Repository-Bootstrapablauf aufrufen lassen und anschließend den ermittelten portablen
-  Interpreter direkt verwenden. Tests simulieren die Bereitstellung ohne Netzwerk;
-  grafische Oberfläche und Paketinstallation bleiben getrennte spätere Schritte.
+- 2026-09-14: **Bootstrap im Windows-Doppelklickstart 0.11.0.0**. Genau ein Teilschritt:
+  `Start-AK-Weather.cmd` ruft bei fehlender Standardlaufzeit den repositorybasierten
+  PowerShell-Bootstrapper auf und verwendet danach direkt den versionsgebundenen
+  Interpreter. Explizite Interpreterpfade werden nicht ersetzt; Bootstrap-Fehlercodes
+  bleiben erhalten. Ein neuer Launcher-Test simuliert den Aufruf ohne Netzwerk.
+  Sechs Launcher-Tests und alle 69 Projekttests bestanden. Keine erneute Bereitstellung.
+- Nächster sehr kleiner Schritt: den ersten festgelegten Windows-GUI-Paketdownload
+  anhand von `dependencies/windows-gui.lock.json` vorbereiten und Größe/SHA-256 vor
+  jeder Übernahme prüfen. Tests verwenden simulierte Antworten; noch keine Installation,
+  kein Import und kein grafisches Fenster.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Bootstrapper wird aus dem Repository bereitgestellt und muss auf Benutzerrechnern
   ohne installiertes Python oder Codex starten.

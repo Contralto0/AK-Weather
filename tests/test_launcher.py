@@ -59,8 +59,28 @@ class LauncherTests(unittest.TestCase):
                     self.environment["AK_WEATHER_PYTHON"] = override
                 result = self.launch(pause=True)
                 self.assertEqual(result.returncode, 1)
-                self.assertIn("portable Python-Laufzeit wurde nicht gefunden", result.stderr)
+                expected = ("Repository-Bootstrapper wurde nicht gefunden" if override is None
+                            else "portable Python-Laufzeit wurde nicht gefunden")
+                self.assertIn(expected, result.stderr)
                 self.assertNotIn("AK-Weather ", result.stdout)
+
+    def test_missing_default_runtime_invokes_repository_bootstrapper(self):
+        self.environment.pop("AK_WEATHER_PYTHON")
+        bootstrap = self.app / "bootstrap"
+        bootstrap.mkdir()
+        marker = self.root / "bootstrap-called.txt"
+        script = bootstrap / "Initialize-PythonRuntime.ps1"
+        script.write_text(
+            "param([string]$RuntimeRootPath)\n"
+            f"[IO.File]::WriteAllText('{str(marker).replace(chr(39), chr(39) * 2)}', $RuntimeRootPath)\n"
+            "exit 23\n",
+            encoding="utf-8",
+        )
+        result = self.launch()
+        self.assertEqual(result.returncode, 23, result.stdout + result.stderr)
+        self.assertIn("konnte nicht bereitgestellt werden", result.stderr)
+        self.assertEqual(Path(marker.read_text()).resolve(), (self.root / "Software").resolve())
+        self.assertFalse((self.root / "Software/python-3.14.7/python.exe").exists())
 
     def test_missing_or_invalid_version_is_reported_and_exit_code_preserved(self):
         version = self.app / "VERSION"

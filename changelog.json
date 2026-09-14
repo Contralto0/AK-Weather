@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.11.0.0",
+    "date": "2026-09-14",
+    "category": "feature",
+    "title": "Python-Bootstrap beim Doppelklick starten",
+    "changes": [
+      "Eine fehlende Standardlaufzeit beim Windows-Doppelklick automatisch über den Repository-Bootstrapper bereitstellen.",
+      "Nach erfolgreicher Bereitstellung direkt den versionsgebundenen portablen Interpreter verwenden.",
+      "Explizite Interpreterpfade respektieren und Bootstrap-Fehlercodes bis zur Startdatei erhalten."
+    ]
+  },
+  {
     "version": "0.10.0.0",
     "date": "2026-09-14",
     "category": "feature",

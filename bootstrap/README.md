@@ -73,6 +73,14 @@ HTTPS-Download aus `Get-PythonArchive.ps1`. Die Ablaufprüfungen verwenden klein
 ZIP-Dateien, leeren PATH und keinen Server. Python wird noch nicht gestartet, und der
 Ablauf ist noch nicht mit der Doppelklick-Startdatei verbunden.
 
+Seit 0.11.0.0 ruft `Start-AK-Weather.cmd` diesen Ablauf auf, wenn weder
+`AK_WEATHER_PYTHON` gesetzt noch die versionsgebundene Standardlaufzeit vorhanden ist.
+Die Startdatei verwendet Windows PowerShell über den absoluten Systempfad, legt nur
+den globalen Software-Stammordner an und startet nach erfolgreicher Bereitstellung
+direkt dessen `python.exe`. Bootstrap-Fehlercodes bleiben erhalten. Ein expliziter,
+aber fehlender Interpreterpfad wird weiterhin ohne Ausweichen auf System-Python
+abgelehnt. Die Tests simulieren den Bootstrapaufruf ohne Netzwerkzugriff.
+
 `windows-python.lock.json` legt die portable CPython-Laufzeit **3.14.7**, Windows
 11 x64, als Embeddable-ZIP ohne Free-Threading fest. Die Archivgröße beträgt
 **12.673.909 Byte**. URL und SHA-256 stammen aus dem Eintrag
