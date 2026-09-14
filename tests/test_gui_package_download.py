@@ -40,12 +40,12 @@ class GuiPackageDownloadTests(unittest.TestCase):
     def quote(value):
         return "'" + str(value).replace("'", "''") + "'"
 
-    def launch(self, action=None, destination=None):
+    def launch(self, action=None, destination=None, package="shiboken6"):
         if action is None:
             action = f"{{ param($uri,$path) [System.IO.File]::Copy({self.quote(self.source)}, $path) }}"
         command = (f"$download={action}; & {self.quote(self.script)} -DestinationDirectory "
                    f"{self.quote(destination or self.destination)} -MetadataPath {self.quote(self.metadata)} "
-                   "-DownloadAction $download; exit $LASTEXITCODE")
+                   f"-PackageName {self.quote(package)} -DownloadAction $download; exit $LASTEXITCODE")
         return subprocess.run(
             [str(self.powershell), "-NoLogo", "-NoProfile", "-NonInteractive",
              "-ExecutionPolicy", "RemoteSigned", "-Command", command],
@@ -98,6 +98,47 @@ class GuiPackageDownloadTests(unittest.TestCase):
         result = self.launch("{ throw 'Download darf nicht laufen' }", missing)
         self.assertEqual(result.returncode, 1)
         self.assertFalse(missing.exists())
+
+    def write_pyside_spec(self):
+        packages = [
+            {"name": "shiboken6", "version": "6.11.2", "requires_dist": [],
+             "filename": "shiboken6-test.whl", "url": "https://example.invalid/shiboken.whl",
+             "size_bytes": 7, "sha256": hashlib.sha256(b"binding").hexdigest()},
+            {"name": "PySide6-Essentials", "version": "6.11.2",
+             "requires_dist": ["shiboken6==6.11.2"], "filename": "essentials-test.whl",
+             "url": "https://example.invalid/essentials.whl", "size_bytes": 10,
+             "sha256": hashlib.sha256(b"essentials").hexdigest()},
+        ]
+        self.metadata.write_text(json.dumps({"format_version": 1, "packages": packages}), encoding="utf-8")
+
+    def test_pyside_essentials_download_requires_verified_shiboken_first(self):
+        self.write_pyside_spec()
+        self.source.write_bytes(b"essentials")
+        dependency = self.destination / "shiboken6-test.whl"
+        dependency.write_bytes(b"binding")
+        result = self.launch(package="PySide6-Essentials")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual((self.destination / "essentials-test.whl").read_bytes(), b"essentials")
+
+    def test_missing_corrupt_or_mismatched_shiboken_stops_before_pyside_download(self):
+        self.write_pyside_spec()
+        dependency = self.destination / "shiboken6-test.whl"
+        for content in (None, b"corrupt"):
+            with self.subTest(content=content):
+                if content is None:
+                    dependency.unlink(missing_ok=True)
+                else:
+                    dependency.write_bytes(content)
+                result = self.launch("{ throw 'Download darf nicht laufen' }", package="PySide6-Essentials")
+                self.assertEqual(result.returncode, 1)
+                self.assertFalse((self.destination / "essentials-test.whl").exists())
+
+        dependency.write_bytes(b"binding")
+        spec = json.loads(self.metadata.read_text())
+        spec["packages"][1]["requires_dist"] = ["shiboken6==6.10.0"]
+        self.metadata.write_text(json.dumps(spec), encoding="utf-8")
+        result = self.launch("{ throw 'Download darf nicht laufen' }", package="PySide6-Essentials")
+        self.assertEqual(result.returncode, 1)
 
 
 if __name__ == "__main__":

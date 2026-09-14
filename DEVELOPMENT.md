@@ -310,10 +310,17 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   abgebrochene Antworten hinterlassen keinen Teilstand. Fünf neue Tests verwenden
   kleine Beispieldateien, simulierte Downloads, leeren PATH und keinen Server.
   Alle 74 Projekttests bestanden. Kein echter Download, Entpacken oder Installieren.
-- Nächster sehr kleiner Schritt: denselben geprüften Downloadpfad für das festgelegte
-  PySide6-Essentials-Wheel freigeben. Abhängigkeit und Reihenfolge zu shiboken6 prüfen;
-  Tests verwenden weiterhin kleine simulierte Antworten. Noch keine Installation,
-  kein Import und kein grafisches Fenster.
+- 2026-09-14: **Geprüfter PySide6-Essentials-Download 0.12.1.0**. Genau ein Teilschritt:
+  `dependencies/Get-GuiPackage.ps1` unterstützt nun auch das festgelegte
+  PySide6-Essentials-Wheel. Vor dessen Download werden die exakte versionsgleiche
+  Abhängigkeitsangabe und das vorhandene shiboken6-Wheel anhand von Größe/SHA-256
+  geprüft. Fehlende, beschädigte oder abweichende Abhängigkeiten stoppen vor dem
+  Download. Zwei neue Tests erweitern die Paketprüfung auf sieben Fälle; alle 76
+  Projekttests bestanden. Keine echten Downloads, Entpackung oder Installation.
+- Nächster sehr kleiner Schritt: das geprüfte shiboken6-Wheel sicher in einen neuen
+  separaten Paket-Stagingordner entpacken. Unsichere ZIP-Pfade, Verknüpfungen und
+  mehrdeutige Windows-Ziele ablehnen. Nur kleine Beispieldaten verwenden; die portable
+  Laufzeit noch nicht verändern und PySide6-Essentials separat behandeln.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Bootstrapper wird aus dem Repository bereitgestellt und muss auf Benutzerrechnern
   ohne installiertes Python oder Codex starten.

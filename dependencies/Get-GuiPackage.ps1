@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$DestinationDirectory,
-    [ValidateSet('shiboken6')][string]$PackageName = 'shiboken6',
+    [ValidateSet('shiboken6', 'PySide6-Essentials')][string]$PackageName = 'shiboken6',
     [string]$MetadataPath,
     [scriptblock]$DownloadAction = {
         param($Uri, $OutputPath)
@@ -36,6 +36,30 @@ function Test-PackageFile {
     }
 }
 
+function Assert-PackageMetadata {
+    param([pscustomobject]$Package)
+    if ((($Package.size_bytes -isnot [int]) -and ($Package.size_bytes -isnot [long])) -or
+        ($Package.size_bytes -lt 0)) { throw 'Die erwartete Paketgroesse ist ungueltig.' }
+    if (($Package.sha256 -isnot [string]) -or ($Package.sha256 -cnotmatch '\A[0-9a-f]{64}\z')) {
+        throw 'Der erwartete SHA-256-Wert ist ungueltig.'
+    }
+    if (($Package.url -isnot [string]) -or
+        -not [System.Uri]::IsWellFormedUriString($Package.url, [System.UriKind]::Absolute) -or
+        ([System.Uri]$Package.url).Scheme -cne 'https') {
+        throw 'Die Downloadadresse muss eine absolute HTTPS-Adresse sein.'
+    }
+    if (($Package.filename -isnot [string]) -or [string]::IsNullOrWhiteSpace($Package.filename) -or
+        ($Package.filename -ne [System.IO.Path]::GetFileName($Package.filename)) -or
+        $Package.filename.Contains(':') -or
+        -not $Package.filename.EndsWith('.whl', [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw 'Der GUI-Paketdateiname ist ungueltig.'
+    }
+    $deviceName = [System.IO.Path]::GetFileNameWithoutExtension($Package.filename)
+    if ($deviceName -match '\A(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])\z') {
+        throw 'Der GUI-Paketdateiname ist unter Windows unzulaessig.'
+    }
+}
+
 try {
     if (-not $PSBoundParameters.ContainsKey('MetadataPath')) {
         $scriptDirectory = [System.IO.Path]::GetDirectoryName($MyInvocation.MyCommand.Path)
@@ -49,34 +73,28 @@ try {
     $matches = @($spec.packages | Where-Object { $_.name -ceq $PackageName })
     if ($matches.Count -ne 1) { throw 'Das festgelegte GUI-Paket fehlt oder ist nicht eindeutig.' }
     $package = $matches[0]
+    Assert-PackageMetadata -Package $package
     $expectedSize = $package.size_bytes
     $expectedHash = $package.sha256
     $sourceUri = $package.url
     $filename = $package.filename
-    if ((($expectedSize -isnot [int]) -and ($expectedSize -isnot [long])) -or ($expectedSize -lt 0)) {
-        throw 'Die erwartete Paketgroesse ist ungueltig.'
-    }
-    if (($expectedHash -isnot [string]) -or ($expectedHash -cnotmatch '\A[0-9a-f]{64}\z')) {
-        throw 'Der erwartete SHA-256-Wert ist ungueltig.'
-    }
-    if (($sourceUri -isnot [string]) -or
-        -not [System.Uri]::IsWellFormedUriString($sourceUri, [System.UriKind]::Absolute) -or
-        ([System.Uri]$sourceUri).Scheme -cne 'https') {
-        throw 'Die Downloadadresse muss eine absolute HTTPS-Adresse sein.'
-    }
-    if (($filename -isnot [string]) -or [string]::IsNullOrWhiteSpace($filename) -or
-        ($filename -ne [System.IO.Path]::GetFileName($filename)) -or $filename.Contains(':') -or
-        -not $filename.EndsWith('.whl', [System.StringComparison]::OrdinalIgnoreCase)) {
-        throw 'Der GUI-Paketdateiname ist ungueltig.'
-    }
-    $deviceName = [System.IO.Path]::GetFileNameWithoutExtension($filename)
-    if ($deviceName -match '\A(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])\z') {
-        throw 'Der GUI-Paketdateiname ist unter Windows unzulaessig.'
-    }
     $destination = Get-Item -LiteralPath $DestinationDirectory -Force
     if (($destination -isnot [System.IO.DirectoryInfo]) -or
         (($destination.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0)) {
         throw 'Der GUI-Paketordner muss als direkter Ordner vorhanden sein.'
+    }
+    if ($PackageName -ceq 'PySide6-Essentials') {
+        $dependencyMatches = @($spec.packages | Where-Object { $_.name -ceq 'shiboken6' })
+        if ($dependencyMatches.Count -ne 1) { throw 'Die festgelegte shiboken6-Abhaengigkeit fehlt.' }
+        $dependency = $dependencyMatches[0]
+        $requirements = @($package.requires_dist)
+        if (($package.version -cne $dependency.version) -or ($requirements.Count -ne 1) -or
+            ($requirements[0] -cne ('shiboken6==' + $dependency.version))) {
+            throw 'Die festgelegte Abhaengigkeit von PySide6-Essentials ist ungueltig.'
+        }
+        Assert-PackageMetadata -Package $dependency
+        Test-PackageFile -Path (Join-Path $destination.FullName $dependency.filename) `
+            -ExpectedSize $dependency.size_bytes -ExpectedHash $dependency.sha256
     }
     $destinationPath = Join-Path $destination.FullName $filename
     if (Test-Path -LiteralPath $destinationPath) {

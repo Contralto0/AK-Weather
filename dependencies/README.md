@@ -26,6 +26,13 @@ Antworten bestimmt. Die produktive Ausführung verwendet die festgelegte HTTPS-A
 Dieser Schritt hat keine Wheels heruntergeladen, entpackt oder installiert und die
 globale Python-Laufzeit nicht verändert. PySide6-Essentials folgt separat.
 
+Seit 0.12.1.0 verwendet auch `PySide6-Essentials` denselben geprüften Downloadpfad.
+Vor seinem Download muss der Datensatz exakt `shiboken6==6.11.2` derselben Version
+fordern. Das festgelegte shiboken6-Wheel muss bereits im Zielordner liegen und wird
+erneut auf Größe und SHA-256 geprüft. Eine fehlende, beschädigte oder abweichend
+versionierte Abhängigkeit beendet den Ablauf vor jedem Essentials-Download.
+Die Tests verwenden weiterhin ausschließlich kleine simulierte Dateien.
+
 Die Datei enthält unveränderlich ausgewählte Dateinamen, HTTPS-Adressen, Größen
 und die von PyPI veröffentlichten SHA-256-Werte. Diese erwarteten Werte wurden
 gegen die versionsgebundene PyPI-API geprüft. Erst ein späterer Download erlaubt

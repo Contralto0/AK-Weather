@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.12.1.0",
+    "date": "2026-09-14",
+    "category": "improvement",
+    "title": "PySide6-Essentials geprüft herunterladen",
+    "changes": [
+      "Den geprüften GUI-Paketdownload auf PySide6-Essentials erweitern.",
+      "Vor dem Essentials-Download die exakt versionsgleiche Abhängigkeit von shiboken6 prüfen.",
+      "Das vorhandene shiboken6-Wheel erneut anhand von Größe und SHA-256 bestätigen."
+    ]
+  },
+  {
     "version": "0.12.0.0",
     "date": "2026-09-14",
     "category": "feature",
