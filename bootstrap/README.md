@@ -60,6 +60,19 @@ führen zu einem Fehler, ohne den vorhandenen Zielordner oder den temporären Or
 zu verändern. Bei erfolgreicher Wiederverwendung bleibt der temporäre Ordner zur
 späteren kontrollierten Bereinigung erhalten. Das Skript startet Python noch nicht.
 
+Seit 0.10.0.0 verbindet `Initialize-PythonRuntime.ps1` die bestehenden Bausteine
+in der festgelegten Reihenfolge: vorhandene Laufzeit erkennen, Archiv laden und
+prüfen, in einen zufälligen direkten Unterordner sicher entpacken und atomar
+veröffentlichen. Eine eindeutig passende markierte Laufzeit beendet den Ablauf vor
+jedem Download. Konflikte, beschädigte Archive und unsichere ZIP-Einträge brechen ab;
+temporäre Entpackordner dieses Ablaufs werden entfernt.
+
+Der optionale Parameter `DownloadAction` dient ausschließlich Tests mit simulierten
+Downloads. Die produktive Ausführung übergibt ihn nicht und verwendet den festgelegten
+HTTPS-Download aus `Get-PythonArchive.ps1`. Die Ablaufprüfungen verwenden kleine lokale
+ZIP-Dateien, leeren PATH und keinen Server. Python wird noch nicht gestartet, und der
+Ablauf ist noch nicht mit der Doppelklick-Startdatei verbunden.
+
 `windows-python.lock.json` legt die portable CPython-Laufzeit **3.14.7**, Windows
 11 x64, als Embeddable-ZIP ohne Free-Threading fest. Die Archivgröße beträgt
 **12.673.909 Byte**. URL und SHA-256 stammen aus dem Eintrag

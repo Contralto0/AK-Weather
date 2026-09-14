@@ -4,9 +4,9 @@ Eine geplante portable Wetteranwendung von **Andy Klemann**, entwickelt mit KI-U
 
 ## Aktueller Stand
 
-Version **0.9.0.0** kann ein fehlendes Python-Archiv zunächst temporär herunterladen,
-prüfen, sicher entpacken und den Laufzeitordner atomar unter seinem versionsgebundenen
-Namen bereitstellen. Die PowerShell-Grundlage startet ohne Python.
+Version **0.10.0.0** verbindet Download, Prüfung, sichere Entpackung und atomare
+Veröffentlichung der portablen Python-Laufzeit in einem Repository-Bootstrapablauf.
+Die PowerShell-Grundlage startet ohne Python.
 Außerdem enthält sie eine Windows-Startdatei für die portable Python-Laufzeit,
 die fachliche Versionslogik, einen Changelog-Leser und die Speicherung des zuletzt
 erfolgreich angezeigten Versionsstands.
@@ -41,9 +41,9 @@ Repository (Branch `live`) automatisch portabel bereitgestellt. Der Bootstrapper
 startet selbst ohne Python; Laufzeitversion, Bezugsquelle und Prüfsumme werden
 zusammen mit ihm im Repository gepflegt.
 Der Doppelklick muss auf einem frischen Windows-Rechner ohne Python, Codex oder
-manuell eingerichtete Python-Pfade funktionieren. Version 0.9.0.0 kann das geprüfte
-Python-Archiv bereitstellen, sicher entpacken und den Laufzeitordner veröffentlichen,
-startet die bereitgestellte Laufzeit aber noch nicht.
+manuell eingerichtete Python-Pfade funktionieren. Version 0.10.0.0 kann die portable
+Python-Laufzeit vollständig bereitstellen und vorhandene passende Laufzeiten vor einem
+Download erkennen, startet die bereitgestellte Laufzeit aber noch nicht.
 Ein entsprechender Test auf sauberem Windows ist vorgesehen.
 
 ## Entwicklung
@@ -51,8 +51,8 @@ Ein entsprechender Test auf sauberem Windows ist vorgesehen.
 Der [Python-Datensatz für den Repository-Bootstrapper](bootstrap/windows-python.lock.json)
 legt Laufzeitversion, Windows-Zielplattform, Originalquelle, Archivgröße und SHA-256
 fest. [Prüfstand und Verwendung](bootstrap/README.md) beschreiben Archivprüfung und
-Download, sichere Entpackung und atomare Laufzeitveröffentlichung. Start und
-vollständige Einrichtung stehen noch aus.
+Download, sichere Entpackung, atomare Laufzeitveröffentlichung und den verbindenden
+Bootstrapablauf. Start und Einbindung in die Doppelklick-Startdatei stehen noch aus.
 
 Die festgelegten Pakete für das erste Qt-Fenster stehen in
 [dependencies/windows-gui.lock.json](dependencies/windows-gui.lock.json).

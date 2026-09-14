@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.10.0.0",
+    "date": "2026-09-14",
+    "category": "feature",
+    "title": "Python-Bereitstellung als Ablauf verbinden",
+    "changes": [
+      "Download, Archivprüfung, sichere Entpackung und atomare Laufzeitveröffentlichung in einem PowerShell-Ablauf verbinden.",
+      "Vorhandene eindeutig passende Python-Laufzeiten erkennen, bevor ein Download beginnt.",
+      "Beschädigte Archive, unsichere ZIP-Pfade und Zielkonflikte ohne unvollständige Laufzeitveröffentlichung abbrechen."
+    ]
+  },
+  {
     "version": "0.9.0.0",
     "date": "2026-09-14",
     "category": "feature",

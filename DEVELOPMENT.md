@@ -289,10 +289,18 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   unmarkierte, abweichende oder verknüpfte Ziele werden ohne Überschreiben abgelehnt.
   Fünf neue Tests verwenden nur kleine lokale Ordner, leeren PATH und keinen Server.
   Alle 63 Tests bestanden. Kein Python-Start, Download oder globale Bereitstellung.
-- Nächster sehr kleiner Schritt: Download, Prüfung, sichere Entpackung und atomare
-  Veröffentlichung in einem repositorybasierten PowerShell-Bootstrapablauf verbinden.
-  Bereits vorhandene passende Laufzeiten vor einem Download erkennen. Tests verwenden
-  ausschließlich simulierte Downloads und kleine lokale Archive; Python noch nicht starten.
+- 2026-09-14: **Repository-Bootstrapablauf 0.10.0.0**. Genau ein Teilschritt:
+  `bootstrap/Initialize-PythonRuntime.ps1` erkennt passende vorhandene Laufzeiten vor
+  jedem Download und verbindet Archivdownload/-prüfung, sichere Entpackung und atomare
+  Veröffentlichung. Zufällige temporäre Ordner werden bei Folgefehlern entfernt;
+  vorhandene Konflikte bleiben unverändert. Fünf neue Tests prüfen den vollständigen
+  Ablauf, Wiederverwendung, Konflikte, beschädigte Downloads und unsichere ZIP-Pfade
+  mit simulierten Downloads, kleinen lokalen Archiven, leerem PATH und ohne Server.
+  Kein Python-Start und keine erneute globale Bereitstellung.
+- Nächster sehr kleiner Schritt: `Start-AK-Weather.cmd` bei fehlender Laufzeit den
+  Repository-Bootstrapablauf aufrufen lassen und anschließend den ermittelten portablen
+  Interpreter direkt verwenden. Tests simulieren die Bereitstellung ohne Netzwerk;
+  grafische Oberfläche und Paketinstallation bleiben getrennte spätere Schritte.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Bootstrapper wird aus dem Repository bereitgestellt und muss auf Benutzerrechnern
   ohne installiertes Python oder Codex starten.
