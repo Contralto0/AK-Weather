@@ -325,9 +325,15 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   neue Tests mit kleinen lokalen Wheels bestanden. Bereits veröffentlichte
   Bestandstests liefen bis zum zeitgerechten Abbruch fehlerfrei. Keine portable
   Laufzeit oder PySide6-Essentials verändert.
-- Nächster sehr kleiner Schritt: das geprüfte PySide6-Essentials-Wheel mit denselben
-  Sicherheitsregeln in einen eigenen neuen Paket-Stagingordner entpacken. Nur kleine
-  Beispieldaten verwenden und die portable Laufzeit noch nicht verändern.
+- 2026-09-15: **Sicheres PySide6-Essentials-Wheel-Entpacken 0.13.1.0**. Genau ein
+  Teilschritt: `dependencies/Expand-GuiPackage.ps1` unterstützt nun auch das
+  festgelegte PySide6-Essentials-Wheel und entpackt es mit denselben Integritäts-,
+  Pfad-, Verknüpfungs- und Zielprüfungen in einen eigenen neuen Stagingordner.
+  Ein neuer kleiner Beispieldatentest ergänzt die fünf shiboken6-Fälle; alle sechs
+  Paket-Entpacktests bestanden. Keine portable Laufzeit verändert.
+- Nächster sehr kleiner Schritt: die beiden sicher entpackten GUI-Paket-Stagingordner
+  geprüft zu einem neuen gemeinsamen Anwendungs-Stagingordner zusammensetzen. Nur
+  kleine Beispieldaten verwenden und die portable Laufzeit noch nicht verändern.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Bootstrapper wird aus dem Repository bereitgestellt und muss auf Benutzerrechnern
   ohne installiertes Python oder Codex starten.

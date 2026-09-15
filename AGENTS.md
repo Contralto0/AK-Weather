@@ -30,10 +30,10 @@ ausdrücklich freigegeben. Die Planungsrückfragen wurden abgeschlossen.
   nicht auf weitere Software ausweiten; nach Erfolg den Auftrag als verbraucht markieren.
   Danach vorhandene Laufzeit wiederverwenden. Keine erneute routinemäßige Rückfrage.
 - Status am 12.09.2026: einmalige Python-Bereitstellung ABGESCHLOSSEN; Ausnahme verbraucht.
-  Vorhandenen Interpreter wiederverwenden:
-  `C:/Users/andyk/HiDrive/OpenAI Codex/Software/python-3.14.7/python.exe`.
-  Offizieller SHA-256 geprüft, isolierter Start mit leerem PATH und acht Tests bestanden.
-  Details und Nachweis stehen in DEVELOPMENT.md. Python nicht erneut bereitstellen.
+  Der Nutzer hat am 15.09.2026 folgende globale Testlaufzeit gespeichert:
+  `C:/Users/andyk/HiDrive/OpenAI Codex/Software/python-3.13.15-embed-amd64/python.exe`.
+  Dies ändert nicht die im Repository festgelegte Bootstrap-Zielversion 3.14.7.
+  Die vorhandene Testlaufzeit wiederverwenden und Python nicht erneut bereitstellen.
 - Nutzeränderung vom 14.09.2026: Kontingentlimits ab jetzt vollständig ignorieren.
   Keine Kontingentwerte abfragen und keinen Lauf wegen Fünfstunden-, Wochen- oder
   anderer Modelllimits überspringen oder verschieben.

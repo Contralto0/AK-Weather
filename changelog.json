@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.13.1.0",
+    "date": "2026-09-15",
+    "category": "improvement",
+    "title": "PySide6-Essentials sicher entpacken",
+    "changes": [
+      "Den sicheren GUI-Paketentpacker auf das festgelegte PySide6-Essentials-Wheel erweitern.",
+      "PySide6-Essentials in einen eigenen neuen Paket-Stagingordner entpacken.",
+      "Dieselben Pfad-, Verknüpfungs- und Integritätsprüfungen wie für shiboken6 anwenden."
+    ]
+  },
+  {
     "version": "0.13.0.0",
     "date": "2026-09-15",
     "category": "feature",

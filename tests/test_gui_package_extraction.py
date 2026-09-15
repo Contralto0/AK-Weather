@@ -26,7 +26,9 @@ class GuiPackageExtractionTests(unittest.TestCase):
         self.powershell = Path(os.environ["SystemRoot"]) / "System32/WindowsPowerShell/v1.0/powershell.exe"
         self.environment = dict(os.environ, PATH="", PYTHONHOME="not-installed", PYTHONPATH="not-installed")
 
-    def write_wheel(self, entries):
+    def write_wheel(self, entries, package_name="shiboken6", filename=None):
+        if filename is not None:
+            self.wheel = self.root / filename
         with zipfile.ZipFile(self.wheel, "w") as archive:
             for entry in entries:
                 if isinstance(entry[0], zipfile.ZipInfo):
@@ -34,16 +36,19 @@ class GuiPackageExtractionTests(unittest.TestCase):
                 else:
                     archive.writestr(entry[0], entry[1])
         content = self.wheel.read_bytes()
-        package = {"name": "shiboken6", "filename": self.wheel.name,
+        package = {"name": package_name, "filename": self.wheel.name,
                    "size_bytes": len(content), "sha256": hashlib.sha256(content).hexdigest()}
         self.metadata.write_text(json.dumps({"format_version": 1, "packages": [package]}), encoding="utf-8")
 
-    def launch(self, destination=None):
-        return subprocess.run(
-            [str(self.powershell), "-NoLogo", "-NoProfile", "-NonInteractive",
+    def launch(self, destination=None, package_name=None):
+        arguments = [str(self.powershell), "-NoLogo", "-NoProfile", "-NonInteractive",
              "-ExecutionPolicy", "RemoteSigned", "-File", str(self.script),
              "-WheelPath", str(self.wheel), "-DestinationPath", str(destination or self.destination),
-             "-MetadataPath", str(self.metadata)],
+             "-MetadataPath", str(self.metadata)]
+        if package_name is not None:
+            arguments.extend(["-PackageName", package_name])
+        return subprocess.run(
+            arguments,
             cwd=self.root, env=self.environment, capture_output=True, text=True,
             errors="replace", timeout=20, creationflags=subprocess.CREATE_NO_WINDOW,
         )
@@ -59,6 +64,19 @@ class GuiPackageExtractionTests(unittest.TestCase):
         result = self.launch()
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual((self.destination / "shiboken6/__init__.py").read_bytes(), b"version = 1\n")
+
+    def test_verified_pyside6_essentials_wheel_uses_its_own_staging_folder(self):
+        self.write_wheel(
+            [("PySide6/QtCore.pyd", b"small fixture")],
+            package_name="PySide6-Essentials",
+            filename="pyside6_essentials-test.whl",
+        )
+        result = self.launch(package_name="PySide6-Essentials")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(
+            (self.destination / "PySide6/QtCore.pyd").read_bytes(),
+            b"small fixture",
+        )
 
     def test_parent_absolute_drive_unc_and_device_paths_are_rejected_before_writing(self):
         for unsafe in ("../outside", "/absolute", "C:/drive", r"\\server\share", "CON"):

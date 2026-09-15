@@ -2,11 +2,11 @@
 param(
     [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$WheelPath,
     [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$DestinationPath,
-    [ValidateSet('shiboken6')][string]$PackageName = 'shiboken6',
+    [ValidateSet('shiboken6', 'PySide6-Essentials')][string]$PackageName = 'shiboken6',
     [string]$MetadataPath
 )
 
-# Windows PowerShell 5.1; prüft und entpackt derzeit ausschließlich shiboken6.
+# Windows PowerShell 5.1; prüft und entpackt die festgelegten GUI-Pakete.
 Set-StrictMode -Version 2.0
 $ErrorActionPreference = 'Stop'
 $stream = $null
@@ -116,7 +116,7 @@ try {
         }
     }
     $completed = $true
-    Write-Output 'shiboken6-Wheel sicher in den Paket-Stagingordner entpackt.'
+    Write-Output "$PackageName-Wheel sicher in den Paket-Stagingordner entpackt."
 } catch {
     [Console]::Error.WriteLine('Fehler beim Entpacken des GUI-Pakets: ' + $_.Exception.Message)
     $result = 1
