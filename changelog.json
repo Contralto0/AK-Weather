@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.14.0.0",
+    "date": "2026-09-15",
+    "category": "feature",
+    "title": "GUI-Paket-Staging sicher zusammenführen",
+    "changes": [
+      "Die getrennt entpackten shiboken6- und PySide6-Essentials-Ordner in einem neuen Anwendungs-Stagingordner zusammensetzen.",
+      "Verknüpfungen, verschachtelte Ziele und mehrdeutige Windows-Pfade vor dem Kopieren ablehnen.",
+      "Quellordner und vorhandene Zielordner bei Fehlern unverändert erhalten."
+    ]
+  },
+  {
     "version": "0.13.1.0",
     "date": "2026-09-15",
     "category": "improvement",

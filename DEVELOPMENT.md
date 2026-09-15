@@ -331,9 +331,17 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   Pfad-, Verknüpfungs- und Zielprüfungen in einen eigenen neuen Stagingordner.
   Ein neuer kleiner Beispieldatentest ergänzt die fünf shiboken6-Fälle; alle sechs
   Paket-Entpacktests bestanden. Keine portable Laufzeit verändert.
-- Nächster sehr kleiner Schritt: die beiden sicher entpackten GUI-Paket-Stagingordner
-  geprüft zu einem neuen gemeinsamen Anwendungs-Stagingordner zusammensetzen. Nur
-  kleine Beispieldaten verwenden und die portable Laufzeit noch nicht verändern.
+- 2026-09-15: **GUI-Paket-Staging sicher zusammenführen 0.14.0.0**. Genau ein
+  Teilschritt: `dependencies/Merge-GuiPackageStaging.ps1` prüft zwei getrennte
+  Paket-Stagingordner und kopiert sie in einen neuen gemeinsamen Anwendungs-
+  Stagingordner. Verknüpfungen, verschachtelte Ziele, Zielkonflikte und unter Windows
+  mehrdeutige Pfade werden vor dem Kopieren abgelehnt. Vier Tests mit kleinen lokalen
+  Ordnern bestanden; Quellordner und vorhandene Ziele bleiben unverändert. Keine
+  portable Laufzeit verändert.
+- Nächster sehr kleiner Schritt: den vollständig zusammengesetzten GUI-Stagingordner
+  mit einer eindeutigen Markierung atomar als versionsgebundenes Bibliothekspaket
+  veröffentlichen. Nur kleine Beispieldaten verwenden und die Python-Laufzeit nicht
+  verändern.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Bootstrapper wird aus dem Repository bereitgestellt und muss auf Benutzerrechnern
   ohne installiertes Python oder Codex starten.
