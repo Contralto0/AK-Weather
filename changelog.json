@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.15.0.0",
+    "date": "2026-09-16",
+    "category": "feature",
+    "title": "GUI-Bibliothekspaket atomar veröffentlichen",
+    "changes": [
+      "Einen vollständig zusammengesetzten GUI-Stagingordner atomar unter einem versionsgebundenen Namen bereitstellen.",
+      "Das veröffentlichte Paket eindeutig mit GUI-, Python- und Ordner-Version markieren.",
+      "Passende vorhandene Pakete unverändert wiederverwenden und Konflikte ohne Überschreiben ablehnen."
+    ]
+  },
+  {
     "version": "0.14.0.0",
     "date": "2026-09-15",
     "category": "feature",

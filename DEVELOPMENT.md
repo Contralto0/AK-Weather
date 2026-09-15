@@ -338,10 +338,16 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   mehrdeutige Pfade werden vor dem Kopieren abgelehnt. Vier Tests mit kleinen lokalen
   Ordnern bestanden; Quellordner und vorhandene Ziele bleiben unverändert. Keine
   portable Laufzeit verändert.
-- Nächster sehr kleiner Schritt: den vollständig zusammengesetzten GUI-Stagingordner
-  mit einer eindeutigen Markierung atomar als versionsgebundenes Bibliothekspaket
-  veröffentlichen. Nur kleine Beispieldaten verwenden und die Python-Laufzeit nicht
-  verändern.
+- 2026-09-16: **GUI-Bibliothekspaket atomar veröffentlichen 0.15.0.0**. Genau ein
+  Teilschritt: `dependencies/Publish-GuiPackage.ps1` verschiebt einen vollständig
+  zusammengesetzten Stagingordner atomar unter den versionsgebundenen Namen aus dem
+  GUI-Datensatz. Eine Markierung hält GUI-Version, Python-Zielversion und Ordnername
+  fest. Passende vorhandene Pakete werden unverändert wiederverwendet; unmarkierte,
+  abweichende oder unvollständige Ziele werden ohne Überschreiben abgelehnt. Fünf
+  Tests mit kleinen lokalen Ordnern bestanden. Keine portable Laufzeit verändert.
+- Nächster sehr kleiner Schritt: Download, sichere Entpackung, Zusammenführung und
+  atomare Veröffentlichung der beiden GUI-Pakete in einem Bootstrapablauf verbinden.
+  Nur kleine simulierte Paketdaten verwenden und die Python-Laufzeit nicht verändern.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Bootstrapper wird aus dem Repository bereitgestellt und muss auf Benutzerrechnern
   ohne installiertes Python oder Codex starten.
