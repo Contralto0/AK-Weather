@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.13.0.0",
+    "date": "2026-09-15",
+    "category": "feature",
+    "title": "shiboken6-Wheel sicher entpacken",
+    "changes": [
+      "Ein geprüftes shiboken6-Wheel in einen neuen separaten Paket-Stagingordner entpacken.",
+      "Unsichere ZIP-Pfade, Verknüpfungen, Windows-Gerätenamen und mehrdeutige Ziele vor dem Schreiben ablehnen.",
+      "Beschädigte Wheels und Zielkonflikte ohne unvollständigen Paket-Stagingordner abbrechen."
+    ]
+  },
+  {
     "version": "0.12.1.0",
     "date": "2026-09-14",
     "category": "improvement",

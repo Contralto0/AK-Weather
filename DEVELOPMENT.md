@@ -317,10 +317,17 @@ Jeder Punkt wird in einzelne sehr kleine Schritte zerlegt, niemals in einem Lauf
   geprüft. Fehlende, beschädigte oder abweichende Abhängigkeiten stoppen vor dem
   Download. Zwei neue Tests erweitern die Paketprüfung auf sieben Fälle; alle 76
   Projekttests bestanden. Keine echten Downloads, Entpackung oder Installation.
-- Nächster sehr kleiner Schritt: das geprüfte shiboken6-Wheel sicher in einen neuen
-  separaten Paket-Stagingordner entpacken. Unsichere ZIP-Pfade, Verknüpfungen und
-  mehrdeutige Windows-Ziele ablehnen. Nur kleine Beispieldaten verwenden; die portable
-  Laufzeit noch nicht verändern und PySide6-Essentials separat behandeln.
+- 2026-09-15: **Sicheres shiboken6-Wheel-Entpacken 0.13.0.0**. Genau ein Teilschritt:
+  `dependencies/Expand-GuiPackage.ps1` prüft Größe und SHA-256 erneut am geöffneten
+  Wheel und entpackt es anschließend in einen neuen separaten Paket-Stagingordner.
+  Unsichere ZIP-Pfade, Verknüpfungen, Windows-Gerätenamen und mehrdeutige Ziele werden
+  vor dem Schreiben abgelehnt; Fehler entfernen nur das neu angelegte Ziel. Fünf
+  neue Tests mit kleinen lokalen Wheels bestanden. Bereits veröffentlichte
+  Bestandstests liefen bis zum zeitgerechten Abbruch fehlerfrei. Keine portable
+  Laufzeit oder PySide6-Essentials verändert.
+- Nächster sehr kleiner Schritt: das geprüfte PySide6-Essentials-Wheel mit denselben
+  Sicherheitsregeln in einen eigenen neuen Paket-Stagingordner entpacken. Nur kleine
+  Beispieldaten verwenden und die portable Laufzeit noch nicht verändern.
 - Die automatische Laufzeit-/Bibliotheksbereitstellung folgt separat. Der fertige
   Bootstrapper wird aus dem Repository bereitgestellt und muss auf Benutzerrechnern
   ohne installiertes Python oder Codex starten.
