@@ -1,0 +1,16 @@
+* text=auto
+.gitignore text eol=lf
+.gitattributes text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.xaml text eol=lf
+*.exe binary
+*.dll binary
+*.pyd binary
+*.zip binary
+*.cat binary
+*.png binary
+*.ico binary
+# Payload hashes refer to exact shipped bytes, including runtime license/config files.
+payload/** -text

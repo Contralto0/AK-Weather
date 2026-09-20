@@ -1,1 +1,6 @@
-
+.ak-weather/
+__pycache__/
+*.pyc
+*.pyo
+Thumbs.db
+Desktop.ini
