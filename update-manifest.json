@@ -1,11 +1,16 @@
 {
   "schema": 1,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "files": [
     {
+      "path": "app/dwd_mosmix.py",
+      "size": 9901,
+      "sha256": "733fae6dbdb38afd90e4714bec6c6a0ac4a5ee9d2da4b493b70921876d8ca429"
+    },
+    {
       "path": "app/healthcheck.py",
-      "size": 1189,
-      "sha256": "d082ebf0b0efe39cc1238105e9397075642f12700d223f8a99c6188ccf762b38"
+      "size": 1256,
+      "sha256": "d1ad5ba78c72b5141d6dfee5a5fc900dc43faf9a7f8ecc1e93baca5a90d39666"
     },
     {
       "path": "app/MainWindow.xaml",
@@ -19,8 +24,8 @@
     },
     {
       "path": "app/version.json",
-      "size": 122,
-      "sha256": "fff527557c835d92a8936550353c0ab02106a96c10ccce07724aa7937cacf731"
+      "size": 138,
+      "sha256": "5299bde9f92a3d57192b015fbccc182ac109b9183e105d239377a91ca95e2139"
     },
     {
       "path": "app/WeatherShell.exe",

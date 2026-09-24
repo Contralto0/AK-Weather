@@ -14,6 +14,7 @@ def main():
     if not isinstance(version.get("version"), str) or not version["version"]:
         raise ValueError("Version fehlt")
     ast.parse((app / "updater.py").read_text(encoding="utf-8"))
+    ast.parse((app / "dwd_mosmix.py").read_text(encoding="utf-8"))
     ssl.create_default_context()
     with zipfile.ZipFile(app.parent / "runtime" / "python313.zip") as standard_library:
         if standard_library.testzip() is not None:

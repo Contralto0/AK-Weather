@@ -25,6 +25,12 @@ docs/                          Öffentliche Dokumentation
 
 Die Windows-Oberfläche verwendet das vorhandene .NET Framework/WPF. Der Python-Updater nutzt ausschließlich die Standardbibliothek. Es gibt keine Paketinstallation, keinen lokalen HTTP-Server, keine Browser-Laufzeit und keine System-Python-Abhängigkeit.
 
+## Vorbereiteter DWD-MOSMIX-Import
+
+`payload/app/dwd_mosmix.py` kapselt den offiziellen DWD-MOSMIX_L-Einzelstationsabruf. Der Provider hat bewusst keine voreingestellte Station und führt weder Standortermittlung noch Stationszuordnung aus. Ein späterer Aufrufer muss immer eine geprüfte fünfstellige DWD-Stationskennung sowie die zugehörigen Breiten- und Längengrade in `StationRequest` übergeben; ohne diesen vollständigen Kontext ist kein Abruf möglich.
+
+Die einzige Wetterdaten-URL hat das feste Schema `https://opendata.dwd.de/weather/local_forecasts/mos/MOSMIX_L/single_stations/<ID>/kml/MOSMIX_L_LATEST_<ID>.kmz`. KMZ und KML werden ausschließlich mit der Python-Standardbibliothek gelesen. Ausgegeben werden Stationsmetadaten, die DWD-Erstellzeit, Koordinate und chronologische Zeitpunkte für `TTT` (in °C umgerechnet), `FF` (m/s), `DD` (°) und `R101` (%). DWD-Fehlwerte bleiben `None`; sie werden nie zu null. Die Oberfläche verwendet den Provider in dieser Version noch nicht.
+
 ## Start und Versionswechsel
 
 1. `AK-Weather.exe` verhindert eine zweite Instanz derselben Installation.
