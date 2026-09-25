@@ -1,6 +1,6 @@
 {
-  "version": "0.1.3",
-  "name": "DWD-RADOLAN-RW-Regengitter vorbereitet",
+  "version": "0.1.4",
+  "name": "DWD-KONRAD3D-Gewitterzellen vorbereitet",
   "author": "Andy Klemann",
   "channel": "live",
   "python": "3.13.15"

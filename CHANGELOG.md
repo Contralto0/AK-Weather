@@ -1,5 +1,14 @@
 # Versionsverlauf
 
+## 0.1.4 – DWD-KONRAD3D-Gewitterzellen vorbereitet – 25.09.2026
+
+- UI-unabhängiger Import des neuesten amtlichen DWD-KONRAD3D-Schnappschusses aus dem festen HTTPS-Verzeichnis.
+- Erkannte konvektive Zellen enthalten DWD-Referenzzeit, WGS-84-Schwerpunkt, Hagel-, Starkregen- und Böenklasse sowie alle gelieferten Schwerpunktprognosen einschließlich verfügbarer Unsicherheitsellipsen.
+- Der DWD-Ausfallwert `-1000000000` für eine nicht berechnete Böenklasse wird als `None` behandelt; gültige Nullklassen bleiben erhalten.
+- Exakte Dateinamenauswahl, Größenlimits, strikte XML-/Werteprüfung und ein auf höchstens zwei ältere Verzeichniseinträge begrenzter Rückfall bei HTTP 404.
+- KONRAD3D bleibt als radarobjektbasierte Kurzfristinformation gekennzeichnet und wird weder als Blitzortung noch als amtliche CAP-Warnung oder Wahrscheinlichkeit ausgegeben.
+- Keine Kartenanzeige, Standortübermittlung, Speicherung, Hintergrundaktualisierung oder automatische Wetterabfrage beim Start.
+
 ## 0.1.3 – DWD-RADOLAN-RW-Regengitter vorbereitet – 25.09.2026
 
 - UI-unabhängiger Import des aktuellen, angeeichten DWD-RADOLAN-RW-Niederschlagsrasters vom festen amtlichen HTTPS-Endpunkt.

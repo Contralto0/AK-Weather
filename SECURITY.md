@@ -14,7 +14,9 @@ Vorhandene Versionen bleiben erhalten. Eine beschädigte aktive Version führt b
 
 ## Netzwerk und Daten
 
-Automatische Verbindungen gehen nur zur Updateprüfung an GitHub. Dabei fallen bei GitHub technisch notwendige Verbindungsdaten wie IP-Adresse und Zeitpunkt an. Es werden keine Konten, API-Schlüssel, persönlichen Dateien oder Standortdaten übertragen. Das Grundsystem enthält keine Telemetrie und keine Wetterabfragen. Die Schaltflächen für Projekt und Dokumentation öffnen GitHub im Standardbrowser.
+Automatische Verbindungen gehen nur zur Updateprüfung an GitHub. Dabei fallen bei GitHub technisch notwendige Verbindungsdaten wie IP-Adresse und Zeitpunkt an. Es werden keine Konten, API-Schlüssel, persönlichen Dateien oder Standortdaten übertragen. Das Grundsystem enthält keine Telemetrie und führt beim Start keine Wetterabfrage aus. Die Schaltflächen für Projekt und Dokumentation öffnen GitHub im Standardbrowser.
+
+Der vorbereitete KONRAD3D-Provider greift nur dann auf `opendata.dwd.de` zu, wenn ihn ein künftiger Programmteil ausdrücklich aufruft. Dabei werden keine lokalen Koordinaten, Konten oder Schlüssel übertragen; beim DWD fallen lediglich technisch notwendige HTTPS-Verbindungsdaten wie IP-Adresse und Zeitpunkt an. Die Verzeichnisliste und die ausgewählte XML-Datei werden nicht dauerhaft gespeichert.
 
 ## Probleme melden
 
