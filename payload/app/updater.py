@@ -37,7 +37,7 @@ MAX_FILES = 10_000
 CHUNK_BYTES = 128 * 1024
 REQUIRED_PATHS = frozenset({
     "app/WeatherShell.exe", "app/updater.py", "app/healthcheck.py",
-    "app/dwd_current.py", "app/version.json", "runtime/python.exe",
+    "app/dwd_current.py", "app/dwd_radolan.py", "app/version.json", "runtime/python.exe",
 })
 SHA256_RE = re.compile(r"[0-9a-f]{64}\Z")
 COMMIT_RE = re.compile(r"[0-9a-f]{40}\Z")

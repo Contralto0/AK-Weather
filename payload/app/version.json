@@ -1,6 +1,6 @@
 {
-  "version": "0.1.2",
-  "name": "Aktuelle DWD-Messwerte vorbereitet",
+  "version": "0.1.3",
+  "name": "DWD-RADOLAN-RW-Regengitter vorbereitet",
   "author": "Andy Klemann",
   "channel": "live",
   "python": "3.13.15"

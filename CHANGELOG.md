@@ -1,5 +1,13 @@
 # Versionsverlauf
 
+## 0.1.3 – DWD-RADOLAN-RW-Regengitter vorbereitet – 25.09.2026
+
+- UI-unabhängiger Import des aktuellen, angeeichten DWD-RADOLAN-RW-Niederschlagsrasters vom festen amtlichen HTTPS-Endpunkt.
+- Strikte Prüfung von BZip2, ETX-Header, UTC-Zeit, `RW`, `INT 60`, `PR E-01`, offiziellen Rastergrößen und exakter Binärnutzlastlänge.
+- Einzelpixel werden bedarfsgesteuert aus kompakten Little-Endian-16-Bit-Rohwerten gelesen; Interpolation, Fehlwert und Clutter bleiben erkennbar.
+- Fehlende Pixel ergeben `None` statt `0.0`; RW bleibt als aktuelle 60-Minuten-Niederschlagsintensität klar von Prognosen und Wahrscheinlichkeiten getrennt.
+- Keine Kartenanzeige, Koordinatenumrechnung, Standortermittlung, Speicherung oder Hintergrundaktualisierung.
+
 ## 0.1.2 – Aktuelle DWD-Messwerte vorbereitet – 25.09.2026
 
 - UI-unabhängiger Import aktueller DWD-10-Minuten-Messwerte für eine explizite fünfstellige CDC-Stations-ID.

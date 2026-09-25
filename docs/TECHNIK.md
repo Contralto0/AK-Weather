@@ -12,6 +12,7 @@ payload/
     dwd_mosmix.py              DWD-MOSMIX-Provider
     dwd_warnings.py            DWD-CAP-Warnungsprovider
     dwd_current.py             DWD-10-Minuten-Messwertprovider
+    dwd_radolan.py             DWD-RADOLAN-RW-Regengitterprovider
     healthcheck.py             Offline-Startprüfung
     version.json               Versionsinformationen
   runtime/                     Eingebettetes Python 3.13.15 inklusive Lizenz
@@ -43,6 +44,18 @@ Pro Aufruf werden genau die beiden festen `now`-Archive für Lufttemperatur und 
 Das unveränderliche Ergebnis `DwdCurrentConditions` enthält Temperatur (`TT_10`), relative Luftfeuchte (`RF_10`), Windgeschwindigkeit (`FF_10`) und Windrichtung (`DD_10`). DWD-Fehlwerte `-999` werden feldweise zu `None`; die ganzzahligen `QN`-Qualitätscodes bleiben erhalten. Temperatur und Wind besitzen bewusst getrennte UTC-Zeitstempel, weil die offiziellen Produkte zeitversetzt aktualisiert werden können. Die `now`-Messwerte sind laut DWD noch nicht abschließend qualitätsgesichert und können korrigiert werden; sie sind weder Prognosen noch Wahrscheinlichkeiten.
 
 Ungültige Stations-IDs werden vor einem Abruf abgewiesen. Netzwerk-, Timeout-, TLS-, HTTP-/404-, Größen-, ZIP-, Pflichtspalten-, Stations-, Zeitstempel- und Qualitätsfehler besitzen unterscheidbare Fehlerklassen. Es gibt keinen stillen Ersatzwert, keine Persistenz, keinen Hintergrundabruf und noch keine Verwendung durch die Oberfläche. Der optionale Transport dient ausschließlich isolierten Tests.
+
+## Vorbereiteter DWD-RADOLAN-RW-Regengitterimport
+
+`payload/app/dwd_radolan.py` stellt `fetch_latest_rw(*, transport=None)` und `parse_rw(compressed)` bereit. Quelle und Datencharakter sind **Deutscher Wetterdienst (DWD), RADOLAN RW, aktuelle Niederschlagsintensität**. RW ist ein mit Stationsmessungen angeeichtes quantitatives Radarkomposit mit 1-km-Raster, einem 60-Minuten-Intervall und einer laufenden Bereitstellung im Zehn-Minuten-Takt. Es ist eine aktuelle Analyse, keine Zukunftsprognose und keine Niederschlags- oder Gewitterwahrscheinlichkeit.
+
+Ein expliziter Abruf lädt genau `https://opendata.dwd.de/weather/radar/radolan/rw/raa01-rw_10000-latest-dwd---bin.bz2` mit 20 Sekunden Socket-Timeout. Umleitungen werden abgelehnt. Komprimierte und entpackte Daten besitzen feste Größenlimits; verarbeitet wird ausschließlich das weiterhin amtlich bereitgestellte klassische BZip2-/RADOLAN-Binärformat mit der Python-Standardbibliothek. Es gibt keine HDF5- oder sonstige Paketabhängigkeit.
+
+Der Parser trennt den variablen ASCII-Header am ETX und verlangt das Produkt `RW`, `INT 60`, `PR E-01`, eine gültige UTC-Zeit sowie `GP 900x900` oder `GP 1100x900`. `GP` beschreibt Zeilen mal Spalten; das erweiterte Raster besitzt daher `height=1100` und `width=900`. Anschließend muss der Binärblock exakt zwei Byte je Rasterzelle enthalten. Die Little-Endian-Reihenfolge beginnt beim Pixel links unten, sodass `pixel_at(0, 0)` das erste Binärpixel liest.
+
+`DwdRadarFrame` bewahrt den vollständigen Binärblock kompakt und dekodiert nur angefragte Zellen. `DwdRadarPixel.precipitation_mm_per_hour` enthält den unteren 12-Bit-Wert mit Faktor 0,1. Bit 13 kennzeichnet aus Stationsmessungen interpolierte Zellen, Bit 14 Fehlwerte und Bit 16 Clutter. Fehlwerte werden unabhängig vom enthaltenen Zahlenanteil als `None` ausgegeben. Netzwerk-, Timeout-, TLS-, HTTP-, Download-, Dekompressions-, Header-, Zeit-, Schema-, Raster- und Nutzlastfehler bleiben kontrolliert unterscheidbar; es gibt weder Teilresultate noch eine Ersatzquelle.
+
+Der Provider sendet keine Koordinaten, Standortdaten, Konten oder Tokens. Die Oberfläche ruft ihn noch nicht auf. Kartenrendering, WGS-84-Rasterzuordnung, Cache, Speicherung und Hintergrundaktualisierung gehören nicht zu diesem Baustein.
 
 ## Vorbereiteter DWD-CAP-Warnungsimport
 
@@ -119,6 +132,9 @@ Die `.gitattributes` deaktiviert Zeilenenden-Umwandlungen für `payload/**`. Die
 
 ## Referenzen
 
+- [DWD Open Data: aktuelles RADOLAN-RW-Verzeichnis](https://opendata.dwd.de/weather/radar/radolan/rw/)
+- [DWD: RADOLAN/RADVOR-Kompositformat 2.6](https://opendata.dwd.de/climate_environment/CDC/help/RADOLAN/Unterstuetzungsdokumente/RADOLAN-RADVOR-Kompositformat_2.6.pdf)
+- [DWD: Unterstützungsdokument zum RADOLAN-Binärformat](https://opendata.dwd.de/climate_environment/CDC/help/RADOLAN/Unterstuetzungsdokumente/Unterstuetzungsdokument_fuer_Programmierer-Lesen_des_RADOLAN-Binaerformats.pdf)
 - [DWD: 10-Minuten-Stationsmessungen der Lufttemperatur](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/air_temperature/DESCRIPTION_obsgermany_climate_10min_air_temperature_en.pdf)
 - [DWD: 10-Minuten-Stationsmessungen des Windes](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/wind/DESCRIPTION_obsgermany_climate_10min_wind_en.pdf)
 - [DWD Climate Data Center: Open Data](https://www.dwd.de/EN/ourservices/cdc/cdc.html?lsbId=646268)
