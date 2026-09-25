@@ -60,7 +60,7 @@
     {
       "path": "app/WeatherShell.exe",
       "size": 15872,
-      "sha256": "c2c4d0189148f23ccc407e1d0f6d66c7f9b61de4af9e1a84031866be98b71a43"
+      "sha256": "0280d854bbf449250f284a9281704109a1ac478223c21f783450ceca6dbc67e3"
     },
     {
       "path": "runtime/_asyncio.pyd",
