@@ -18,14 +18,19 @@
       "sha256": "ea0229814eec5c5a882f964579d3f2c37f338a28499376d6e2ff77131d6a9345"
     },
     {
+      "path": "app/dwd_reports.py",
+      "size": 10094,
+      "sha256": "049fc645c7d169fc6be10a51f4ba42150282546b10b6fe1992945f69188eabc6"
+    },
+    {
       "path": "app/dwd_warnings.py",
       "size": 13728,
       "sha256": "94327b60b809e4359d64a7ec4bb430f1222d33a7dc2eda00287e2b6ee207a7b9"
     },
     {
       "path": "app/healthcheck.py",
-      "size": 1461,
-      "sha256": "ff52cbbb17a80f16032cffbefb5a25200d923f801fa725b27639070b1d69a9b1"
+      "size": 1529,
+      "sha256": "9a62b4e3a60db78e09244e3f361ded1500ea435dad6ccf436b6ed1ff8c4c9050"
     },
     {
       "path": "app/MainWindow.xaml",
@@ -45,7 +50,7 @@
     {
       "path": "app/WeatherShell.exe",
       "size": 15872,
-      "sha256": "396ce4859b9de49a9967c6b7b2e91859d1c4f00c12255ccb10832e4ab6394412"
+      "sha256": "59d4a0a34babae90caeb124c7abd43104cffed76adf9be6dffa3d8b4154cc19d"
     },
     {
       "path": "runtime/_asyncio.pyd",

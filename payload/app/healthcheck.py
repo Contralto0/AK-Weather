@@ -18,6 +18,7 @@ def main():
     ast.parse((app / "dwd_warnings.py").read_text(encoding="utf-8"))
     ast.parse((app / "dwd_current.py").read_text(encoding="utf-8"))
     ast.parse((app / "dwd_radolan.py").read_text(encoding="utf-8"))
+    ast.parse((app / "dwd_reports.py").read_text(encoding="utf-8"))
     ssl.create_default_context()
     with zipfile.ZipFile(app.parent / "runtime" / "python313.zip") as standard_library:
         if standard_library.testzip() is not None:
