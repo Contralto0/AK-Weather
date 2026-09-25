@@ -1,8 +1,11 @@
 # Versionsverlauf
 
-## 0.1.1 – MOSMIX-Provider vorbereitet – 24.09.2026
+## 0.1.1 – DWD-Datenprovider vorbereitet – 25.09.2026
 
 - UI-unabhängiger Import für eine explizit ausgewählte DWD-MOSMIX_L-Station.
+- UI-unabhängiger Import aktueller deutschsprachiger DWD-CAP-Warnungen für eine explizite WarnCellID.
+- Der vollständige Gemeindestatus wird mit festen Größenlimits ausschließlich im Speicher verarbeitet; die WarnCellID wird nicht an DWD übertragen.
+- Netzwerk-, HTTP-, Größen-, Archiv- und CAP-Fehler bleiben von einer gültigen Zelle ohne Warnungen unterscheidbar.
 - Keine Standortermittlung, Stationszuordnung oder automatische Wetterabfrage.
 - Abrufe sind erst mit Stationskennung und Koordinaten durch einen künftigen Aufrufer möglich.
 

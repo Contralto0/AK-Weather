@@ -9,6 +9,8 @@ payload/
     WeatherShell.exe           Native WPF-Oberfläche
     MainWindow.xaml            Layout und Vektorillustration
     updater.py                 Python-Updater
+    dwd_mosmix.py              DWD-MOSMIX-Provider
+    dwd_warnings.py            DWD-CAP-Warnungsprovider
     healthcheck.py             Offline-Startprüfung
     version.json               Versionsinformationen
   runtime/                     Eingebettetes Python 3.13.15 inklusive Lizenz
@@ -30,6 +32,14 @@ Die Windows-Oberfläche verwendet das vorhandene .NET Framework/WPF. Der Python-
 `payload/app/dwd_mosmix.py` kapselt den offiziellen DWD-MOSMIX_L-Einzelstationsabruf. Der Provider hat bewusst keine voreingestellte Station und führt weder Standortermittlung noch Stationszuordnung aus. Ein späterer Aufrufer muss immer eine geprüfte fünfstellige DWD-Stationskennung sowie die zugehörigen Breiten- und Längengrade in `StationRequest` übergeben; ohne diesen vollständigen Kontext ist kein Abruf möglich.
 
 Die einzige Wetterdaten-URL hat das feste Schema `https://opendata.dwd.de/weather/local_forecasts/mos/MOSMIX_L/single_stations/<ID>/kml/MOSMIX_L_LATEST_<ID>.kmz`. KMZ und KML werden ausschließlich mit der Python-Standardbibliothek gelesen. Ausgegeben werden Stationsmetadaten, die DWD-Erstellzeit, Koordinate und chronologische Zeitpunkte für `TTT` (in °C umgerechnet), `FF` (m/s), `DD` (°) und `R101` (%). DWD-Fehlwerte bleiben `None`; sie werden nie zu null. Die Oberfläche verwendet den Provider in dieser Version noch nicht.
+
+## Vorbereiteter DWD-CAP-Warnungsimport
+
+`payload/app/dwd_warnings.py` stellt `get_warnings(warncell_id, *, transport=None)` bereit. Die Schnittstelle akzeptiert ausschließlich neunstellige DWD-WarnCellIDs ohne führende Null und verwirft ungültige Werte vor jedem Netzwerkzugriff mit `ValueError`. Sie lädt den vollständigen deutschen `COMMUNEUNION_DWD_STAT`-Statusfeed über eine feste HTTPS-Adresse. Die angefragte WarnCellID ist nur ein lokaler Filter und wird nicht an DWD übertragen.
+
+Das ZIP und die einzelne CAP-XML-Datei werden ausschließlich im Speicher verarbeitet. Begrenzungen für komprimierte und entpackte Daten, eine feste Archivstruktur sowie die Ablehnung von XML-Entitätsdefinitionen schützen die Verarbeitung. Zeitangaben werden als zeitzonenbewusste UTC-`datetime`-Werte ausgegeben. `severity`, `urgency` und `certainty` bleiben unveränderte CAP-Werte; insbesondere wird daraus keine numerische Wetterwahrscheinlichkeit abgeleitet.
+
+Das Ergebnis ist ein unveränderliches Tupel aus `DwdWarning`-Datensätzen in Quellreihenfolge. Eine gültige, nicht enthaltene WarnCellID und eine CAP-Aufhebungsnachricht ergeben `()`. Netzwerk-, Timeout-, HTTP-, Downloadgrößen-, ZIP- und CAP-Fehler besitzen dagegen eigene Providerfehler und werden nicht als warnungsfreier Zustand behandelt. Geometrien, Standortauflösung, automatische Aktualisierung und die Darstellung in der Oberfläche gehören noch nicht zu diesem Baustein.
 
 ## Start und Versionswechsel
 
