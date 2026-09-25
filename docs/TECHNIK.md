@@ -12,6 +12,7 @@ payload/
     dwd_mosmix.py              DWD-MOSMIX-Provider
     dwd_warnings.py            DWD-CAP-Warnungsprovider
     dwd_current.py             DWD-10-Minuten-Messwertprovider
+    dwd_poi.py                 DWD-POI-Wetterzustandsprovider
     dwd_radolan.py             DWD-RADOLAN-RW-Regengitterprovider
     healthcheck.py             Offline-Startprüfung
     version.json               Versionsinformationen
@@ -44,6 +45,14 @@ Pro Aufruf werden genau die beiden festen `now`-Archive für Lufttemperatur und 
 Das unveränderliche Ergebnis `DwdCurrentConditions` enthält Temperatur (`TT_10`), relative Luftfeuchte (`RF_10`), Windgeschwindigkeit (`FF_10`) und Windrichtung (`DD_10`). DWD-Fehlwerte `-999` werden feldweise zu `None`; die ganzzahligen `QN`-Qualitätscodes bleiben erhalten. Temperatur und Wind besitzen bewusst getrennte UTC-Zeitstempel, weil die offiziellen Produkte zeitversetzt aktualisiert werden können. Die `now`-Messwerte sind laut DWD noch nicht abschließend qualitätsgesichert und können korrigiert werden; sie sind weder Prognosen noch Wahrscheinlichkeiten.
 
 Ungültige Stations-IDs werden vor einem Abruf abgewiesen. Netzwerk-, Timeout-, TLS-, HTTP-/404-, Größen-, ZIP-, Pflichtspalten-, Stations-, Zeitstempel- und Qualitätsfehler besitzen unterscheidbare Fehlerklassen. Es gibt keinen stillen Ersatzwert, keine Persistenz, keinen Hintergrundabruf und noch keine Verwendung durch die Oberfläche. Der optionale Transport dient ausschließlich isolierten Tests.
+
+## Vorbereiteter DWD-POI-Wetterzustandsimport
+
+`payload/app/dwd_poi.py` stellt `fetch_latest_present_weather(station_id, *, transport=None)` bereit. Die Kennung muss aus ein bis fünf Großbuchstaben oder Ziffern bestehen. Für die eine fest definierte POI-Datei werden fehlende Stellen rechts mit `_` ergänzt; `A191` ruft daher ausschließlich `https://opendata.dwd.de/weather/weather_reports/poi/A191_-BEOB.csv` ab. Es gibt weder Orts- oder Stationssuche noch Standortabfrage.
+
+Der Abruf erfolgt nur auf ausdrücklichen Aufruf, ausschließlich per HTTPS an `opendata.dwd.de`, mit 20 Sekunden Timeout, Umleitungsablehnung und einer Grenze von 128 KiB. Die Datei wird ohne Cache und ausschließlich im Speicher als Latin-1-/Semikolon-CSV verarbeitet. Von den drei Kopfzeilen und den Beobachtungszeilen werden nur die ersten beiden Datums-/Zeitspalten sowie `present_weather` genutzt. Aus allen gültigen Zeilen wird der neueste UTC-Zeitpunkt gewählt, nie nur die letzte Datei- oder Datenzeile.
+
+Das unveränderliche Ergebnis `PresentWeather` enthält die Stationskennung, Beobachtungszeit, den DWD-Code, eine kurze und lange deutsche Bezeichnung sowie konkrete Quelle und Quellenname `DWD POI`. Die offizielle DWD-Tabelle für die Codes 1 bis 31 ist unverändert enthalten. Der Fehlwert `---` ergibt `None` für Code und Bezeichnungen; unbekannte spätere numerische Codes bleiben als Code sichtbar, aber ohne geratene Bezeichnung. Beobachtete POI-Zustände sind weder Prognosen noch Niederschlags- oder Gewitterwahrscheinlichkeiten. Die Oberfläche ruft den Provider noch nicht auf.
 
 ## Vorbereiteter DWD-RADOLAN-RW-Regengitterimport
 

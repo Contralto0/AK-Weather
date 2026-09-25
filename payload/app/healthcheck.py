@@ -17,6 +17,7 @@ def main():
     ast.parse((app / "dwd_mosmix.py").read_text(encoding="utf-8"))
     ast.parse((app / "dwd_warnings.py").read_text(encoding="utf-8"))
     ast.parse((app / "dwd_current.py").read_text(encoding="utf-8"))
+    ast.parse((app / "dwd_poi.py").read_text(encoding="utf-8"))
     ast.parse((app / "dwd_radolan.py").read_text(encoding="utf-8"))
     ast.parse((app / "dwd_reports.py").read_text(encoding="utf-8"))
     ast.parse((app / "konrad3d.py").read_text(encoding="utf-8"))

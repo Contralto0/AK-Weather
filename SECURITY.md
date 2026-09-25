@@ -18,6 +18,8 @@ Automatische Verbindungen gehen nur zur Updateprüfung an GitHub. Dabei fallen b
 
 Der vorbereitete KONRAD3D-Provider greift nur dann auf `opendata.dwd.de` zu, wenn ihn ein künftiger Programmteil ausdrücklich aufruft. Dabei werden keine lokalen Koordinaten, Konten oder Schlüssel übertragen; beim DWD fallen lediglich technisch notwendige HTTPS-Verbindungsdaten wie IP-Adresse und Zeitpunkt an. Die Verzeichnisliste und die ausgewählte XML-Datei werden nicht dauerhaft gespeichert.
 
+Der vorbereitete DWD-POI-Provider greift ebenfalls nur nach einem ausdrücklichen Aufruf auf `opendata.dwd.de` zu. Die angegebene Stationskennung wird dabei ausschließlich als Teil des festen Dateinamens übertragen; Standortdaten, Konten, Tokens und Koordinaten werden nicht gesendet. Beim DWD fallen technisch unvermeidbar IP-Adresse, Zeitpunkt und die angefragte POI-Datei an. Die Antwort wird weder zwischengespeichert noch dauerhaft gespeichert.
+
 ## Probleme melden
 
 Allgemeine Fehler können über die [GitHub-Issues](https://github.com/Contralto0/AK-Weather/issues) gemeldet werden. Bitte keine Passwörter, Tokens, persönlichen Daten oder vertraulichen Exploitdetails öffentlich einstellen. Ein gesonderter vertraulicher Meldekanal ist für dieses Grundsystem noch nicht eingerichtet.

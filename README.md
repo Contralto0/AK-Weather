@@ -25,6 +25,10 @@ Die Datei `AK-Weather.exe` und der Ordner `payload` müssen zusammenbleiben. Pyt
 | Ausfallschutz | Prüfung vor Aktivierung, bisherige Version bleibt erhalten |
 | Wetterdaten, Orte und Vorhersagen | Noch in Entwicklung |
 
+## Vorbereiteter DWD-POI-Import
+
+Die Auslieferung enthält einen noch nicht an die Oberfläche angebundenen Baustein für den **beobachteten aktuellen Wetterzustand** einer ausdrücklich gewählten POI-Station, etwa Regen oder Nebel. Er ist keine Vorhersage und ruft beim Programmstart keine Wetterdaten ab.
+
 ## So kommen Updates an
 
 Beim Start wird der aktuelle Commit des Branches **`live`** ermittelt. Der Updater vergleicht Dateigrößen und SHA-256-Prüfsummen und lädt ausschließlich geänderte oder neue Programmdateien. Unveränderte Dateien werden lokal übernommen. **Der Updater verwendet weder GitHub Releases noch vollständige Repository-Archive.** Das ZIP oben wird nur für den ersten Download oder eine manuelle Neuinstallation benötigt.

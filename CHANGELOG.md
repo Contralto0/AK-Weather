@@ -1,6 +1,14 @@
 # Versionsverlauf
 
-## 0.1.4 – DWD-KONRAD3D-Gewitterzellen vorbereitet – 25.09.2026
+## 0.1.5 – DWD-POI-Wetterzustand vorbereitet – 25.09.2026
+
+- UI-unabhängiger Import des neuesten amtlich beobachteten DWD-POI-Wetterzustands für eine explizite Stationskennung.
+- Die unveränderliche Beobachtung enthält UTC-Zeit, originalen `present_weather`-Code sowie die vollständige offizielle deutsche DWD-Zuordnung für die Codes 1 bis 31.
+- Fehlwert `---` bleibt ohne erfundene Bezeichnung; später unbekannte numerische Codes bleiben erhalten und werden bewusst nicht übersetzt.
+- Feste HTTPS-Dateiadresse, 128-KiB-Grenze, Umleitungsablehnung und strikte Latin-1-/Semikolon-CSV-Prüfung ohne Cache oder Persistenz.
+- Der Zustand ist eine Beobachtung, keine Prognose, keine Niederschlags- oder Gewitterwahrscheinlichkeit und wird von der Oberfläche noch nicht automatisch abgerufen.
+
+## 0.1.4 - DWD-KONRAD3D-Gewitterzellen vorbereitet - 25.09.2026
 
 - UI-unabhängiger Import des neuesten amtlichen DWD-KONRAD3D-Schnappschusses aus dem festen HTTPS-Verzeichnis.
 - Erkannte konvektive Zellen enthalten DWD-Referenzzeit, WGS-84-Schwerpunkt, Hagel-, Starkregen- und Böenklasse sowie alle gelieferten Schwerpunktprognosen einschließlich verfügbarer Unsicherheitsellipsen.

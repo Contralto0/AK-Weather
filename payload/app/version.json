@@ -1,6 +1,6 @@
 {
-  "version": "0.1.4",
-  "name": "DWD-KONRAD3D-Gewitterzellen vorbereitet",
+  "version": "0.1.5",
+  "name": "DWD-POI-Wetterzustand vorbereitet",
   "author": "Andy Klemann",
   "channel": "live",
   "python": "3.13.15"
