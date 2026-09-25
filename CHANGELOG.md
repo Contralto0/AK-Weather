@@ -1,5 +1,11 @@
 # Versionsverlauf
 
+## 0.1.7 - DWD-MOSMIX-Signifikantes Wetter vorbereitet - 25.09.2026
+
+- Die UI-unabhängigen MOSMIX_L-Vorhersagepunkte enthalten zusätzlich den unveränderten amtlichen DWD-Code `ww` für signifikantes Wetter.
+- DWD-Fehlwerte und eine fehlende `ww`-Reihe bleiben als `None` erkennbar; eine vorhandene fehlerhafte Reihe wird strikt abgewiesen.
+- `ww` ist ein priorisierter kategorialer Wetterzustand, keine Niederschlags- oder Gewitterwahrscheinlichkeit, keine Beobachtung und keine amtliche Warnung.
+
 ## 0.1.6 - DWD-MOSMIX-Stationenkatalog vorbereitet - 25.09.2026
 
 - UI-unabhängige, deterministische Zuordnung von WGS-84-Koordinaten zur geografisch nächsten DWD-MOSMIX-Station.

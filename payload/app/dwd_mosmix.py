@@ -78,6 +78,7 @@ class ForecastPoint:
     wind_speed: WeatherValue
     wind_direction: WeatherValue
     precipitation_probability: WeatherValue
+    significant_weather_code: Optional[int] = None
 
 
 @dataclass(frozen=True)
@@ -162,6 +163,7 @@ def parse_kml(kml_bytes: bytes) -> MosmixForecast:
     station_name = _required_text(placemark, "./{*}description", "Stationsname")
     coordinate = _parse_coordinate(_required_text(placemark, ".//{*}coordinates", "Stationskoordinate"))
     forecasts: dict[str, list[Optional[float]]] = {}
+    significant_weather_codes: Optional[list[Optional[int]]] = None
     for element in placemark.findall(".//{*}Forecast"):
         parameter = _attribute_by_local_name(element, "elementName")
         if parameter in {"TTT", "FF", "DD", "R101"}:
@@ -169,11 +171,17 @@ def parse_kml(kml_bytes: bytes) -> MosmixForecast:
             if len(values) != len(time_steps):
                 raise MosmixProviderError(f"DWD-Werte für {parameter} passen nicht zu den Zeitpunkten.")
             forecasts[parameter] = values
+        elif parameter == "ww":
+            values = [_parse_significant_weather_code(token) for token in "".join(element.itertext()).split()]
+            if len(values) != len(time_steps):
+                raise MosmixProviderError("Invalid ww value count.")
+            significant_weather_codes = values
     empty = [None] * len(time_steps)
     temperatures = forecasts.get("TTT", empty)
     wind_speeds = forecasts.get("FF", empty)
     wind_directions = forecasts.get("DD", empty)
     precipitation_probabilities = forecasts.get("R101", empty)
+    weather_codes = significant_weather_codes if significant_weather_codes is not None else empty
     points = [
         ForecastPoint(
             timestamp=timestamp,
@@ -181,6 +189,7 @@ def parse_kml(kml_bytes: bytes) -> MosmixForecast:
             wind_speed=WeatherValue(wind_speeds[index], "m/s"),
             wind_direction=WeatherValue(wind_directions[index], "°"),
             precipitation_probability=WeatherValue(precipitation_probabilities[index], "%"),
+            significant_weather_code=weather_codes[index],
         )
         for index, timestamp in enumerate(time_steps)
     ]
@@ -230,6 +239,15 @@ def _parse_dwd_value(token: str) -> Optional[float]:
         return float(token)
     except ValueError as error:
         raise MosmixProviderError("DWD-KML enthält einen ungültigen Wetterwert.") from error
+
+
+def _parse_significant_weather_code(token: str) -> Optional[int]:
+    """Parse DWD's categorical ``ww`` code without treating it as a probability."""
+    if token.strip().lower() in _MISSING_VALUES:
+        return None
+    if not re.fullmatch(r"[0-9]{1,2}", token):
+        raise MosmixProviderError("Invalid ww weather code.")
+    return int(token)
 
 
 def _kelvin_to_celsius(value: Optional[float]) -> Optional[float]:

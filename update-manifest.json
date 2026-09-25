@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "0.1.6",
+  "version": "0.1.7",
   "files": [
     {
       "path": "app/dwd_current.py",
@@ -9,8 +9,8 @@
     },
     {
       "path": "app/dwd_mosmix.py",
-      "size": 9901,
-      "sha256": "733fae6dbdb38afd90e4714bec6c6a0ac4a5ee9d2da4b493b70921876d8ca429"
+      "size": 10835,
+      "sha256": "cd2ce63b2c9a5c9b81c0d88eeef7879cb8e3a5683437a021b8729d806efd845e"
     },
     {
       "path": "app/dwd_poi.py",
@@ -59,8 +59,8 @@
     },
     {
       "path": "app/version.json",
-      "size": 150,
-      "sha256": "8eb50e3f320b2cedaa00d6665625a8fea0137bb583cb4a7c0dc7b5752fd15151"
+      "size": 154,
+      "sha256": "86ab1f1c3d694dec40fe780ebb05b491c41e66fa90f6ab28434422187cf66d92"
     },
     {
       "path": "app/WeatherShell.exe",

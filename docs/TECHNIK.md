@@ -45,6 +45,8 @@ Die Übergabekoordinaten bleiben lokal und werden nicht an DWD gesendet. Die Hav
 
 Die einzige Wetterdaten-URL hat das feste Schema `https://opendata.dwd.de/weather/local_forecasts/mos/MOSMIX_L/single_stations/<ID>/kml/MOSMIX_L_LATEST_<ID>.kmz`. KMZ und KML werden ausschließlich mit der Python-Standardbibliothek gelesen. Ausgegeben werden Stationsmetadaten, die DWD-Erstellzeit, Koordinate und chronologische Zeitpunkte für `TTT` (in °C umgerechnet), `FF` (m/s), `DD` (°) und `R101` (%). DWD-Fehlwerte bleiben `None`; sie werden nie zu null. Die Oberfläche verwendet den Provider in dieser Version noch nicht.
 
+Das Datenmodell jedes chronologischen Forecast-Punkts enthält außerdem `significant_weather_code`: den unveränderten ganzzahligen DWD-Code `ww` für signifikantes Wetter. Fehlwerte und eine vollständig fehlende optionale `ww`-Reihe werden als `None` ausgegeben. Ist die Reihe vorhanden, müssen ihre Werte punktgenau, ganzzahlig und im Bereich 0 bis 99 liegen; andernfalls wird die Datei abgewiesen. `ww` ist ein priorisierter kategorialer Wetterzustand, keine Niederschlags- oder Gewitterwahrscheinlichkeit, keine Beobachtung und keine amtliche Warnung.
+
 ## Vorbereiteter DWD-10-Minuten-Messwertimport
 
 `payload/app/dwd_current.py` stellt `fetch_current_conditions(station_id, *, transport=None)` bereit. Die Schnittstelle akzeptiert ausschließlich fünf ASCII-Ziffern als explizite CDC-Stations-ID. Sie führt keine Orts-, Koordinaten- oder Stationssuche aus und setzt CDC-Stationen nicht mit MOSMIX-Stationen gleich.
