@@ -11,6 +11,7 @@ payload/
     updater.py                 Python-Updater
     dwd_mosmix.py              DWD-MOSMIX-Provider
     dwd_warnings.py            DWD-CAP-Warnungsprovider
+    dwd_current.py             DWD-10-Minuten-Messwertprovider
     healthcheck.py             Offline-Startprüfung
     version.json               Versionsinformationen
   runtime/                     Eingebettetes Python 3.13.15 inklusive Lizenz
@@ -32,6 +33,16 @@ Die Windows-Oberfläche verwendet das vorhandene .NET Framework/WPF. Der Python-
 `payload/app/dwd_mosmix.py` kapselt den offiziellen DWD-MOSMIX_L-Einzelstationsabruf. Der Provider hat bewusst keine voreingestellte Station und führt weder Standortermittlung noch Stationszuordnung aus. Ein späterer Aufrufer muss immer eine geprüfte fünfstellige DWD-Stationskennung sowie die zugehörigen Breiten- und Längengrade in `StationRequest` übergeben; ohne diesen vollständigen Kontext ist kein Abruf möglich.
 
 Die einzige Wetterdaten-URL hat das feste Schema `https://opendata.dwd.de/weather/local_forecasts/mos/MOSMIX_L/single_stations/<ID>/kml/MOSMIX_L_LATEST_<ID>.kmz`. KMZ und KML werden ausschließlich mit der Python-Standardbibliothek gelesen. Ausgegeben werden Stationsmetadaten, die DWD-Erstellzeit, Koordinate und chronologische Zeitpunkte für `TTT` (in °C umgerechnet), `FF` (m/s), `DD` (°) und `R101` (%). DWD-Fehlwerte bleiben `None`; sie werden nie zu null. Die Oberfläche verwendet den Provider in dieser Version noch nicht.
+
+## Vorbereiteter DWD-10-Minuten-Messwertimport
+
+`payload/app/dwd_current.py` stellt `fetch_current_conditions(station_id, *, transport=None)` bereit. Die Schnittstelle akzeptiert ausschließlich fünf ASCII-Ziffern als explizite CDC-Stations-ID. Sie führt keine Orts-, Koordinaten- oder Stationssuche aus und setzt CDC-Stationen nicht mit MOSMIX-Stationen gleich.
+
+Pro Aufruf werden genau die beiden festen `now`-Archive für Lufttemperatur und Wind über `https://opendata.dwd.de` mit 20 Sekunden Timeout geladen. Umleitungen werden abgelehnt. Download und entpackte Produktdatei sind je Abruf auf 4 MiB beziehungsweise 16 MiB begrenzt. Erlaubt ist genau eine unverschlüsselte CSV-/TXT-Produktdatei ohne Pfadangabe im ZIP. Die Semikolon-CSV muss die jeweiligen DWD-Pflichtfelder enthalten; aus gültigen Zeilen der angefragten normalisierten Stations-ID wird der neueste UTC-Zeitstempel gewählt.
+
+Das unveränderliche Ergebnis `DwdCurrentConditions` enthält Temperatur (`TT_10`), relative Luftfeuchte (`RF_10`), Windgeschwindigkeit (`FF_10`) und Windrichtung (`DD_10`). DWD-Fehlwerte `-999` werden feldweise zu `None`; die ganzzahligen `QN`-Qualitätscodes bleiben erhalten. Temperatur und Wind besitzen bewusst getrennte UTC-Zeitstempel, weil die offiziellen Produkte zeitversetzt aktualisiert werden können. Die `now`-Messwerte sind laut DWD noch nicht abschließend qualitätsgesichert und können korrigiert werden; sie sind weder Prognosen noch Wahrscheinlichkeiten.
+
+Ungültige Stations-IDs werden vor einem Abruf abgewiesen. Netzwerk-, Timeout-, TLS-, HTTP-/404-, Größen-, ZIP-, Pflichtspalten-, Stations-, Zeitstempel- und Qualitätsfehler besitzen unterscheidbare Fehlerklassen. Es gibt keinen stillen Ersatzwert, keine Persistenz, keinen Hintergrundabruf und noch keine Verwendung durch die Oberfläche. Der optionale Transport dient ausschließlich isolierten Tests.
 
 ## Vorbereiteter DWD-CAP-Warnungsimport
 
@@ -108,6 +119,9 @@ Die `.gitattributes` deaktiviert Zeilenenden-Umwandlungen für `payload/**`. Die
 
 ## Referenzen
 
+- [DWD: 10-Minuten-Stationsmessungen der Lufttemperatur](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/air_temperature/DESCRIPTION_obsgermany_climate_10min_air_temperature_en.pdf)
+- [DWD: 10-Minuten-Stationsmessungen des Windes](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/wind/DESCRIPTION_obsgermany_climate_10min_wind_en.pdf)
+- [DWD Climate Data Center: Open Data](https://www.dwd.de/EN/ourservices/cdc/cdc.html?lsbId=646268)
 - [GitHub: Commit-API](https://docs.github.com/en/rest/commits/commits#get-a-commit)
 - [Python: eingebettete Windows-Distribution](https://docs.python.org/3.13/using/windows.html#the-embeddable-package)
 - [Microsoft: Windows Presentation Foundation](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/)

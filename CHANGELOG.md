@@ -1,5 +1,13 @@
 # Versionsverlauf
 
+## 0.1.2 – Aktuelle DWD-Messwerte vorbereitet – 25.09.2026
+
+- UI-unabhängiger Import aktueller DWD-10-Minuten-Messwerte für eine explizite fünfstellige CDC-Stations-ID.
+- Temperatur, relative Luftfeuchte, Windgeschwindigkeit und Windrichtung werden mit getrennten UTC-Zeitstempeln und DWD-Qualitätscodes ausgegeben.
+- Fehlwerte `-999` bleiben als `None` erkennbar; vorläufig qualitätsgeprüfte `now`-Daten werden nicht als Vorhersage oder Wahrscheinlichkeit ausgegeben.
+- Feste HTTPS-Ziele, Größenlimits und strikte ZIP-/CSV-Prüfungen; Netzwerk-, HTTP-, Archiv- und Datenfehler bleiben unterscheidbar.
+- Keine Standort- oder Stationssuche, Oberfläche, Zwischenspeicherung oder Hintergrundaktualisierung.
+
 ## 0.1.1 – DWD-Datenprovider vorbereitet – 25.09.2026
 
 - UI-unabhängiger Import für eine explizit ausgewählte DWD-MOSMIX_L-Station.

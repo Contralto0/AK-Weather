@@ -1,7 +1,12 @@
 {
   "schema": 1,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "files": [
+    {
+      "path": "app/dwd_current.py",
+      "size": 18587,
+      "sha256": "8514df518889ead6c6fce0768210d373e730add05615507d7ea39a3ae7a6a096"
+    },
     {
       "path": "app/dwd_mosmix.py",
       "size": 9901,
@@ -14,8 +19,8 @@
     },
     {
       "path": "app/healthcheck.py",
-      "size": 1325,
-      "sha256": "842c26e82014c7b62af502b7bf73d88d93fab165ab9c8077ff300336caec0a71"
+      "size": 1393,
+      "sha256": "d8bd36fe94cc7414de270dd2f364841b45a0a9345aa7bdf43e91acc6246f4118"
     },
     {
       "path": "app/MainWindow.xaml",
@@ -24,18 +29,18 @@
     },
     {
       "path": "app/updater.py",
-      "size": 25569,
-      "sha256": "8d03778a587a8c64c5f9f6379203c469ea9fe66b899454edba22fe5a117ba77a"
+      "size": 25591,
+      "sha256": "39f0c667a4579aaf04502aa93347448cff05aae5af56e3dccafb2d15ffcb5a6c"
     },
     {
       "path": "app/version.json",
-      "size": 140,
-      "sha256": "030d68a8ed9a49e94c7496d2b9e16cf03948319e9a66ee44c22cfd1c00d60477"
+      "size": 145,
+      "sha256": "4a460099d543cafc864bd3be3d6f072e59fc5d5d6cee8c68c0e5322ea4f22960"
     },
     {
       "path": "app/WeatherShell.exe",
       "size": 15872,
-      "sha256": "5c0e0726ebd460657e5a65d3cfa91b1f2f186fa25fe73861ab084ef3b1abf323"
+      "sha256": "4acbcbdee970eb16647da7461e579a5deb58ae52351f8d8a7b0b601f35901edb"
     },
     {
       "path": "runtime/_asyncio.pyd",
