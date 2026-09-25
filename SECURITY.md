@@ -20,6 +20,8 @@ Der vorbereitete KONRAD3D-Provider greift nur dann auf `opendata.dwd.de` zu, wen
 
 Der vorbereitete DWD-POI-Provider greift ebenfalls nur nach einem ausdrücklichen Aufruf auf `opendata.dwd.de` zu. Die angegebene Stationskennung wird dabei ausschließlich als Teil des festen Dateinamens übertragen; Standortdaten, Konten, Tokens und Koordinaten werden nicht gesendet. Beim DWD fallen technisch unvermeidbar IP-Adresse, Zeitpunkt und die angefragte POI-Datei an. Die Antwort wird weder zwischengespeichert noch dauerhaft gespeichert.
 
+Der vorbereitete DWD-MOSMIX-Stationenkatalog wird nur bei einem ausdrücklichen Aufruf von `dwd_stations.py` über den festen HTTPS-Endpunkt bei `www.dwd.de` geladen. Übertragen werden keine Orts- oder Gerätekoordinaten, Konten, Tokens oder Schlüssel: Die übergebenen Koordinaten werden ausschließlich lokal mit dem geladenen Katalog verglichen. Beim DWD fallen technisch unvermeidbar IP-Adresse und Zeitpunkt an. Der Katalog wird weder zwischengespeichert noch dauerhaft gespeichert; insbesondere führt das Öffnen von AK-Weather keine DWD-Abfrage aus.
+
 ## Probleme melden
 
 Allgemeine Fehler können über die [GitHub-Issues](https://github.com/Contralto0/AK-Weather/issues) gemeldet werden. Bitte keine Passwörter, Tokens, persönlichen Daten oder vertraulichen Exploitdetails öffentlich einstellen. Ein gesonderter vertraulicher Meldekanal ist für dieses Grundsystem noch nicht eingerichtet.

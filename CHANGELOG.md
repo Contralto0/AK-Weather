@@ -1,6 +1,14 @@
 # Versionsverlauf
 
-## 0.1.5 – DWD-POI-Wetterzustand vorbereitet – 25.09.2026
+## 0.1.6 - DWD-MOSMIX-Stationenkatalog vorbereitet - 25.09.2026
+
+- UI-unabhängige, deterministische Zuordnung von WGS-84-Koordinaten zur geografisch nächsten DWD-MOSMIX-Station.
+- Der unveränderliche Stationsdatensatz enthält Kennung, optionalen ICAO-Code, Namen, Koordinate und optionale Höhe; `----` bleibt kein ICAO-Code.
+- Der laufend gepflegte offizielle Katalog wird ausschließlich auf ausdrücklichen Abruf per festem HTTPS-Endpunkt geladen, auf 1 MiB begrenzt, strikt geprüft und nicht zwischengespeichert.
+- Bei Distanzgleichstand entscheidet die Stationskennung reproduzierbar; ungültige Eingaben oder Kataloge liefern keine geratene Ersatzstation.
+- Keine Standortermittlung, Kartenansicht, Ortsoberfläche, Speicherung oder automatische DWD-Abfrage beim Start.
+
+## 0.1.5 - DWD-POI-Wetterzustand vorbereitet - 25.09.2026
 
 - UI-unabhängiger Import des neuesten amtlich beobachteten DWD-POI-Wetterzustands für eine explizite Stationskennung.
 - Die unveränderliche Beobachtung enthält UTC-Zeit, originalen `present_weather`-Code sowie die vollständige offizielle deutsche DWD-Zuordnung für die Codes 1 bis 31.

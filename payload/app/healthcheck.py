@@ -14,6 +14,7 @@ def main():
     if not isinstance(version.get("version"), str) or not version["version"]:
         raise ValueError("Version fehlt")
     ast.parse((app / "updater.py").read_text(encoding="utf-8"))
+    ast.parse((app / "dwd_stations.py").read_text(encoding="utf-8"))
     ast.parse((app / "dwd_mosmix.py").read_text(encoding="utf-8"))
     ast.parse((app / "dwd_warnings.py").read_text(encoding="utf-8"))
     ast.parse((app / "dwd_current.py").read_text(encoding="utf-8"))

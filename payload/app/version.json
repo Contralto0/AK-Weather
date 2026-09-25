@@ -1,6 +1,6 @@
 {
-  "version": "0.1.5",
-  "name": "DWD-POI-Wetterzustand vorbereitet",
+  "version": "0.1.6",
+  "name": "DWD-MOSMIX-Stationenkatalog vorbereitet",
   "author": "Andy Klemann",
   "channel": "live",
   "python": "3.13.15"

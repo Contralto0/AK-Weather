@@ -9,6 +9,7 @@ payload/
     WeatherShell.exe           Native WPF-Oberfläche
     MainWindow.xaml            Layout und Vektorillustration
     updater.py                 Python-Updater
+    dwd_stations.py            DWD-MOSMIX-Stationenkatalogprovider
     dwd_mosmix.py              DWD-MOSMIX-Provider
     dwd_warnings.py            DWD-CAP-Warnungsprovider
     dwd_current.py             DWD-10-Minuten-Messwertprovider
@@ -29,6 +30,14 @@ docs/                          Öffentliche Dokumentation
 `public` ist die Wurzel des GitHub-Repositories. Der danebenliegende Entwicklungsordner des Autors gehört nicht zur öffentlichen Auslieferung. Zum Betrieb erforderliche Python-Dateien und XAML werden als Teil von `payload` öffentlich mitgeliefert.
 
 Die Windows-Oberfläche verwendet das vorhandene .NET Framework/WPF. Der Python-Updater nutzt ausschließlich die Standardbibliothek. Es gibt keine Paketinstallation, keinen lokalen HTTP-Server, keine Browser-Laufzeit und keine System-Python-Abhängigkeit.
+
+## Vorbereiteter DWD-MOSMIX-Stationenkatalog
+
+`payload/app/dwd_stations.py` löst ausschließlich auf ausdrücklichen Aufruf WGS-84-Koordinaten zur geografisch nächsten DWD-MOSMIX-Station auf. Die öffentliche Schnittstelle umfasst `fetch_catalog()`, `parse_catalog(bytes)` und `nearest_station(stations, latitude, longitude)`; die Kommandozeile akzeptiert nur `--latitude` und `--longitude` und schreibt bei Erfolg genau einen UTF-8-JSON-Datensatz. Das unveränderliche Datenmodell `Station` enthält `station_id`, optionales `icao`, `name`, `latitude`, `longitude` und optionales `elevation_m`.
+
+Datenbasis: **Deutscher Wetterdienst (DWD), MOSMIX-Stationenkatalog**. Ausschließlich der feste HTTPS-Endpunkt `https://www.dwd.de/DE/leistungen/met_verfahren_mosmix/mosmix_stationskatalog.cfg?view=nasPublication&nn=16102` ist zugelassen. Der Abruf nutzt einen Socket-Timeout von 20 Sekunden, verweigert Umleitungen und begrenzt die Antwort auf 1 MiB. Der Katalog wird nur im Speicher verarbeitet und nicht gecacht. Die festen CFG-Spalten `ID`, `ICAO`, `NAME`, `LAT`, `LON` und `ELEV` werden strikt validiert; `----` bei ICAO wird zu `None`. Leere Namen, doppelte Kennungen, fehlerhafte Zahlen, WGS-84-Verstöße und ein leerer Katalog sind kontrollierte Fehler.
+
+Die Übergabekoordinaten bleiben lokal und werden nicht an DWD gesendet. Die Haversine-Auswahl nutzt bei exakt gleicher Distanz die lexikographisch kleinere Stationskennung. Standort-API, Karten, Orteingabe, Speicherung, Ranglisten, Prognosedownloads und eine automatische Abfrage beim App-Start gehören nicht zu diesem Baustein.
 
 ## Vorbereiteter DWD-MOSMIX-Import
 
@@ -141,6 +150,8 @@ Die `.gitattributes` deaktiviert Zeilenenden-Umwandlungen für `payload/**`. Die
 
 ## Referenzen
 
+- [DWD: MOSMIX-Stationenkatalog](https://www.dwd.de/DE/leistungen/met_verfahren_mosmix/mosmix_stationskatalog.cfg?view=nasPublication&nn=16102)
+- [DWD Open Data: Erläuternde Dateien und Stationslisten](https://www.dwd.de/DE/leistungen/opendata/hilfe.html?lsbId=627548)
 - [DWD Open Data: aktuelles RADOLAN-RW-Verzeichnis](https://opendata.dwd.de/weather/radar/radolan/rw/)
 - [DWD: RADOLAN/RADVOR-Kompositformat 2.6](https://opendata.dwd.de/climate_environment/CDC/help/RADOLAN/Unterstuetzungsdokumente/RADOLAN-RADVOR-Kompositformat_2.6.pdf)
 - [DWD: Unterstützungsdokument zum RADOLAN-Binärformat](https://opendata.dwd.de/climate_environment/CDC/help/RADOLAN/Unterstuetzungsdokumente/Unterstuetzungsdokument_fuer_Programmierer-Lesen_des_RADOLAN-Binaerformats.pdf)

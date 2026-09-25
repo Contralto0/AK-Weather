@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "0.1.5",
+  "version": "0.1.6",
   "files": [
     {
       "path": "app/dwd_current.py",
@@ -28,14 +28,19 @@
       "sha256": "049fc645c7d169fc6be10a51f4ba42150282546b10b6fe1992945f69188eabc6"
     },
     {
+      "path": "app/dwd_stations.py",
+      "size": 13875,
+      "sha256": "b207c13520f70198e948a8293b430d23e5ee9c06a58adf4a16ac6094ce4765db"
+    },
+    {
       "path": "app/dwd_warnings.py",
       "size": 13728,
       "sha256": "94327b60b809e4359d64a7ec4bb430f1222d33a7dc2eda00287e2b6ee207a7b9"
     },
     {
       "path": "app/healthcheck.py",
-      "size": 1658,
-      "sha256": "8ffcc0655108586d4370336747173ff15e2a4e7e60fbe3c067bbaf376818ec92"
+      "size": 1727,
+      "sha256": "e3349fd62a828e33e94b70b5632db38d0ae6b3f1f50965358890b2e8c3f118d8"
     },
     {
       "path": "app/konrad3d.py",
@@ -49,18 +54,18 @@
     },
     {
       "path": "app/updater.py",
-      "size": 25613,
-      "sha256": "2051d10f15db2b9821cd47e26b12fd7222f217247f58a685250326172e1c5858"
+      "size": 25636,
+      "sha256": "7a1bc3585eef7766136ef101f52f9ccc4b64af155bf3b452c9e011ea17307db0"
     },
     {
       "path": "app/version.json",
-      "size": 144,
-      "sha256": "85f4ed2324d675ef00664f148dccc86df3b33875dcf08453152a211079beb55f"
+      "size": 150,
+      "sha256": "8eb50e3f320b2cedaa00d6665625a8fea0137bb583cb4a7c0dc7b5752fd15151"
     },
     {
       "path": "app/WeatherShell.exe",
       "size": 15872,
-      "sha256": "0280d854bbf449250f284a9281704109a1ac478223c21f783450ceca6dbc67e3"
+      "sha256": "1abb09048342b83e54af4475ec3dfcf35babbe819d8897d92a1e9775755df9ce"
     },
     {
       "path": "runtime/_asyncio.pyd",
