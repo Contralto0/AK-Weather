@@ -47,6 +47,8 @@ Die einzige Wetterdaten-URL hat das feste Schema `https://opendata.dwd.de/weathe
 
 Das Datenmodell jedes chronologischen Forecast-Punkts enthält außerdem `significant_weather_code`: den unveränderten ganzzahligen DWD-Code `ww` für signifikantes Wetter. Fehlwerte und eine vollständig fehlende optionale `ww`-Reihe werden als `None` ausgegeben. Ist die Reihe vorhanden, müssen ihre Werte punktgenau, ganzzahlig und im Bereich 0 bis 99 liegen; andernfalls wird die Datei abgewiesen. `ww` ist ein priorisierter kategorialer Wetterzustand, keine Niederschlags- oder Gewitterwahrscheinlichkeit, keine Beobachtung und keine amtliche Warnung.
 
+`ForecastPoint.wind_gust` enthält den unveränderten MOSMIX-Parameter `FX1` als `WeatherValue` in m/s. Er beschreibt die für den vorausgehenden Stundenzeitraum prognostizierte maximale Windböe, nicht eine aktuelle Messung oder Warnung. Eine vollständig fehlende `FX1`-Reihe sowie einzelne DWD-Fehlwerte werden als `None` ausgegeben; eine vorhandene nichtnumerische oder nicht punktgenau zu den Forecast-Zeitpunkten passende Reihe wird abgewiesen.
+
 ## Vorbereiteter DWD-10-Minuten-Messwertimport
 
 `payload/app/dwd_current.py` stellt `fetch_current_conditions(station_id, *, transport=None)` bereit. Die Schnittstelle akzeptiert ausschließlich fünf ASCII-Ziffern als explizite CDC-Stations-ID. Sie führt keine Orts-, Koordinaten- oder Stationssuche aus und setzt CDC-Stationen nicht mit MOSMIX-Stationen gleich.

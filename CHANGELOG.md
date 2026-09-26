@@ -1,5 +1,11 @@
 # Versionsverlauf
 
+## 0.1.8 - DWD-MOSMIX-Windböen vorbereitet - 26.09.2026
+
+- Die UI-unabhängigen MOSMIX_L-Vorhersagepunkte enthalten zusätzlich `wind_gust` aus dem amtlichen Parameter `FX1` in m/s.
+- `FX1` ist die für den vorausgehenden Stundenzeitraum prognostizierte maximale Windböe, keine aktuelle Messung und keine Warnung.
+- Eine fehlende `FX1`-Reihe oder DWD-Fehlwerte bleiben als `None` erkennbar; vorhandene fehlerhafte Reihen werden strikt abgewiesen.
+
 ## 0.1.7 - DWD-MOSMIX-Signifikantes Wetter vorbereitet - 25.09.2026
 
 - Die UI-unabhängigen MOSMIX_L-Vorhersagepunkte enthalten zusätzlich den unveränderten amtlichen DWD-Code `ww` für signifikantes Wetter.

@@ -79,6 +79,7 @@ class ForecastPoint:
     wind_direction: WeatherValue
     precipitation_probability: WeatherValue
     significant_weather_code: Optional[int] = None
+    wind_gust: WeatherValue = WeatherValue(None, "m/s")
 
 
 @dataclass(frozen=True)
@@ -166,7 +167,7 @@ def parse_kml(kml_bytes: bytes) -> MosmixForecast:
     significant_weather_codes: Optional[list[Optional[int]]] = None
     for element in placemark.findall(".//{*}Forecast"):
         parameter = _attribute_by_local_name(element, "elementName")
-        if parameter in {"TTT", "FF", "DD", "R101"}:
+        if parameter in {"TTT", "FF", "DD", "R101", "FX1"}:
             values = [_parse_dwd_value(token) for token in "".join(element.itertext()).split()]
             if len(values) != len(time_steps):
                 raise MosmixProviderError(f"DWD-Werte für {parameter} passen nicht zu den Zeitpunkten.")
@@ -181,6 +182,7 @@ def parse_kml(kml_bytes: bytes) -> MosmixForecast:
     wind_speeds = forecasts.get("FF", empty)
     wind_directions = forecasts.get("DD", empty)
     precipitation_probabilities = forecasts.get("R101", empty)
+    wind_gusts = forecasts.get("FX1", empty)
     weather_codes = significant_weather_codes if significant_weather_codes is not None else empty
     points = [
         ForecastPoint(
@@ -190,6 +192,7 @@ def parse_kml(kml_bytes: bytes) -> MosmixForecast:
             wind_direction=WeatherValue(wind_directions[index], "°"),
             precipitation_probability=WeatherValue(precipitation_probabilities[index], "%"),
             significant_weather_code=weather_codes[index],
+            wind_gust=WeatherValue(wind_gusts[index], "m/s"),
         )
         for index, timestamp in enumerate(time_steps)
     ]
