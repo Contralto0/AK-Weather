@@ -9,8 +9,8 @@
     },
     {
       "path": "app/dwd_mosmix.py",
-      "size": 12540,
-      "sha256": "8ee15baa93c9d492e8ca1861e154a6005ab6df70e67139cbacbefa98ff3b651c"
+      "size": 12710,
+      "sha256": "c5e820581df33117c91b8ade508be440640a9df979a60b9a7772ecf7aeb9a1c0"
     },
     {
       "path": "app/dwd_poi.py",
