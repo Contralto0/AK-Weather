@@ -49,6 +49,8 @@ Das Datenmodell jedes chronologischen Forecast-Punkts enthält außerdem `signif
 
 `ForecastPoint.wind_gust` enthält den unveränderten MOSMIX-Parameter `FX1` als `WeatherValue` in m/s. Er beschreibt die für den vorausgehenden Stundenzeitraum prognostizierte maximale Windböe, nicht eine aktuelle Messung oder Warnung. Eine vollständig fehlende `FX1`-Reihe sowie einzelne DWD-Fehlwerte werden als `None` ausgegeben; eine vorhandene nichtnumerische oder nicht punktgenau zu den Forecast-Zeitpunkten passende Reihe wird abgewiesen.
 
+`ForecastPoint.thunderstorm_probability` enthält den unveränderten MOSMIX-Parameter `wwT3` als `WeatherValue` in Prozent. Er beschreibt die für den dem Vorhersagezeitpunkt vorausgehenden Drei-Stunden-Zeitraum prognostizierte Gewitterwahrscheinlichkeit. Er ist weder eine aktuelle Blitzortung oder Gewitterbeobachtung noch eine CAP-Warnung, Niederschlagswahrscheinlichkeit oder selbst berechnete Quellenbewertung. Eine vollständig fehlende `wwT3`-Reihe sowie einzelne DWD-Fehlwerte werden als `WeatherValue(None, "%")` ausgegeben; eine vorhandene nichtnumerische oder nicht punktgenau zu den Forecast-Zeitpunkten passende Reihe wird abgewiesen.
+
 ## Vorbereiteter DWD-10-Minuten-Messwertimport
 
 `payload/app/dwd_current.py` stellt `fetch_current_conditions(station_id, *, transport=None)` bereit. Die Schnittstelle akzeptiert ausschließlich fünf ASCII-Ziffern als explizite CDC-Stations-ID. Sie führt keine Orts-, Koordinaten- oder Stationssuche aus und setzt CDC-Stationen nicht mit MOSMIX-Stationen gleich.

@@ -1,6 +1,6 @@
 {
-  "version": "0.1.10",
-  "name": "DWD-MOSMIX-Gesamtbewölkung vorbereitet",
+  "version": "0.1.11",
+  "name": "DWD-MOSMIX-Gewitterwahrscheinlichkeit vorbereitet",
   "author": "Andy Klemann",
   "channel": "live",
   "python": "3.13.15"

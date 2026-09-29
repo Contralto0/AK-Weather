@@ -1,5 +1,11 @@
 # Versionsverlauf
 
+## 0.1.11 - DWD-MOSMIX-Gewitterwahrscheinlichkeit vorbereitet - 29.09.2026
+
+- Die UI-unabhängigen MOSMIX_L-Vorhersagepunkte enthalten zusätzlich `thunderstorm_probability` aus dem amtlichen Parameter `wwT3` in Prozent.
+- `wwT3` ist die für den dem Vorhersagezeitpunkt vorausgehenden Drei-Stunden-Zeitraum prognostizierte Gewitterwahrscheinlichkeit, keine aktuelle Blitzortung, Beobachtung oder amtliche Warnung.
+- DWD-Fehlwerte oder eine fehlende `wwT3`-Reihe bleiben als `WeatherValue(None, "%")` erkennbar; vorhandene nichtnumerische oder nicht punktgenau passende Reihen werden abgewiesen.
+
 ## 0.1.10 - DWD-MOSMIX-Gesamtbewölkung vorbereitet - 29.09.2026
 
 - Die UI-unabhängigen MOSMIX_L-Vorhersagepunkte enthalten zusätzlich `total_cloud_cover` aus dem amtlichen Parameter `N` in Prozent.

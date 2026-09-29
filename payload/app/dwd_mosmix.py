@@ -86,6 +86,7 @@ class ForecastPoint:
     wind_gust: WeatherValue = WeatherValue(None, "m/s")
     precipitation_amount: WeatherValue = WeatherValue(None, "kg/m²")
     total_cloud_cover: WeatherValue = WeatherValue(None, "%")
+    thunderstorm_probability: WeatherValue = WeatherValue(None, "%")
 
 
 @dataclass(frozen=True)
@@ -173,7 +174,7 @@ def parse_kml(kml_bytes: bytes) -> MosmixForecast:
     significant_weather_codes: Optional[list[Optional[int]]] = None
     for element in placemark.findall(".//{*}Forecast"):
         parameter = _attribute_by_local_name(element, "elementName")
-        if parameter in {"TTT", "FF", "DD", "R101", "FX1", "RR1c", "N"}:
+        if parameter in {"TTT", "FF", "DD", "R101", "wwT3", "FX1", "RR1c", "N"}:
             parser = {
                 "RR1c": _parse_nonnegative_dwd_value,
                 "N": _parse_cloud_cover_value,
@@ -192,6 +193,7 @@ def parse_kml(kml_bytes: bytes) -> MosmixForecast:
     wind_speeds = forecasts.get("FF", empty)
     wind_directions = forecasts.get("DD", empty)
     precipitation_probabilities = forecasts.get("R101", empty)
+    thunderstorm_probabilities = forecasts.get("wwT3", empty)
     wind_gusts = forecasts.get("FX1", empty)
     total_cloud_covers = forecasts.get("N", empty)
     precipitation_amounts = forecasts.get("RR1c", empty)
@@ -207,6 +209,7 @@ def parse_kml(kml_bytes: bytes) -> MosmixForecast:
             wind_gust=WeatherValue(wind_gusts[index], "m/s"),
             precipitation_amount=WeatherValue(precipitation_amounts[index], "kg/m²"),
             total_cloud_cover=WeatherValue(total_cloud_covers[index], "%"),
+            thunderstorm_probability=WeatherValue(thunderstorm_probabilities[index], "%"),
         )
         for index, timestamp in enumerate(time_steps)
     ]
