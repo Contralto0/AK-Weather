@@ -1,5 +1,11 @@
 # Versionsverlauf
 
+## 0.1.10 - DWD-MOSMIX-Gesamtbewölkung vorbereitet - 29.09.2026
+
+- Die UI-unabhängigen MOSMIX_L-Vorhersagepunkte enthalten zusätzlich `total_cloud_cover` aus dem amtlichen Parameter `N` in Prozent.
+- `N` ist die zum Vorhersagezeitpunkt prognostizierte Gesamtbewölkung, keine aktuelle Stationsbeobachtung, Niederschlags- oder Gewitterwahrscheinlichkeit und keine Kartenebene.
+- DWD-Fehlwerte oder eine fehlende `N`-Reihe bleiben als `WeatherValue(None, "%")` erkennbar; vorhandene nicht-endliche oder außerhalb 0 bis 100 liegende Reihen werden strikt abgewiesen.
+
 ## 0.1.9 - DWD-MOSMIX-Niederschlagsmenge vorbereitet - 29.09.2026
 
 - Die UI-unabhängigen MOSMIX_L-Vorhersagepunkte enthalten zusätzlich `precipitation_amount` aus dem amtlichen Parameter `RR1c` in kg/m².

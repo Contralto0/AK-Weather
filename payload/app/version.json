@@ -1,6 +1,6 @@
 {
-  "version": "0.1.9",
-  "name": "DWD-MOSMIX-Niederschlagsmenge vorbereitet",
+  "version": "0.1.10",
+  "name": "DWD-MOSMIX-Gesamtbewölkung vorbereitet",
   "author": "Andy Klemann",
   "channel": "live",
   "python": "3.13.15"
