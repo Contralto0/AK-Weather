@@ -4,8 +4,8 @@
   "files": [
     {
       "path": "app/dwd_current.py",
-      "size": 18587,
-      "sha256": "8514df518889ead6c6fce0768210d373e730add05615507d7ea39a3ae7a6a096"
+      "size": 21522,
+      "sha256": "ce3e8099f09a1c6229283d15f7714a960c59279bce74553f081f0a58f590cba9"
     },
     {
       "path": "app/dwd_mosmix.py",

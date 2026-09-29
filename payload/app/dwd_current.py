@@ -1,9 +1,10 @@
-"""Import current DWD 10-minute temperature and wind station observations.
+"""Import current DWD 10-minute station observations.
 
 The public ``fetch_current_conditions`` function accepts one explicit five-digit
 CDC station identifier.  It downloads the two fixed ``now`` products, keeps
 their observation times separate, and performs no station or location lookup.
-Only the Python standard library is used.
+``fetch_current_precipitation`` separately retrieves the 10-minute
+precipitation product.  Only the Python standard library is used.
 """
 
 from __future__ import annotations
@@ -30,6 +31,10 @@ TEMPERATURE_BASE_URL = (
 WIND_BASE_URL = (
     "https://opendata.dwd.de/climate_environment/CDC/observations_germany/"
     "climate/10_minutes/wind/now"
+)
+PRECIPITATION_BASE_URL = (
+    "https://opendata.dwd.de/climate_environment/CDC/observations_germany/"
+    "climate/10_minutes/precipitation/now"
 )
 SOURCE_LABEL = (
     "Deutscher Wetterdienst (DWD), Climate Data Center, "
@@ -137,6 +142,23 @@ class DwdCurrentConditions:
     source_url: str = field(default=SOURCE_URL, init=False)
 
 
+@dataclass(frozen=True)
+class DwdCurrentPrecipitation:
+    """Latest 10-minute precipitation observation for one explicit CDC station.
+
+    The amount describes the preceding ten-minute interval.  The indicator is
+    the unmodified DWD ``RWS_IND_10`` code, not a boolean rain classification.
+    """
+
+    station_id: str
+    observed_at: datetime
+    precipitation_mm_10min: float | None
+    precipitation_indicator: int | None
+    quality: int
+    source_label: str = field(default=SOURCE_LABEL, init=False)
+    source_url: str = field(default=SOURCE_URL, init=False)
+
+
 Transport = Callable[[str, float], bytes]
 
 
@@ -145,7 +167,7 @@ class _ProductRecord:
     observed_at: datetime
     quality: int
     first_value: float | None
-    second_value: float | None
+    second_value: float | int | None
 
 
 class _RejectRedirectHandler(HTTPRedirectHandler):
@@ -253,6 +275,40 @@ def fetch_current_conditions(
     )
 
 
+def fetch_current_precipitation(
+    station_id: str, *, transport: Transport | None = None
+) -> DwdCurrentPrecipitation:
+    """Return the latest DWD 10-minute precipitation observation.
+
+    This is a station point measurement for the preceding ten-minute interval,
+    not a forecast or precipitation chance.  The optional transport has the
+    same deterministic offline-test contract as ``fetch_current_conditions``.
+    """
+
+    if not isinstance(station_id, str) or not _STATION_ID.fullmatch(station_id):
+        raise ValueError("DWD-CDC-Stations-ID muss aus genau fünf ASCII-Ziffern bestehen.")
+
+    precipitation_url = (
+        f"{PRECIPITATION_BASE_URL}/10minutenwerte_nieder_{station_id}_now.zip"
+    )
+    precipitation_data = _call_transport(transport or _download, precipitation_url)
+    precipitation = _read_product(
+        precipitation_data,
+        station_id,
+        required_columns=("STATIONS_ID", "MESS_DATUM", "QN", "RWS_10", "RWS_IND_10"),
+        value_columns=("RWS_10", "RWS_IND_10"),
+        second_value_parser=_parse_precipitation_indicator,
+        product_name="Niederschlagsprodukt",
+    )
+    return DwdCurrentPrecipitation(
+        station_id=station_id,
+        observed_at=precipitation.observed_at,
+        precipitation_mm_10min=precipitation.first_value,
+        precipitation_indicator=precipitation.second_value,
+        quality=precipitation.quality,
+    )
+
+
 def _call_transport(transport: Transport, url: str) -> bytes:
     try:
         downloaded = transport(url, TIMEOUT_SECONDS)
@@ -290,6 +346,7 @@ def _read_product(
     *,
     required_columns: tuple[str, ...],
     value_columns: tuple[str, str],
+    second_value_parser: Callable[[str], float | int | None] | None = None,
     product_name: str,
 ) -> _ProductRecord:
     try:
@@ -347,6 +404,7 @@ def _read_product(
         station_id,
         required_columns=required_columns,
         value_columns=value_columns,
+        second_value_parser=second_value_parser,
         product_name=product_name,
     )
 
@@ -357,6 +415,7 @@ def _parse_product(
     *,
     required_columns: tuple[str, ...],
     value_columns: tuple[str, str],
+    second_value_parser: Callable[[str], float | int | None] | None = None,
     product_name: str,
 ) -> _ProductRecord:
     try:
@@ -411,7 +470,9 @@ def _parse_product(
                 continue
             try:
                 first_value = _parse_measurement(row[indexes[value_columns[0]]])
-                second_value = _parse_measurement(row[indexes[value_columns[1]]])
+                second_value = (second_value_parser or _parse_measurement)(
+                    row[indexes[value_columns[1]]]
+                )
             except ValueError:
                 saw_other_invalid = True
                 continue
@@ -481,3 +542,17 @@ def _parse_measurement(value: str) -> float | None:
     if not math.isfinite(parsed):
         raise ValueError("non-finite measurement")
     return None if parsed == -999.0 else parsed
+
+
+def _parse_precipitation_indicator(value: str) -> int | None:
+    """Parse the DWD RWS_IND_10 code without reinterpreting its meaning."""
+
+    stripped = value.strip()
+    if stripped == "-999":
+        return None
+    if not re.fullmatch(r"[0-9]+", stripped, re.ASCII):
+        raise ValueError("invalid precipitation indicator")
+    parsed = int(stripped)
+    if not 0 <= parsed <= 3:
+        raise ValueError("invalid precipitation indicator")
+    return parsed
