@@ -1,5 +1,11 @@
 # Versionsverlauf
 
+## 0.1.9 - DWD-MOSMIX-Niederschlagsmenge vorbereitet - 29.09.2026
+
+- Die UI-unabhängigen MOSMIX_L-Vorhersagepunkte enthalten zusätzlich `precipitation_amount` aus dem amtlichen Parameter `RR1c` in kg/m².
+- `RR1c` ist die für den vorausgehenden Stundenzeitraum prognostizierte Niederschlagsmenge, keine aktuelle RADOLAN-Beobachtung, keine Niederschlagsintensität und keine Warnung.
+- DWD-Fehlwerte oder eine fehlende `RR1c`-Reihe bleiben als `WeatherValue(None, "kg/m²")` erkennbar; vorhandene fehlerhafte oder negative Reihen werden strikt abgewiesen.
+
 ## 0.1.8 - DWD-MOSMIX-Windböen vorbereitet - 26.09.2026
 
 - Die UI-unabhängigen MOSMIX_L-Vorhersagepunkte enthalten zusätzlich `wind_gust` aus dem amtlichen Parameter `FX1` in m/s.

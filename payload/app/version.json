@@ -1,6 +1,6 @@
 {
-  "version": "0.1.8",
-  "name": "DWD-MOSMIX-Windböen vorbereitet",
+  "version": "0.1.9",
+  "name": "DWD-MOSMIX-Niederschlagsmenge vorbereitet",
   "author": "Andy Klemann",
   "channel": "live",
   "python": "3.13.15"
